@@ -6,7 +6,7 @@
 
 |이름|학과|역할|
 |----|---|---|
-|[안하영](https://github.com/ahnha-ahnha) [![](https://img.shields.io/badge/Github-ahnha-blue?style=flat-square&logo=Github)](https://github.com/ahnha-ahnha)|컴퓨터공학전공|팀장|
+|[안하영](https://github.com/ahnha-ahnha) [![](https://img.shields.io/badge/Github-ahnha-blue?style=flat-square&logo=Github)](https://github.com/ahnha-ahnha)|컴퓨터공학전공|팀장, AI개발|
 |[이석민](https://github.com/DrRivaski) [![](https://img.shields.io/badge/Github-DrRivaski-blue?style=flat-square&logo=Github)](https://github.com/DrRivaski)|컴퓨터공학전공|Backend|
-|[이정수](https://github.com/Lee-JeongSoo) [![](https://img.shields.io/badge/Github-LeeJeongSoo-blue?style=flat-square&logo=Github)](https://github.com/Lee-JeongSoo)|컴퓨터공학전공|Frontend|
+|[이정수](https://github.com/Lee-JeongSoo) [![](https://img.shields.io/badge/Github-LeeJeongSoo-blue?style=flat-square&logo=Github)](https://github.com/Lee-JeongSoo)|컴퓨터공학전공|기획, Frontend|
 |[이다은](https://github.com/Dan2dani) [![](https://img.shields.io/badge/Github-Dan2dani-blue?style=flat-square&logo=Github)](https://github.com/Dan2dani)|컴퓨터공학전공|Frontend|
