@@ -46,7 +46,6 @@ class SignViewModel : ViewModel() {
         name.isNotEmpty() && birth.length == 4 && _inputGender.value != null
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
-
     companion object {
         const val EMAIL_PATTERN = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
         const val PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{10,}\$"
