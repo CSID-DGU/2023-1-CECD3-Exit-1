@@ -26,4 +26,14 @@
     <string name="sign_up_info_gender_male">남성</string>
     <string name="sign_up_info_gender_female">여성</string>
     <string name="sign_up_info_gender_none">선택안함</string>
+    <string name="cheokcheok">척척약사</string>
+    <string name="sign_up_email_title1">에 오신걸 환영합니다!</string>
+    <string name="sign_up_email_title2">계정을 만들어 볼까요?</string>
+    <string name="sign_up_email">1. 이메일 입력</string>
+
+    <!-- home   -->
+    <string name="home_title2">에게 물어보세요!</string>
+    <string name="home_dose_title">복용관리</string>
+    <string name="home_search_hint">약 이름으로 검색하기</string>
+    <string name="home_image_search_totle">약 이름을 모르시나요?\n이미지로 검색하기</string>
 </resources>
