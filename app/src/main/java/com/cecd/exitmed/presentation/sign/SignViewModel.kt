@@ -28,10 +28,12 @@ class SignViewModel : ViewModel() {
         password.matches(Regex(PASSWORD_PATTERN))
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
-    val isDoubleCheck: StateFlow<Boolean?> = inputPWDoubleCheck.map { doubleCheck ->
-        doubleCheck == inputPW.value
+    val isDoubleCheck: StateFlow<Boolean?> = combine(
+        inputPW,
+        inputPWDoubleCheck
+    ) { password, passwordDoubleCheck ->
+        password == passwordDoubleCheck
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
-
     fun setUserGender(genderType: GenderType) {
         _inputGender.value = genderType
     }
