@@ -1,13 +1,21 @@
 package com.cecd.exitmed.presentation.search
 
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.MotionEvent
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySearchBinding
 import com.cecd.exitmed.util.binding.BindingActivity
+import com.cecd.exitmed.util.binding.setVisibility
+import com.cecd.exitmed.util.extension.showKeyboard
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_search) {
@@ -17,7 +25,48 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         binding.viewModel = searchViewModel
         binding.lifecycleOwner = this
 
+        addListeners()
+        collectData()
+        setPillResultList()
         setSearchPagerAdapter()
+    }
+
+    private fun addListeners() {
+        binding.ivSearchDelete.setOnClickListener {
+            binding.etSearchBox.text = null
+        }
+        binding.etSearchBox.setOnKeyListener { _, keyCode, event ->
+            if ((event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                showKeyboard(binding.root, false)
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun collectData() {
+        searchViewModel.searchCount.flowWithLifecycle(lifecycle).onEach { searchCount ->
+            binding.tabSearch.setVisibility(searchCount == null)
+            binding.vpSearch.setVisibility(searchCount == null)
+            binding.ivSearchDelete.setVisibility(searchCount != null)
+            binding.linearSearchResult.setVisibility(searchCount != null)
+            binding.tvSearchEmpty.setVisibility(searchCount == 0)
+            if (searchCount != null) {
+                binding.rvSearchList.setVisibility(searchCount > 0)
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        showKeyboard(binding.root, false)
+        return super.dispatchTouchEvent(ev)
+    }
+
+    private fun setPillResultList() {
+        val searchListAdapter = SearchListAdapter()
+        binding.rvSearchList.adapter = searchListAdapter
+        searchListAdapter.submitList(searchViewModel.mockSearchList)
     }
 
     private fun setSearchPagerAdapter() {
