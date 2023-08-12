@@ -17,6 +17,11 @@
         <item name="android:overScrollMode">never</item>
     </style>
 
+    <!--  ImageView Style  -->
+    <style name="Radius4">
+        <item name="cornerSize">4dp</item>
+    </style>
+
     <!--  Widget  -->
     <style name="Widget.Material.Button.Basic" parent="">
         <item name="android:insetTop">0dp</item>
