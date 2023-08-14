@@ -155,7 +155,7 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:layout_marginTop="32dp"
-            android:background="@color/lightgray_warm2"
+            android:background="@color/lightgray_warm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_my_page_buttons" />
@@ -188,7 +188,7 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:layout_marginTop="26dp"
-            android:background="@color/lightgray_warm2"
+            android:background="@color/lightgray_warm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_my_page_terms_of_use" />
