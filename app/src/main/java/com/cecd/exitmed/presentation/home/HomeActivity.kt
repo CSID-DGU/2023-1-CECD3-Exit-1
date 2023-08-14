@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityHomeBinding
+import com.cecd.exitmed.presentation.my.MyActivity
 import com.cecd.exitmed.presentation.search.SearchActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,9 +21,16 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         binding.layoutHomeSearchBox.setOnClickListener {
             moveToSearch()
         }
+        binding.ivHomeMyPage.setOnClickListener {
+            moveToMyPage()
+        }
     }
 
     private fun moveToSearch() {
         startActivity(Intent(this, SearchActivity::class.java))
+    }
+
+    private fun moveToMyPage() {
+        startActivity(Intent(this, MyActivity::class.java))
     }
 }
