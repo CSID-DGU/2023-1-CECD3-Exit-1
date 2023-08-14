@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">ExitMed</string>
+
+    <!--  sign  -->
+    <string name="sign_in_title">환영합니다!\n로그인을 해주세요.</string>
+    <string name="sign_in_move_to_sign_up">척척약사는 처음이신가요? 가입하기</string>
+    <string name="sign_in_id_hint">ID</string>
+    <string name="sign_in_password_hint">PASSWORD</string>
+    <string name="sign_in">로그인</string>
+    <string name="sign_up_password_title">영문, 숫자를 포함해 10자리 이상의\n비밀번호를 입력해주세요!</string>
+    <string name="sign_up_password_input_title">2-1. 비밀번호 입력</string>
+    <string name="sign_up_password_hint">사용할 비밀번호를 입력해주세요</string>
+    <string name="sign_up_password_double_check_title">2-1. 비밀번호 확인</string>
+    <string name="sign_up_password_double_check_hint">비밀번호를 다시 입력해주세요</string>
+    <string name="back">이전</string>
+    <string name="next">다음</string>
+    <string name="sign_up_email_error">올바르지 않은 이메일 형식이에요</string>
+    <string name="sign_up_password_error">올바르지 않은 비밀번호 형식이에요.</string>
+    <string name="sing_up_info_title">가입완료까지 거의 다 왔어요.\n당신은 어떤 사람인가요?</string>
+    <string name="sign_up_info_name">3-1. 이름</string>
+    <string name="sign_up_info_name_hint">이름을 입력해주세요</string>
+    <string name="sign_up_info_birth">3-2. 출생년도</string>
+    <string name="sign_up_info_birth_hint">출생년도를 입력해주세요(ex.2023)</string>
+    <string name="sign_up_info_gender">3-3. 성별</string>
+    <string name="sign_up_complete">가입완료</string>
+    <string name="sign_up_info_gender_male">남성</string>
+    <string name="sign_up_info_gender_female">여성</string>
+    <string name="sign_up_info_gender_none">선택안함</string>
+    <string name="cheokcheok">척척약사</string>
+    <string name="sign_up_email_title1">에 오신걸 환영합니다!</string>
+    <string name="sign_up_email_title2">계정을 만들어 볼까요?</string>
+    <string name="sign_up_email">1. 이메일 입력</string>
+    <string name="sign_up_email_hint">사용할 이메일을 입력해주세요</string>
+
+    <!--  home  -->
+    <string name="home_title2">에게 물어보세요!</string>
+    <string name="home_dose_title">복용관리</string>
+    <string name="home_search_hint">약 이름으로 검색하기</string>
+    <string name="home_image_search_totle">약 이름을 모르시나요?\n이미지로 검색하기</string>
+
+    <!-- search  -->
+    <string name="search_history">검색기록</string>
+    <string name="search_bookmark">즐겨찾기</string>
+    <string name="search_count">%d개</string>
+    <string name="search_box_hint">약 이름으로 검색하기(ex. 타이레놀)</string>
+    <string name="search_result">검색 결과</string>
+    <string name="search_result_empty">검색결과가 없습니다</string>
+
+    <!--  my   -->
+    <string name="my_page_toolbar">마이페이지</string>
+    <string name="my_page_nickname">다니니</string>
+    <string name="my_page_title2">건강한 복약 관리 하세요!</string>
+    <string name="my_page_bookmark">즐겨찾기</string>
+    <string name="my_page_pill_drawer">약서랍</string>
+    <string name="my_page_modify_member_information">회원정보 수정</string>
+    <string name="my_page_terms_conditions">이용약관</string>
+    <string name="my_page_personal_information">개인정보처리방침</string>
+</resources>
