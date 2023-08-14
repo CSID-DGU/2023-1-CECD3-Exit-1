@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--  orange  -->
+    <color name="orange_25">#FFF6F2</color>
     <color name="orange_50">#FFECE5</color>
     <color name="orange_500">#FF8B66</color>
     <color name="orange_600">#FF774B</color>

@@ -40,6 +40,11 @@
         <item name="android:fontFamily">@font/pretendard_b</item>
     </style>
 
+    <style name="TextAppearance.BodyB2" parent="">
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/pretendard_b</item>
+    </style>
+
     <style name="TextAppearance.CaptionB1" parent="">
         <item name="android:textSize">12dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>

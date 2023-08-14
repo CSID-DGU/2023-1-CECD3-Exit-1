@@ -9,6 +9,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySearchBinding
+import com.cecd.exitmed.presentation.common.PillListAdapter
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.binding.setVisibility
 import com.cecd.exitmed.util.extension.showKeyboard
@@ -45,15 +46,15 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         }
     }
 
+    // TODO 서버 통신 후 로직 다시 고민!!
     private fun collectData() {
         searchViewModel.searchCount.flowWithLifecycle(lifecycle).onEach { searchCount ->
-            binding.tabSearch.setVisibility(searchCount == null)
-            binding.vpSearch.setVisibility(searchCount == null)
-            binding.ivSearchDelete.setVisibility(searchCount != null)
-            binding.linearSearchResult.setVisibility(searchCount != null)
-            binding.tvSearchEmpty.setVisibility(searchCount == 0)
-            if (searchCount != null) {
-                binding.rvSearchList.setVisibility(searchCount > 0)
+            with(binding) {
+                tabSearch.setVisibility(searchCount == null)
+                vpSearch.setVisibility(searchCount == null)
+                linearSearchResult.setVisibility(searchCount != null)
+                tvSearchEmpty.setVisibility(searchCount == 0)
+                rvSearchList.setVisibility(searchCount != null && searchCount > 0)
             }
         }.launchIn(lifecycleScope)
     }
@@ -64,7 +65,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun setPillResultList() {
-        val searchListAdapter = SearchListAdapter()
+        val searchListAdapter = PillListAdapter()
         binding.rvSearchList.adapter = searchListAdapter
         searchListAdapter.submitList(searchViewModel.mockSearchList)
     }

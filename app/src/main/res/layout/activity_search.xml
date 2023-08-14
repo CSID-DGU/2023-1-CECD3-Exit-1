@@ -40,7 +40,7 @@
             android:maxLines="1"
             android:paddingVertical="16dp"
             android:paddingStart="15dp"
-            android:text="@{viewModel.searchText}"
+            android:text="@={viewModel.searchText}"
             android:textAppearance="@style/TextAppearance.BodyM3"
             android:textColorHint="#AAAAAA"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +48,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            visibility="@{!viewModel.searchText.empty}"
             android:id="@+id/iv_search_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,6 +101,7 @@
                 android:id="@+id/tv_search_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:text="@{@string/search_count(viewModel.searchCount)}"
                 android:textAppearance="@style/TextAppearance.BodyM1"
                 android:textColor="@color/orange_600"
@@ -129,6 +131,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_search_result"
-            tools:listitem="@layout/item_search_result" />
+            tools:listitem="@layout/item_pill" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

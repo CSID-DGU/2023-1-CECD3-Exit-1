@@ -1,14 +1,14 @@
-package com.cecd.exitmed.presentation.search
+package com.cecd.exitmed.presentation.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cecd.exitmed.databinding.ItemSearchResultBinding
+import com.cecd.exitmed.databinding.ItemPillBinding
 import com.cecd.exitmed.domain.type.SearchPill
 import com.cecd.exitmed.util.ItemDiffCallback
 
-class SearchListAdapter : ListAdapter<SearchPill, SearchListAdapter.SearchResultViewHolder>(
+class PillListAdapter : ListAdapter<SearchPill, PillListAdapter.SearchResultViewHolder>(
     ItemDiffCallback<SearchPill>(
         onItemTheSame = { old, new -> old.pillId == new.pillId },
         onContentsTheSame = { old, new -> old == new }
@@ -16,7 +16,7 @@ class SearchListAdapter : ListAdapter<SearchPill, SearchListAdapter.SearchResult
 ) {
 
     class SearchResultViewHolder(
-        private val binding: ItemSearchResultBinding
+        private val binding: ItemPillBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(pill: SearchPill) {
             binding.searchPill = pill
@@ -26,7 +26,7 @@ class SearchListAdapter : ListAdapter<SearchPill, SearchListAdapter.SearchResult
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
         val binding =
-            ItemSearchResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemPillBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SearchResultViewHolder(binding)
     }
 
