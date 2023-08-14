@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!--  spacing  -->
-    <dimen name="spacing24">24dp</dimen>
-
-    <!-- Widget Size -->
-    <dimen name="button_height">48dp</dimen>
-</resources>
