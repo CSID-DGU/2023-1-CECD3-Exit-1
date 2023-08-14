@@ -9,6 +9,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySearchBinding
+import com.cecd.exitmed.presentation.common.PillListAdapter
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.binding.setVisibility
 import com.cecd.exitmed.util.extension.showKeyboard
@@ -64,7 +65,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun setPillResultList() {
-        val searchListAdapter = SearchListAdapter()
+        val searchListAdapter = PillListAdapter()
         binding.rvSearchList.adapter = searchListAdapter
         searchListAdapter.submitList(searchViewModel.mockSearchList)
     }
