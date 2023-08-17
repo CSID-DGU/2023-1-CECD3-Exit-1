@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_pill_creation_date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing24"
+            android:text="@string/pill_creation_date_title"
+            android:textAppearance="@style/TextAppearance.Title2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_pill_creation_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing24"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_radius_12_border_orange"
+            android:gravity="center_vertical"
+            android:paddingVertical="20dp"
+            android:paddingStart="16dp"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_pill_creation_date_title"
+            tools:text="2023/08/16" />
+
+        <ImageView
+            android:id="@+id/iv_pill_creation_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="6dp"
+            android:src="@drawable/ic_callender"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pill_creation_date"
+            app:layout_constraintEnd_toEndOf="@id/tv_pill_creation_date"
+            app:layout_constraintTop_toTopOf="@id/tv_pill_creation_date" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
