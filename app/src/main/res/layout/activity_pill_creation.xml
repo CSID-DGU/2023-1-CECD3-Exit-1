@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/spacing24"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:text="@string/pill_creation_title"
+            android:textAppearance="@style/TextAppearance.BodyM2"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_close"
+            app:layout_constraintStart_toEndOf="@id/iv_close"
+            app:layout_constraintTop_toTopOf="@+id/iv_close" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/pill_creation_tab_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:paddingEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_toolbar_title"
+            app:tabBackground="@drawable/selector_dot_indicator"
+            app:tabIndicatorHeight="0dp" />
+
+        <TextView
+            android:id="@+id/tv_pill_creation_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing24"
+            android:textAppearance="@style/TextAppearance.BodyM3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pill_creation_tab_indicator"
+            tools:text="STEP 1/4" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_pill_creation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="@dimen/spacing24"
+            app:layout_constraintBottom_toTopOf="@id/btn_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_pill_creation_step" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back"
+            style="@style/Widget.FullButton.Basic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing24"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="@dimen/spacing24"
+            android:paddingVertical="12dp"
+            android:text="@string/back"
+            android:textAppearance="@style/TextAppearance.BodyM2"
+            android:textColor="@color/orange_500"
+            app:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_next"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeColor="@color/orange_500"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            style="@style/Widget.FullButton.Basic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="@dimen/spacing24"
+            android:layout_marginBottom="@dimen/spacing24"
+            android:background="@drawable/shape_radius_8"
+            android:enabled="true"
+            android:paddingVertical="12dp"
+            android:text="@string/next"
+            android:textAppearance="@style/TextAppearance.BodyM2"
+            android:textColor="@color/selector_complete_button_text_color"
+            app:backgroundTint="@color/selector_complete_button_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_back" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
