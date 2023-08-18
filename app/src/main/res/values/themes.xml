@@ -2,9 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.ExitMed" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/orange_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/orange_500</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -15,6 +16,7 @@
         <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
         <item name="android:overScrollMode">never</item>
+        <item name="android:timePickerStyle">@style/Theme.TimePickerDialog</item>
     </style>
 
     <!--  ImageView Style  -->
@@ -35,5 +37,17 @@
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_width">0dp</item>
         <item name="cornerRadius">8dp</item>
+    </style>
+
+    <style name="Theme.TimePickerDialog" parent="android:Widget.Material.Light.TimePicker">
+        <item name="android:timePickerMode">spinner</item>
+    </style>
+
+    <style name="Widget.Pill.Creation.Chip" parent="Widget.AppCompat.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.BodyM1</item>
+        <item name="android:textColor">@color/selector_pill_creation_chip_color</item>
+        <item name="android:paddingVertical">5dp</item>
+        <item name="android:paddingHorizontal">20dp</item>
+        <item name="android:background">@drawable/selector_pill_creation</item>
     </style>
 </resources>
