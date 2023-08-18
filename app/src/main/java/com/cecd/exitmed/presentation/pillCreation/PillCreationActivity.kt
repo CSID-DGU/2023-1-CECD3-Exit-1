@@ -78,6 +78,5 @@ class PillCreationActivity :
         TabLayoutMediator(
             binding.pillCreationTabIndicator, binding.vpPillCreation
         ) { _, _ -> }.attach()
-
     }
 }
