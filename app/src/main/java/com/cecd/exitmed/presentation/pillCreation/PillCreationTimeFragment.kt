@@ -65,10 +65,10 @@ class PillCreationTimeFragment :
     // TODO 로직 다시 보기
     private fun set12HourClock(hourOfDay: Int, minute: Int): String {
         return if (hourOfDay < 12)
-            "오전 ${hourOfDay}:${minute}"
+            "오전 $hourOfDay:$minute"
         else if (hourOfDay == 12)
-            "오후 ${hourOfDay}:${minute}"
+            "오후 $hourOfDay:$minute"
         else
-            "오후 ${hourOfDay - 12}:${minute}"
+            "오후 ${hourOfDay - 12}:$minute"
     }
 }
