@@ -3,7 +3,7 @@ package com.cecd.exitmed.presentation.pillDrawer
 import androidx.lifecycle.ViewModel
 import com.cecd.exitmed.domain.type.DrawerPill
 
-class PillDrawerViewModel: ViewModel() {
+class PillDrawerViewModel : ViewModel() {
     val mockPillDrawerList = listOf(
         DrawerPill(
             1,
