@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_pill_drawer_detail_info_period_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing24"
+            android:text="@string/pill_drawer_detail_info_period_title"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="@color/orange_500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_pill_drawer_detail_info_period_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/spacing24"
+            android:text="월요일, 화요일, 수요일, 목요일, 금요일, 토요일 2회씩"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_pill_drawer_detail_info_period_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_pill_drawer_detail_info_period_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pill_drawer_detail_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing24"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_radius_12_border_black"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_pill_drawer_detail_info_period_content"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_pill_drawer_detail_dose_time" />
+
+        <TextView
+            android:id="@+id/tv_pill_drawer_detail_last_dose_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing24"
+            android:text="@string/pill_drawer_detail_info_last_dose_title"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="@color/orange_500"
+            app:layout_constraintStart_toStartOf="@id/tv_pill_drawer_detail_info_period_title"
+            app:layout_constraintTop_toBottomOf="@id/rv_pill_drawer_detail_time" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing24"
+            android:text="2023년 8월 19일"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pill_drawer_detail_last_dose_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_pill_drawer_detail_last_dose_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
