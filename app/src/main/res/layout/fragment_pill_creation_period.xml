@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.cecd.exitmed.type.PillPeriodType" />
+
+        <import type="com.cecd.exitmed.type.DayType" />
+
+        <variable
+            name="viewModel"
+            type="com.cecd.exitmed.presentation.pillCreation.PillCreationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing24" />
+
+        <TextView
+            android:id="@+id/tv_pill_creation_period_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pill_creation_period_title"
+            android:textAppearance="@style/TextAppearance.Title2"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_pill_creation_period_everyday"
+            style="@style/Widget.Pill.Creation.Chip"
+            selected="@{viewModel.pillPeriodType == PillPeriodType.EVERYDAY}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="@{() -> viewModel.setPillPeriod(PillPeriodType.EVERYDAY)}"
+            android:text="@{PillPeriodType.EVERYDAY.titleRes}"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_pill_creation_period_title"
+            tools:text="매일" />
+
+        <TextView
+            style="@style/Widget.Pill.Creation.Chip"
+            selected="@{viewModel.pillPeriodType == PillPeriodType.FIXEDDAY}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:onClick="@{() -> viewModel.setPillPeriod(PillPeriodType.FIXEDDAY)}"
+            android:text="@{PillPeriodType.FIXEDDAY.titleRes}"
+            app:layout_constraintStart_toEndOf="@id/tv_pill_creation_period_everyday"
+            app:layout_constraintTop_toTopOf="@id/tv_pill_creation_period_everyday"
+            tools:text="정해진 요일마다" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            visibility="@{viewModel.pillPeriodType == PillPeriodType.FIXEDDAY}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_pill_creation_period_everyday">
+
+            <TextView
+                android:id="@+id/tv_pill_creation_day_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pill_creation_day_setting_title"
+                android:textAppearance="@style/TextAppearance.Title2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_day_monday"
+                style="@style/Widget.Pill.Creation.Chip"
+                selected="@{viewModel.pillDayType[DayType.MONDAY]}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="@{() -> viewModel.setPillDay(DayType.MONDAY)}"
+                android:text="@{DayType.MONDAY.titleRes}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_pill_creation_day_title"
+                tools:text="월요일" />
+
+            <TextView
+                android:id="@+id/tv_day_tuesday"
+                style="@style/Widget.Pill.Creation.Chip"
+                selected="@{viewModel.pillDayType[DayType.TUESDAY]}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> viewModel.setPillDay(DayType.TUESDAY)}"
+                android:text="@{DayType.TUESDAY.titleRes}"
+                app:layout_constraintStart_toEndOf="@id/tv_day_monday"
+                app:layout_constraintTop_toTopOf="@id/tv_day_monday"
+                tools:text="화요일" />
+
+            <TextView
+                android:id="@+id/tv_day_wednesday"
+                style="@style/Widget.Pill.Creation.Chip"
+                selected="@{viewModel.pillDayType[DayType.WEDNESDAY]}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> viewModel.setPillDay(DayType.WEDNESDAY)}"
+                android:text="@{DayType.WEDNESDAY.titleRes}"
+                app:layout_constraintStart_toEndOf="@id/tv_day_tuesday"
+                app:layout_constraintTop_toTopOf="@id/tv_day_monday"
+                tools:text="수요일" />
+
+            <TextView
+                android:id="@+id/tv_day_thursday"
+                style="@style/Widget.Pill.Creation.Chip"
+                selected="@{viewModel.pillDayType[DayType.THURSDAY]}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:onClick="@{() -> viewModel.setPillDay(DayType.THURSDAY)}"
+                android:text="@{DayType.THURSDAY.titleRes}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_day_monday"
+                tools:text="목요일" />
+
+            <TextView
+                android:id="@+id/tv_day_friday"
+                style="@style/Widget.Pill.Creation.Chip"
+                selected="@{viewModel.pillDayType[DayType.FRIDAY]}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> viewModel.setPillDay(DayType.FRIDAY)}"
+                android:text="@{DayType.FRIDAY.titleRes}"
+                app:layout_constraintStart_toEndOf="@id/tv_day_thursday"
+                app:layout_constraintTop_toTopOf="@id/tv_day_thursday"
+                tools:text="금요일" />
+
+            <TextView
+                android:id="@+id/tv_day_saturday"
+                style="@style/Widget.Pill.Creation.Chip"
+                selected="@{viewModel.pillDayType[DayType.SATURDAY]}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> viewModel.setPillDay(DayType.SATURDAY)}"
+                android:text="@{DayType.SATURDAY.titleRes}"
+                app:layout_constraintStart_toEndOf="@id/tv_day_friday"
+                app:layout_constraintTop_toTopOf="@id/tv_day_thursday"
+                tools:text="토요일" />
+
+            <TextView
+                android:id="@+id/tv_day_sunday"
+                style="@style/Widget.Pill.Creation.Chip"
+                selected="@{viewModel.pillDayType[DayType.SUNDAY]}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:onClick="@{() -> viewModel.setPillDay(DayType.SUNDAY)}"
+                android:text="@{DayType.SUNDAY.titleRes}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_day_thursday"
+                tools:text="일요일" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
