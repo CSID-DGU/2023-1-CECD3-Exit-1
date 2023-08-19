@@ -24,6 +24,10 @@
         <item name="cornerSize">4dp</item>
     </style>
 
+    <style name="Radius8">
+        <item name="cornerSize">8dp</item>
+    </style>
+
     <!--  Widget  -->
     <style name="Widget.Material.Button.Basic" parent="">
         <item name="android:insetTop">0dp</item>
