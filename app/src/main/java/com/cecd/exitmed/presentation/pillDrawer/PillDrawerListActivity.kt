@@ -1,9 +1,11 @@
 package com.cecd.exitmed.presentation.pillDrawer
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityPillDrawerBinding
+import com.cecd.exitmed.presentation.pillDrawerDetail.PillDrawerDetailActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +22,7 @@ class PillDrawerListActivity :
     }
 
     private fun initLayout() {
-        val pillDrawerAdapter = PillDrawerListAdapter()
+        val pillDrawerAdapter = PillDrawerListAdapter(::moveTOPillDrawerDetail)
         binding.rvPillDrawer.apply {
             adapter = pillDrawerAdapter
         }
@@ -31,5 +33,9 @@ class PillDrawerListActivity :
         binding.toolbar.ivBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun moveTOPillDrawerDetail() {
+        startActivity(Intent(this, PillDrawerDetailActivity::class.java))
     }
 }
