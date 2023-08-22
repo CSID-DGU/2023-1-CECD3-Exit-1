@@ -1,4 +1,4 @@
-package com.example.exitmedserver.search;
+package com.example.exitmedserver.search.service;
 
 import org.springframework.stereotype.Service;
 

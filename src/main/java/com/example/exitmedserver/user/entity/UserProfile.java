@@ -1,4 +1,4 @@
-package com.example.exitmedserver.user;
+package com.example.exitmedserver.user.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +22,7 @@ public class UserProfile {
     private String profilePicture;
 
     @Column(name = "sex")
-    private Byte sex;
+    private String sex;
 
     @Column(name = "is_pregnant")
     private Byte isPregnant;

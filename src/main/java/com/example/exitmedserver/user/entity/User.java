@@ -1,4 +1,4 @@
-package com.example.exitmedserver.user;
+package com.example.exitmedserver.user.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

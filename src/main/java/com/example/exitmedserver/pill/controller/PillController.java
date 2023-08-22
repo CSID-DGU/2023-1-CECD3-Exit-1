@@ -1,4 +1,4 @@
-package com.example.exitmedserver.pill;
+package com.example.exitmedserver.pill.controller;
 
 import org.springframework.stereotype.Controller;
 

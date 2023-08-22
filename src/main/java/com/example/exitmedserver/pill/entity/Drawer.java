@@ -1,4 +1,4 @@
-package com.example.exitmedserver.search;
+package com.example.exitmedserver.pill.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class FavoriteList {
+public class Drawer {
     @Id
     @Column(name = "user_id")
     private String userId;
