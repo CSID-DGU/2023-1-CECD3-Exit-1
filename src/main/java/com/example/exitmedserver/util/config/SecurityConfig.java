@@ -1,5 +1,6 @@
 package com.example.exitmedserver.util.config;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,11 +12,28 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true); // 서버가 json을 응답할 때 자바스크립트가 처리할 수 있도록 허용
+        configuration.addAllowedOrigin("*"); // 모든 ip에 응답을 허용하겠다
+        configuration.addAllowedHeader("*"); // 모든 헤더에 응답을 허용하겠다
+        configuration.addAllowedMethod("*"); // 모든 post, get, put, delete, patch 요청을 허용하겠다
+        return new CorsConfigurationSource() {
+            @Override
+            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                return configuration;
+            }
+        };
+    }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
