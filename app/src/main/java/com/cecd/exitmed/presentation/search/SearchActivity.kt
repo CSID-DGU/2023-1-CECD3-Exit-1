@@ -44,6 +44,9 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
                 false
             }
         }
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     // TODO 서버 통신 후 로직 다시 고민!!
