@@ -79,8 +79,8 @@
     <string name="pill_creation_sunday">일요일</string>
     <string name="pill_creation_day_setting_title">복용할 요일을 모두 선택해주세요</string>
 
-    <!--  pill Drawer  -->
-    <string name="pill_drawer">약서랍</string>
+    <!--  dose  -->
+    <string name="dose_managing">복용 관리</string>
     <string name="pill_drawer_detail_info_period_title">복용 주기</string>
     <string name="pill_drawer_detail_info_last_dose_title">복용 종료일</string>
     <string name="pill_drawer_detail_info_title">복약 정보</string>
@@ -89,4 +89,8 @@
     <string name="pill_drawer_detail_pill_info_usage">용법</string>
     <string name="pill_drawer_detail_pill_info_caution_title">주의사항</string>
     <string name="pill_drawer_detail_dose_time_order">%d번째 알람</string>
+    <string name="pill_drawer">약 서랍</string>
+    <string name="pill_time_table">복용 시간표</string>
+    <string name="pill_drawer_move_to_search_title2">약 이름으로 검색하러 가기</string>
+    <string name="pill_drawer_move_to_search_title1">내 약서랍에 약을 추가하고 싶나요?</string>
 </resources>

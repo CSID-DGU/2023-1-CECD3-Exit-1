@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityMyBinding
-import com.cecd.exitmed.presentation.pillDrawer.PillDrawerListActivity
+import com.cecd.exitmed.presentation.dose.DoseActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
             moveToPillBookMark()
         }
         binding.layoutMyPagePillDrawer.setOnClickListener {
-            moveToPillDrawer()
+            moveToDose()
         }
         binding.layoutToolbar.ivBack.setOnClickListener {
             finish()
@@ -31,7 +31,7 @@ class MyActivity : BindingActivity<ActivityMyBinding>(R.layout.activity_my) {
         startActivity(Intent(this, MyPillListActivity::class.java))
     }
 
-    private fun moveToPillDrawer() {
-        startActivity(Intent(this, PillDrawerListActivity::class.java))
+    private fun moveToDose() {
+        startActivity(Intent(this, DoseActivity::class.java))
     }
 }
