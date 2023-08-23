@@ -1,5 +1,7 @@
 package com.example.exitmedserver.user.service;
 
+import com.example.exitmedserver.user.dto.UserCheckDuplicatedRequestDto;
+import com.example.exitmedserver.user.dto.UserCheckDuplicatedResponseDto;
 import com.example.exitmedserver.user.dto.UserSignupRequestDto;
 import com.example.exitmedserver.user.dto.UserSignupResponseDto;
 import com.example.exitmedserver.user.entity.User;
@@ -19,6 +21,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserProfileRepository userProfileRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public UserSignupResponseDto signup(UserSignupRequestDto userSignupRequestDto) {
         System.out.println("user service started");
         User user = User.builder()
@@ -50,5 +53,20 @@ public class UserService {
                 .userId(userSignupRequestDto.getUserId())
                 .fullName(userSignupRequestDto.getFullName())
                 .build();
+    }
+
+    public UserCheckDuplicatedResponseDto checkDuplicated(UserCheckDuplicatedRequestDto userCheckDuplicatedRequestDto) {
+        String userId = userCheckDuplicatedRequestDto.getUserId();
+        UserCheckDuplicatedResponseDto userCheckDuplicatedResponseDto = new UserCheckDuplicatedResponseDto();
+
+        if (userRepository.findUserByUserId(userId) != null) {
+            // 만들려는 아이디가 이미 존재함, 아이디 생성 불가
+            userCheckDuplicatedResponseDto.setDuplicated(true);
+            return userCheckDuplicatedResponseDto;
+        } else {
+            // 아이디 생성 가능
+            userCheckDuplicatedResponseDto.setDuplicated(false);
+            return userCheckDuplicatedResponseDto;
+        }
     }
 }
