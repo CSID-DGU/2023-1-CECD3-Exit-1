@@ -1,4 +1,4 @@
-package com.cecd.exitmed.presentation.pillDrawer
+package com.cecd.exitmed.presentation.dose
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
