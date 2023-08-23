@@ -59,14 +59,7 @@ public class UserService {
         String userId = userCheckDuplicatedRequestDto.getUserId();
         UserCheckDuplicatedResponseDto userCheckDuplicatedResponseDto = new UserCheckDuplicatedResponseDto();
 
-        if (userRepository.findUserByUserId(userId) != null) {
-            // 만들려는 아이디가 이미 존재함, 아이디 생성 불가
-            userCheckDuplicatedResponseDto.setDuplicated(true);
-            return userCheckDuplicatedResponseDto;
-        } else {
-            // 아이디 생성 가능
-            userCheckDuplicatedResponseDto.setDuplicated(false);
-            return userCheckDuplicatedResponseDto;
-        }
+        userCheckDuplicatedResponseDto.setDuplicated(userRepository.findUserByUserId(userId) != null);
+        return userCheckDuplicatedResponseDto;
     }
 }
