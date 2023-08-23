@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="doseTimeTable"
+            type="com.cecd.exitmed.domain.type.DoseTimeTable" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view_vertical"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="38dp"
+            android:background="@color/orange_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:src="@{doseTimeTable.passed == true? @drawable/ic_dose_time_unabled : @drawable/ic_dose_time_enabled}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/view_vertical"
+            app:layout_constraintStart_toStartOf="@id/view_vertical"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_dose_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="@{doseTimeTable.time}"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            android:textColor="@{doseTimeTable.passed == true? @color/gray_400 : @color/black}"
+            app:layout_constraintBottom_toTopOf="@id/tv_dose_pill_name"
+            app:layout_constraintStart_toEndOf="@id/view_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="오전 10:00" />
+
+        <TextView
+            android:id="@+id/tv_dose_pill_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{doseTimeTable.pillName}"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            android:textColor="@{doseTimeTable.passed == true? @color/gray_400 : @color/black}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_dose_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_dose_time"
+            tools:text="타이레놀" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

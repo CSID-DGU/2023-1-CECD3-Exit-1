@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_dose_timetable_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="30dp"
+            android:textAppearance="@style/TextAppearance.BodyB2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="8월 32일" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/pill_time_table"
+            android:textAppearance="@style/TextAppearance.BodyB2"
+            android:textColor="@color/orange_600"
+            app:layout_constraintStart_toEndOf="@id/tv_dose_timetable_date"
+            app:layout_constraintTop_toTopOf="@id/tv_dose_timetable_date" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_dose_time_table"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dose_timetable_date"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_dose_timetable" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

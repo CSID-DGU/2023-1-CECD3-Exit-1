@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pill_drawer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/spacing24"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/layout_move_to_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_pill_drawer" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_move_to_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing24"
+            android:layout_marginBottom="@dimen/spacing24"
+            android:background="@drawable/shape_radius_12_border_orange"
+            android:backgroundTint="@color/orange_25"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tv_move_to_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pill_drawer_move_to_search_title1"
+                android:textAppearance="@style/TextAppearance.BodyM3"
+                android:textColor="@color/orange_500"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/pill_drawer_move_to_search_title2"
+                android:textAppearance="@style/TextAppearance.BodyM3"
+                android:textColor="@color/gray_400"
+                app:layout_constraintStart_toStartOf="@id/tv_move_to_search"
+                app:layout_constraintTop_toBottomOf="@id/tv_move_to_search" />
+
+            <ImageView
+                android:id="@+id/iv_move_to_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="@id/layout_move_to_search"
+                app:layout_constraintEnd_toEndOf="@id/layout_move_to_search"
+                app:layout_constraintTop_toTopOf="@id/layout_move_to_search" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
