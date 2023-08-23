@@ -32,7 +32,7 @@ class PillDrawerListFragment :
     }
 
     private fun addListeners() {
-        binding.ivMoveToSearch.setOnClickListener {
+        binding.layoutMoveToSearch.setOnClickListener {
             moveToTextSearch()
         }
     }
