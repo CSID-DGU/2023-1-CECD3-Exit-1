@@ -70,7 +70,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.pillDrawer.PillDrawerListActivity"
+            android:name=".presentation.dose.DoseActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
