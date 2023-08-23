@@ -28,6 +28,9 @@ class SignUpEmailActivity :
         binding.btnNext.setOnClickListener {
             moveToSignUpPassword()
         }
+        binding.ivClose.setOnClickListener {
+            finish()
+        }
     }
 
     private fun moveToSignUpPassword() {

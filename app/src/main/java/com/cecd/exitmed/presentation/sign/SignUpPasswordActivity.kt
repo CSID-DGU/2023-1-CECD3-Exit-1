@@ -23,7 +23,7 @@ class SignUpPasswordActivity :
     }
 
     private fun addListeners() {
-        binding.root.setOnClickListener {
+        binding.layoutSignUpPassword.setOnClickListener {
             showKeyboard(it, false)
         }
         binding.btnNext.setOnClickListener {
@@ -32,9 +32,18 @@ class SignUpPasswordActivity :
         binding.btnBack.setOnClickListener {
             finish()
         }
+        binding.ivClose.setOnClickListener {
+            moveToHSignIn()
+        }
     }
 
     private fun moveToSignUpInfo() {
         startActivity(Intent(this, SignUpInfoActivity::class.java))
+    }
+
+    private fun moveToHSignIn() {
+        val intent = Intent(this, SignInActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }
