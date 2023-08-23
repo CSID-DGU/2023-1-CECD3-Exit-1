@@ -1,5 +1,6 @@
 package com.example.exitmedserver.user.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -7,12 +8,15 @@ import lombok.Data;
 public class UserSignupRequestDto {
 
     @NotNull
+    @NotEmpty
     private String userId;
 
     @NotNull
+    @NotEmpty
     private String userPassword;
 
     @NotNull
+    @NotEmpty
     private String fullName;
 
     @NotNull
