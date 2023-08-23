@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-
 @AndroidEntryPoint
 class DoseTimeTableFragment :
     BindingFragment<FragmentDoseTimetableBinding>(R.layout.fragment_dose_timetable) {
