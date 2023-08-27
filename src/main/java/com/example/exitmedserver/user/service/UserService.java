@@ -28,6 +28,7 @@ public class UserService {
                 .userId(userSignupRequestDto.getUserId())
                 .userPassword(bCryptPasswordEncoder.encode(userSignupRequestDto.getUserPassword()))
                 .createdAt(Timestamp.from(Instant.now()))
+                .userRole("ROLE_USER")
                 .build();
 
         byte isPregnant;
@@ -59,7 +60,7 @@ public class UserService {
         String userId = userCheckDuplicatedRequestDto.getUserId();
         UserCheckDuplicatedResponseDto userCheckDuplicatedResponseDto = new UserCheckDuplicatedResponseDto();
 
-        userCheckDuplicatedResponseDto.setDuplicated(userRepository.findUserByUserId(userId) != null);
+        userCheckDuplicatedResponseDto.setDuplicated(userRepository.findByUserId(userId) != null);
         return userCheckDuplicatedResponseDto;
     }
 }

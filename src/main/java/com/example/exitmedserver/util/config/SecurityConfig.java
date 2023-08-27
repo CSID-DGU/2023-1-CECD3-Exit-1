@@ -1,5 +1,6 @@
 package com.example.exitmedserver.util.config;
 
+import com.example.exitmedserver.util.auth.JwtAuthenticationFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -64,6 +65,9 @@ public class SecurityConfig {
 
                 // 위에서 생성한 authenticationManager 사용 설정
                 .authenticationManager(authenticationManager)
+
+                // JwtAuthenticationFilter의 parameter로 아까 만들어둔 authenticaitonManager 넘겨주기
+                .addFilter(new JwtAuthenticationFilter(authenticationManager))
                 ;
         return http.build();
     }
