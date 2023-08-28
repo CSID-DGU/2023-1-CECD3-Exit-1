@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityBookmarkListBinding
 import com.cecd.exitmed.presentation.common.PillListAdapter
-import com.cecd.exitmed.presentation.search.SearchViewModel
+import com.cecd.exitmed.presentation.textSearch.SearchViewModel
 import com.cecd.exitmed.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 

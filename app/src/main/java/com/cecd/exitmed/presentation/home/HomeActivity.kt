@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityHomeBinding
 import com.cecd.exitmed.presentation.my.MyActivity
-import com.cecd.exitmed.presentation.search.SearchActivity
+import com.cecd.exitmed.presentation.textSearch.SearchActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 

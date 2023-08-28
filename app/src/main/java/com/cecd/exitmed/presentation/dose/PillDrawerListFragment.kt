@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.FragmentPillDrawerBinding
 import com.cecd.exitmed.presentation.pillDrawerDetail.PillDrawerDetailActivity
-import com.cecd.exitmed.presentation.search.SearchActivity
+import com.cecd.exitmed.presentation.textSearch.SearchActivity
 import com.cecd.exitmed.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
