@@ -1,4 +1,4 @@
-package com.cecd.exitmed.presentation.sign
+package com.cecd.exitmed.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -34,6 +34,12 @@ class SignUpEmailActivity :
     }
 
     private fun moveToSignUpPassword() {
-        startActivity(Intent(this, SignUpPasswordActivity::class.java))
+        val intent = Intent(this, SignUpPasswordActivity::class.java)
+        intent.putExtra(EMAIL, viewModel.inputEmail.value)
+        startActivity(intent)
+    }
+
+    companion object {
+        const val EMAIL = "email"
     }
 }
