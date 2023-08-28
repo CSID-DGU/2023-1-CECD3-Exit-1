@@ -7,7 +7,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySignUpInfoBinding
-import com.cecd.exitmed.presentation.home.HomeActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.extension.showKeyboard
 import com.cecd.exitmed.util.extension.showToast
@@ -57,19 +56,13 @@ class SignUpInfoActivity :
             when (isSignUp) {
                 true -> {
                     showToast(getString(R.string.sign_up_success_toast))
-                    moveToHome()
+                    moveToSignIn()
                 }
 
                 false -> showToast(getString(R.string.sign_up_fail_toast))
                 else -> {}
             }
         }.launchIn(lifecycleScope)
-    }
-
-    private fun moveToHome() {
-        val intent = Intent(this, HomeActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
     }
 
     private fun moveToSignIn() {
