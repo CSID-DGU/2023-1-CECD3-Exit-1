@@ -1,8 +1,8 @@
 package com.cecd.exitmed.presentation.auth
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cecd.exitmed.data.model.request.RequestEmailDoubleCheck
 import com.cecd.exitmed.data.model.request.RequestSignUp
 import com.cecd.exitmed.domain.repository.AuthRepository
 import com.cecd.exitmed.type.GenderType
@@ -24,17 +24,23 @@ class SignViewModel @Inject constructor(
 ) : ViewModel() {
     val inputEmail = MutableStateFlow("")
     val inputPW = MutableStateFlow("")
-    val inputPWDoubleCheck = MutableStateFlow("")
+    val inputPWReConfirm = MutableStateFlow("")
     val inputName = MutableStateFlow("")
     val inputBirth = MutableStateFlow("")
     private var _inputGender = MutableStateFlow<GenderType?>(null)
     val inputGender get() = _inputGender.asStateFlow()
     private var _isCompleteSignUp = MutableStateFlow<Boolean?>(null)
     val isCompleteSignUp get() = _isCompleteSignUp.asStateFlow()
+    private val _isEmailDuplicated = MutableStateFlow<Boolean?>(null)
+    val isEmailDuplicated get() = _isEmailDuplicated.asStateFlow()
 
     val isValidEmail: StateFlow<Boolean?> = inputEmail.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
+
+    fun initEmailDuplicated() {
+        _isEmailDuplicated.value = null
+    }
 
     val isValidPassword: StateFlow<Boolean?> = inputPW.map { password ->
         password.matches(Regex(PASSWORD_PATTERN))
@@ -42,7 +48,7 @@ class SignViewModel @Inject constructor(
 
     val isDoubleCheck: StateFlow<Boolean?> = combine(
         inputPW,
-        inputPWDoubleCheck
+        inputPWReConfirm
     ) { password, passwordDoubleCheck ->
         password == passwordDoubleCheck
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
@@ -76,6 +82,18 @@ class SignViewModel @Inject constructor(
                 }
                 .onFailure { throwable ->
                     _isCompleteSignUp.value = false
+                    Timber.e(throwable.message)
+                }
+        }
+    }
+
+    fun checkEmailDuplicated() {
+        viewModelScope.launch {
+            authRepository.checkEmailDuplicated(RequestEmailDoubleCheck(inputEmail.value))
+                .onSuccess { isDuplicated ->
+                    _isEmailDuplicated.value = isDuplicated.duplicated
+                }
+                .onFailure { throwable ->
                     Timber.e(throwable.message)
                 }
         }

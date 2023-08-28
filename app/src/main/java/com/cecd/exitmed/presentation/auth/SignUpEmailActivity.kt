@@ -3,11 +3,15 @@ package com.cecd.exitmed.presentation.auth
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySignUpEmailBinding
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.extension.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class SignUpEmailActivity :
@@ -19,6 +23,7 @@ class SignUpEmailActivity :
         binding.lifecycleOwner = this
 
         addListeners()
+        collectData()
     }
 
     private fun addListeners() {
@@ -31,6 +36,14 @@ class SignUpEmailActivity :
         binding.ivClose.setOnClickListener {
             finish()
         }
+    }
+
+    private fun collectData() {
+        viewModel.inputEmail.flowWithLifecycle(lifecycle).onEach {
+            if (viewModel.isEmailDuplicated.value != null) {
+                viewModel.initEmailDuplicated()
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun moveToSignUpPassword() {
