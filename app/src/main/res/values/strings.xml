@@ -31,6 +31,7 @@
     <string name="sign_up_email_title2">계정을 만들어 볼까요?</string>
     <string name="sign_up_email">1. 이메일 입력</string>
     <string name="sign_up_email_hint">사용할 이메일을 입력해주세요</string>
+    <string name="sign_up_email_double_check">중복확인</string>
 
     <!--  home  -->
     <string name="home_title2">에게 물어보세요!</string>
