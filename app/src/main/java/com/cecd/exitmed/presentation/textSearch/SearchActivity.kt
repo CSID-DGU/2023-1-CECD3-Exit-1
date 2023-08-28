@@ -1,4 +1,4 @@
-package com.cecd.exitmed.presentation.search
+package com.cecd.exitmed.presentation.textSearch
 
 import android.os.Bundle
 import android.view.KeyEvent
