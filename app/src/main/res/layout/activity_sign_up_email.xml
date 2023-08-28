@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.cecd.exitmed.presentation.sign.SignViewModel" />
+            type="com.cecd.exitmed.presentation.auth.SignViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_radius_8_border_orange"
+            android:onClick="@{() -> viewModel.checkEmailDuplicated()}"
             android:paddingHorizontal="20dp"
             android:paddingVertical="6dp"
             android:text="@string/sign_up_email_double_check"
@@ -121,6 +122,30 @@
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
             app:layout_constraintTop_toBottomOf="@id/et_sign_up_email" />
 
+        <TextView
+            android:id="@+id/tv_sign_up_email_duplicated"
+            visibility="@{viewModel.isEmailDuplicated == true}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/sign_up_email_duplicated_toast"
+            android:textAppearance="@style/TextAppearance.CaptionM1"
+            android:textColor="@color/error"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintTop_toBottomOf="@id/et_sign_up_email" />
+
+        <TextView
+            android:id="@+id/tv_sign_up_email_not_duplicated"
+            visibility="@{viewModel.isEmailDuplicated == false &amp; viewModel.isEmailDuplicated != null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/sign_up_email_not_duplicated_toast"
+            android:textAppearance="@style/TextAppearance.CaptionM1"
+            android:textColor="#38953B"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintTop_toBottomOf="@id/et_sign_up_email" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_next"
             style="@style/Widget.FullButton.Basic"
@@ -128,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing24"
             android:background="@drawable/shape_radius_8"
-            android:enabled="@{viewModel.isValidEmail}"
+            android:enabled="@{viewModel.isValidEmail &amp; viewModel.isEmailDuplicated == false &amp; viewModel.isEmailDuplicated != null}"
             android:paddingVertical="12dp"
             android:text="@string/next"
             android:textAppearance="@style/TextAppearance.BodyM2"

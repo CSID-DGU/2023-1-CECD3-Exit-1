@@ -1,4 +1,4 @@
-package com.cecd.exitmed.presentation.sign
+package com.cecd.exitmed.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
