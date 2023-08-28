@@ -1,8 +1,10 @@
 package com.cecd.exitmed.data.service
 
 import com.cecd.exitmed.data.model.request.RequestEmailDoubleCheck
+import com.cecd.exitmed.data.model.request.RequestSignIn
 import com.cecd.exitmed.data.model.request.RequestSignUp
 import com.cecd.exitmed.data.model.response.ResponseEmailDoubleCheck
+import com.cecd.exitmed.data.model.response.ResponseSignIn
 import com.cecd.exitmed.data.model.response.ResponseSignUp
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -17,4 +19,9 @@ interface AuthService {
     suspend fun checkEmailDuplicated(
         @Body requestEmailDoubleCheck: RequestEmailDoubleCheck
     ): ResponseEmailDoubleCheck
+
+    @POST("user/login")
+    suspend fun signIn(
+        @Body requestSignIn: RequestSignIn
+    ): ResponseSignIn
 }

@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cecd.exitmed.presentation.auth.SignViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,6 +58,7 @@
             android:hint="@string/sign_in_id_hint"
             android:paddingVertical="14dp"
             android:paddingStart="20dp"
+            android:text="@={viewModel.inputEmail}"
             android:textAppearance="@style/TextAppearance.BodyM1"
             android:textColorHint="@color/gray_200"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
@@ -71,6 +75,7 @@
             android:hint="@string/sign_in_password_hint"
             android:paddingVertical="14dp"
             android:paddingStart="20dp"
+            android:text="@={viewModel.inputPW}"
             android:textAppearance="@style/TextAppearance.BodyM1"
             android:textColorHint="@color/gray_200"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
@@ -78,6 +83,7 @@
             app:layout_constraintTop_toBottomOf="@id/et_sign_in_id" />
 
         <com.google.android.material.button.MaterialButton
+            android:onClick="@{() -> viewModel.signIn()}"
             style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

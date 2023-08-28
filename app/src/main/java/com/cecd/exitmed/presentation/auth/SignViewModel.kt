@@ -3,6 +3,7 @@ package com.cecd.exitmed.presentation.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cecd.exitmed.data.model.request.RequestEmailDoubleCheck
+import com.cecd.exitmed.data.model.request.RequestSignIn
 import com.cecd.exitmed.data.model.request.RequestSignUp
 import com.cecd.exitmed.domain.repository.AuthRepository
 import com.cecd.exitmed.type.GenderType
@@ -33,6 +34,8 @@ class SignViewModel @Inject constructor(
     val isCompleteSignUp get() = _isCompleteSignUp.asStateFlow()
     private val _isEmailDuplicated = MutableStateFlow<Boolean?>(null)
     val isEmailDuplicated get() = _isEmailDuplicated.asStateFlow()
+    private var _isCompleteSignIn = MutableStateFlow<Boolean?>(null)
+    val isCompleteSignIn get() = _isCompleteSignIn.asStateFlow()
 
     val isValidEmail: StateFlow<Boolean?> = inputEmail.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
@@ -94,6 +97,19 @@ class SignViewModel @Inject constructor(
                     _isEmailDuplicated.value = isDuplicated.duplicated
                 }
                 .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
+
+    fun signIn() {
+        viewModelScope.launch {
+            authRepository.signIn(RequestSignIn(inputEmail.value, inputPW.value))
+                .onSuccess {
+                    _isCompleteSignIn.value = true
+                }
+                .onFailure { throwable ->
+                    _isCompleteSignIn.value = false
                     Timber.e(throwable.message)
                 }
         }
