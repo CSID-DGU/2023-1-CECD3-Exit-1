@@ -1,8 +1,12 @@
-package com.cecd.exitmed.presentation.sign
+package com.cecd.exitmed.presentation.auth
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cecd.exitmed.data.model.request.RequestSignUp
+import com.cecd.exitmed.domain.repository.AuthRepository
 import com.cecd.exitmed.type.GenderType
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -10,8 +14,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class SignViewModel : ViewModel() {
+@HiltViewModel
+class SignViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : ViewModel() {
     val inputEmail = MutableStateFlow("")
     val inputPW = MutableStateFlow("")
     val inputPWDoubleCheck = MutableStateFlow("")
@@ -19,6 +29,8 @@ class SignViewModel : ViewModel() {
     val inputBirth = MutableStateFlow("")
     private var _inputGender = MutableStateFlow<GenderType?>(null)
     val inputGender get() = _inputGender.asStateFlow()
+    private var _isCompleteSignUp = MutableStateFlow<Boolean?>(null)
+    val isCompleteSignUp get() = _isCompleteSignUp.asStateFlow()
 
     val isValidEmail: StateFlow<Boolean?> = inputEmail.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
@@ -34,6 +46,7 @@ class SignViewModel : ViewModel() {
     ) { password, passwordDoubleCheck ->
         password == passwordDoubleCheck
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
+
     fun setUserGender(genderType: GenderType) {
         _inputGender.value = genderType
     }
@@ -46,6 +59,29 @@ class SignViewModel : ViewModel() {
         name.isNotEmpty() && birth.length == 4 && _inputGender.value != null
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
+    fun signUp(email: String, password: String, birth: Int, name: String, gender: String) {
+        viewModelScope.launch {
+            authRepository.signUp(
+                RequestSignUp(
+                    email,
+                    password,
+                    birth,
+                    name,
+                    gender,
+                    false
+                )
+            )
+                .onSuccess {
+                    _isCompleteSignUp.value = true
+                }
+                .onFailure { throwable ->
+                    _isCompleteSignUp.value = false
+                    Timber.e(throwable.message)
+                }
+        }
+    }
+
+    private
     companion object {
         const val EMAIL_PATTERN = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
         const val PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{10,}\$"
