@@ -93,4 +93,8 @@
     <string name="pill_time_table">복용 시간표</string>
     <string name="pill_drawer_move_to_search_title2">약 이름으로 검색하러 가기</string>
     <string name="pill_drawer_move_to_search_title1">내 약서랍에 약을 추가하고 싶나요?</string>
+
+    <!--  image search  -->
+    <string name="image_search_title">이미지 검색</string>
+    <string name="image_search_button_title">이미지 검색하기</string>
 </resources>
