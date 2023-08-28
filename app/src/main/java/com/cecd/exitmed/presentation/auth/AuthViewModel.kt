@@ -20,7 +20,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class SignViewModel @Inject constructor(
+class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
     val inputEmail = MutableStateFlow("")
@@ -110,7 +110,7 @@ class SignViewModel @Inject constructor(
                 }
                 .onFailure { throwable ->
                     _isCompleteSignIn.value = false
-                    Timber.e(throwable.message)
+                    Timber.tag("aaaaa").e(throwable.message)
                 }
         }
     }

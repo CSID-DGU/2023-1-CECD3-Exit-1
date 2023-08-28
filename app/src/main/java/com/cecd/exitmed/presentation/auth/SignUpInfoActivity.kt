@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class SignUpInfoActivity :
     BindingActivity<ActivitySignUpInfoBinding>(R.layout.activity_sign_up_info) {
-    private val viewModel: SignViewModel by viewModels()
+    private val viewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel

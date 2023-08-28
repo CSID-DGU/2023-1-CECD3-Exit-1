@@ -6,94 +6,105 @@
 
         <variable
             name="viewModel"
-            type="com.cecd.exitmed.presentation.auth.SignViewModel" />
+            type="com.cecd.exitmed.presentation.auth.AuthViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/spacing24" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/spacing24" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/spacing24" />
 
-        <TextView
-            android:id="@+id/tv_sign_in_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="86dp"
-            android:text="@string/sign_in_title"
-            android:textAppearance="@style/TextAppearance.LargeTitle"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/spacing24" />
 
-        <TextView
-            android:id="@+id/tv_sign_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="174dp"
-            android:text="@string/sign_in_move_to_sign_up"
-            android:textAppearance="@style/TextAppearance.CaptionB1"
-            android:textColor="@color/gray_500"
-            app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintTop_toBottomOf="@id/tv_sign_in_title" />
+            <TextView
+                android:id="@+id/tv_sign_in_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="86dp"
+                android:text="@string/sign_in_title"
+                android:textAppearance="@style/TextAppearance.LargeTitle"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/et_sign_in_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_radius_8"
-            android:backgroundTint="@color/lightgray_warm"
-            android:hint="@string/sign_in_id_hint"
-            android:paddingVertical="14dp"
-            android:paddingStart="20dp"
-            android:text="@={viewModel.inputEmail}"
-            android:textAppearance="@style/TextAppearance.BodyM1"
-            android:textColorHint="@color/gray_200"
-            app:layout_constraintEnd_toStartOf="@+id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_sign_up" />
+            <TextView
+                android:id="@+id/tv_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="174dp"
+                android:text="@string/sign_in_move_to_sign_up"
+                android:textAppearance="@style/TextAppearance.CaptionB1"
+                android:textColor="@color/gray_500"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintTop_toBottomOf="@id/tv_sign_in_title" />
 
-        <EditText
-            android:id="@+id/et_sign_in_password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_radius_8"
-            android:backgroundTint="@color/lightgray_warm"
-            android:hint="@string/sign_in_password_hint"
-            android:paddingVertical="14dp"
-            android:paddingStart="20dp"
-            android:text="@={viewModel.inputPW}"
-            android:textAppearance="@style/TextAppearance.BodyM1"
-            android:textColorHint="@color/gray_200"
-            app:layout_constraintEnd_toStartOf="@+id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/et_sign_in_id" />
+            <EditText
+                android:id="@+id/et_sign_in_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_radius_8"
+                android:backgroundTint="@color/lightgray_warm"
+                android:hint="@string/sign_in_id_hint"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingVertical="14dp"
+                android:paddingStart="20dp"
+                android:text="@={viewModel.inputEmail}"
+                android:textAppearance="@style/TextAppearance.BodyM1"
+                android:textColorHint="@color/gray_200"
+                app:layout_constraintEnd_toStartOf="@+id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/tv_sign_up" />
 
-        <com.google.android.material.button.MaterialButton
-            android:onClick="@{() -> viewModel.signIn()}"
-            style="@style/Widget.FullButton.Basic"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/orange_500"
-            android:paddingVertical="12dp"
-            android:text="@string/sign_in"
-            android:textAppearance="@style/TextAppearance.BodyM2"
-            app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/et_sign_in_password" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/et_sign_in_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_radius_8"
+                android:backgroundTint="@color/lightgray_warm"
+                android:hint="@string/sign_in_password_hint"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingVertical="14dp"
+                android:paddingStart="20dp"
+                android:text="@={viewModel.inputPW}"
+                android:textAppearance="@style/TextAppearance.BodyM1"
+                android:textColorHint="@color/gray_200"
+                app:layout_constraintEnd_toStartOf="@+id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/et_sign_in_id" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.FullButton.Basic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/orange_500"
+                android:onClick="@{() -> viewModel.signIn()}"
+                android:paddingVertical="12dp"
+                android:text="@string/sign_in"
+                android:textAppearance="@style/TextAppearance.BodyM2"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@+id/et_sign_in_password" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>
