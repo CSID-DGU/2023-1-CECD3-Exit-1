@@ -77,6 +77,19 @@
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@+id/tv_sign_up_email_title3" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_radius_8_border_orange"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="6dp"
+            android:text="@string/sign_up_email_double_check"
+            android:textAppearance="@style/TextAppearance.CaptionM1"
+            android:textColor="@color/orange_500"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sign_up_email"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toTopOf="@id/tv_sign_up_email" />
+
         <EditText
             android:id="@+id/et_sign_up_email"
             android:layout_width="0dp"
