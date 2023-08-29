@@ -94,7 +94,12 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.imageSearch.ImageSearchActivity"
-            android:exported="true"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".presentation.imageSearch.ImageCaptureActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
     </application>
