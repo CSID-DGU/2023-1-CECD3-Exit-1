@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ResponseSignIn(
     @SerialName("Authorization")
-    val refreshToken: String
+    val accessToken: String
 )
