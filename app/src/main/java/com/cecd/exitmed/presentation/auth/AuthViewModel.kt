@@ -2,6 +2,7 @@ package com.cecd.exitmed.presentation.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cecd.exitmed.data.dataSource.local.ExitLocalDataSource
 import com.cecd.exitmed.data.model.request.RequestEmailDoubleCheck
 import com.cecd.exitmed.data.model.request.RequestSignIn
 import com.cecd.exitmed.data.model.request.RequestSignUp
@@ -21,6 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
+    private val dataStore: ExitLocalDataSource,
     private val authRepository: AuthRepository
 ) : ViewModel() {
     val inputEmail = MutableStateFlow("")
@@ -106,6 +108,8 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.signIn(RequestSignIn(inputEmail.value, inputPW.value))
                 .onSuccess {
+                    dataStore.isLogin = true
+                    dataStore.accessToken = it.accessToken
                     _isCompleteSignIn.value = true
                 }
                 .onFailure { throwable ->
