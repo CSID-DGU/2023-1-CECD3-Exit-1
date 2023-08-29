@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing24" />
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/view_toolbar"
+            app:title="@{@string/image_search_title}" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="44dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_image_capture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView">
+
+            <ImageView
+                android:id="@+id/iv_light_reflection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_light_reflection"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_light_reflection"
+                coloredText="@{@string/image_capture_light_reflection}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAppearance="@style/TextAppearance.BodyM1"
+                app:layout_constraintStart_toStartOf="@+id/iv_light_reflection"
+                app:layout_constraintTop_toBottomOf="@+id/iv_light_reflection"
+                tools:text="@string/image_capture_light_reflection" />
+
+            <ImageView
+                android:id="@+id/iv_pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:src="@drawable/ic_image_search_pill"
+                app:layout_constraintStart_toStartOf="@+id/iv_identification_pharse"
+                app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+            <TextView
+                android:id="@+id/tv_pill"
+                coloredText="@{@string/image_capture_pill_front}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAppearance="@style/TextAppearance.BodyM1"
+                app:layout_constraintStart_toStartOf="@+id/iv_identification_pharse"
+                app:layout_constraintTop_toBottomOf="@+id/iv_light_reflection"
+                tools:text="알약의 앞면을\n해주세요" />
+
+            <ImageView
+                android:id="@+id/iv_image_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_image_center"
+                app:layout_constraintStart_toStartOf="@+id/iv_light_reflection"
+                app:layout_constraintTop_toTopOf="@+id/iv_identification_pharse" />
+
+            <TextView
+                android:id="@+id/tv_image_center"
+                coloredText="@{@string/image_capture_center}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAppearance="@style/TextAppearance.BodyM1"
+                app:layout_constraintStart_toStartOf="@+id/iv_light_reflection"
+                app:layout_constraintTop_toBottomOf="@+id/iv_image_center"
+                tools:text="카메라 중앙에\n알약을 두세요" />
+
+            <ImageView
+                android:id="@+id/iv_identification_pharse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/ic_identification_phrase"
+                app:layout_constraintStart_toStartOf="@+id/tv_identification_pharse"
+                app:layout_constraintTop_toBottomOf="@+id/tv_light_reflection" />
+
+            <TextView
+                android:id="@+id/tv_identification_pharse"
+                coloredText="@{@string/image_capture_identification_pharse}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAppearance="@style/TextAppearance.BodyM1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_identification_pharse"
+                tools:text="식별문구를 신경써서\n촬영해주세요" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_image_capture"
+            style="@style/Widget.FullButton.Basic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing24"
+            android:paddingVertical="12dp"
+            android:text="@string/image_capture_button_title"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
