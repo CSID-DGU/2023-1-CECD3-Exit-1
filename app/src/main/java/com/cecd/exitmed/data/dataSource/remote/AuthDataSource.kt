@@ -1,4 +1,4 @@
-package com.cecd.exitmed.data.dataSource
+package com.cecd.exitmed.data.dataSource.remote
 
 import com.cecd.exitmed.data.model.request.RequestEmailDoubleCheck
 import com.cecd.exitmed.data.model.request.RequestSignIn

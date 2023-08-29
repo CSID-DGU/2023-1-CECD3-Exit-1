@@ -1,6 +1,6 @@
 package com.cecd.exitmed.data.repository
 
-import com.cecd.exitmed.data.dataSource.AuthDataSource
+import com.cecd.exitmed.data.dataSource.remote.AuthDataSource
 import com.cecd.exitmed.data.model.request.RequestEmailDoubleCheck
 import com.cecd.exitmed.data.model.request.RequestSignIn
 import com.cecd.exitmed.data.model.request.RequestSignUp
