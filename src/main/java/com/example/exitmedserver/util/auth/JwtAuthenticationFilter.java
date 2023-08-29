@@ -53,7 +53,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String jwtToken = jwtProvider.createAccessToken(principalDetails.getUsername(), principalDetails.getPassword());
 
-        response.getWriter().write("{\n\t\"Authorization\": " + "Bearer " + jwtToken + "\n}");
+        response.setContentType("application/json");
+        response.getWriter().write("{\"Authorization\": \"Bearer " + jwtToken + "\"}");
     }
 
     @Override
