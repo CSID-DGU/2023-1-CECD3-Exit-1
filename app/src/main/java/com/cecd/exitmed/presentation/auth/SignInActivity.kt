@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
+import com.cecd.exitmed.data.dataSource.local.ExitLocalDataSource
 import com.cecd.exitmed.databinding.ActivitySignInBinding
 import com.cecd.exitmed.presentation.home.HomeActivity
 import com.cecd.exitmed.util.binding.BindingActivity
@@ -23,6 +24,7 @@ class SignInActivity : BindingActivity<ActivitySignInBinding>(R.layout.activity_
         binding.viewModel = authViewModel
         binding.lifecycleOwner = this
 
+        autoLogin()
         addListeners()
         collectData()
     }
@@ -51,6 +53,12 @@ class SignInActivity : BindingActivity<ActivitySignInBinding>(R.layout.activity_
                 else -> {}
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun autoLogin() {
+        val dataStore = ExitLocalDataSource(this)
+        if (dataStore.isLogin)
+            moveToHome()
     }
 
     private fun moveToSignUp() {
