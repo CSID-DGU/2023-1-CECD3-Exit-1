@@ -20,6 +20,9 @@ class ImageCaptureCautionActivity :
         binding.btnImageCapture.setOnClickListener {
             moveToImageSearch()
         }
+        binding.toolbar.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun moveToImageSearch() {
