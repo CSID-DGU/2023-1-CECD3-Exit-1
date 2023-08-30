@@ -46,5 +46,3 @@ fun TextView.setColoredText(text: String?) {
         this.text = spannableStringBuilder
     }
 }
-
-
