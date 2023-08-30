@@ -28,6 +28,17 @@
             app:strokeColor="@color/gray_200"
             app:strokeWidth="1dp" />
 
+        <ImageView
+            android:id="@+id/iv_add_a_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_a_photo"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_image_search_pill"
+            app:layout_constraintEnd_toEndOf="@+id/iv_image_search_pill"
+            app:layout_constraintStart_toStartOf="@+id/iv_image_search_pill"
+            app:layout_constraintTop_toTopOf="@+id/iv_image_search_pill"
+            app:tint="@color/gray_200" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_image_search"
             style="@style/Widget.FullButton.Basic"
