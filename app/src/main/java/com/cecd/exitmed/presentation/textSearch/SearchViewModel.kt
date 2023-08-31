@@ -1,4 +1,4 @@
-package com.cecd.exitmed.presentation.search
+package com.cecd.exitmed.presentation.textSearch
 
 import androidx.lifecycle.ViewModel
 import com.cecd.exitmed.domain.type.SearchPill

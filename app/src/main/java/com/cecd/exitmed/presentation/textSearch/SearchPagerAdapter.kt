@@ -1,4 +1,4 @@
-package com.cecd.exitmed.presentation.search
+package com.cecd.exitmed.presentation.textSearch
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

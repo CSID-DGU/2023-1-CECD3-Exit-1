@@ -4,8 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityHomeBinding
+import com.cecd.exitmed.presentation.imageSearch.ImageCaptureCautionActivity
 import com.cecd.exitmed.presentation.my.MyActivity
-import com.cecd.exitmed.presentation.search.SearchActivity
+import com.cecd.exitmed.presentation.textSearch.SearchActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +25,9 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         binding.ivHomeMyPage.setOnClickListener {
             moveToMyPage()
         }
+        binding.layoutImageSearch.setOnClickListener {
+            moveToImageCaptureCaution()
+        }
     }
 
     private fun moveToSearch() {
@@ -32,5 +36,9 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     private fun moveToMyPage() {
         startActivity(Intent(this, MyActivity::class.java))
+    }
+
+    private fun moveToImageCaptureCaution() {
+        startActivity(Intent(this, ImageCaptureCautionActivity::class.java))
     }
 }

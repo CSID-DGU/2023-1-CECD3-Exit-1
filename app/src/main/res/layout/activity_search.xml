@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.cecd.exitmed.presentation.search.SearchViewModel" />
+            type="com.cecd.exitmed.presentation.textSearch.SearchViewModel" />
 
     </data>
 
