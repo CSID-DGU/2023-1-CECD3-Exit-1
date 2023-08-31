@@ -31,7 +31,7 @@
             app:title="@{@string/image_search_title}" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_caution"
             android:layout_width="0dp"
             android:layout_height="240dp"
             android:layout_marginTop="44dp"
@@ -48,7 +48,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_image_capture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView">
+            app:layout_constraintTop_toBottomOf="@id/iv_caution">
 
             <ImageView
                 android:id="@+id/iv_light_reflection"
@@ -73,10 +73,9 @@
                 android:id="@+id/iv_pill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
                 android:src="@drawable/ic_image_search_pill"
                 app:layout_constraintStart_toStartOf="@+id/iv_identification_pharse"
-                app:layout_constraintTop_toBottomOf="@id/imageView" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_pill"
