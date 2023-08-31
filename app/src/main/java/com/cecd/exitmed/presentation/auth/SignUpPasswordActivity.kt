@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignUpPasswordActivity :
     BindingActivity<ActivitySignUpPasswordBinding>(R.layout.activity_sign_up_password) {
-    private val viewModel: SignViewModel by viewModels()
+    private val viewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

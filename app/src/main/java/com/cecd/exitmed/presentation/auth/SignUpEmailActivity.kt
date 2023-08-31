@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class SignUpEmailActivity :
     BindingActivity<ActivitySignUpEmailBinding>(R.layout.activity_sign_up_email) {
-    private val viewModel: SignViewModel by viewModels()
+    private val viewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel

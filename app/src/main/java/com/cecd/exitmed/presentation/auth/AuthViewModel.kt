@@ -2,7 +2,9 @@ package com.cecd.exitmed.presentation.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cecd.exitmed.data.dataSource.local.ExitLocalDataSource
 import com.cecd.exitmed.data.model.request.RequestEmailDoubleCheck
+import com.cecd.exitmed.data.model.request.RequestSignIn
 import com.cecd.exitmed.data.model.request.RequestSignUp
 import com.cecd.exitmed.domain.repository.AuthRepository
 import com.cecd.exitmed.type.GenderType
@@ -19,7 +21,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class SignViewModel @Inject constructor(
+class AuthViewModel @Inject constructor(
+    private val dataStore: ExitLocalDataSource,
     private val authRepository: AuthRepository
 ) : ViewModel() {
     val inputEmail = MutableStateFlow("")
@@ -33,6 +36,8 @@ class SignViewModel @Inject constructor(
     val isCompleteSignUp get() = _isCompleteSignUp.asStateFlow()
     private val _isEmailDuplicated = MutableStateFlow<Boolean?>(null)
     val isEmailDuplicated get() = _isEmailDuplicated.asStateFlow()
+    private var _isCompleteSignIn = MutableStateFlow<Boolean?>(null)
+    val isCompleteSignIn get() = _isCompleteSignIn.asStateFlow()
 
     val isValidEmail: StateFlow<Boolean?> = inputEmail.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
@@ -95,6 +100,21 @@ class SignViewModel @Inject constructor(
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
+                }
+        }
+    }
+
+    fun signIn() {
+        viewModelScope.launch {
+            authRepository.signIn(RequestSignIn(inputEmail.value, inputPW.value))
+                .onSuccess {
+                    dataStore.isLogin = true
+                    dataStore.accessToken = it.accessToken
+                    _isCompleteSignIn.value = true
+                }
+                .onFailure { throwable ->
+                    _isCompleteSignIn.value = false
+                    Timber.tag("aaaaa").e(throwable.message)
                 }
         }
     }
