@@ -31,6 +31,12 @@
     <string name="sign_up_email_title2">계정을 만들어 볼까요?</string>
     <string name="sign_up_email">1. 이메일 입력</string>
     <string name="sign_up_email_hint">사용할 이메일을 입력해주세요</string>
+    <string name="sign_up_email_double_check">중복확인</string>
+    <string name="sign_up_success_toast">회원가입에 성공했습니다!</string>
+    <string name="sign_up_fail_toast">회원가입에 실패했습니다.</string>
+    <string name="sign_up_email_duplicated_toast">이미 존재하는 이메일이에요.</string>
+    <string name="sign_up_email_not_duplicated_toast">사용 가능한 이메일이에요</string>
+    <string name="sign_in_fail_toast">이메일, 비밀번호를 다시 확인해주세요</string>
 
     <!--  home  -->
     <string name="home_title2">에게 물어보세요!</string>

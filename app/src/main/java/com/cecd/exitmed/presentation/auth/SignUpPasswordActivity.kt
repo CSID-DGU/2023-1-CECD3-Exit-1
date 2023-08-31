@@ -1,4 +1,4 @@
-package com.cecd.exitmed.presentation.sign
+package com.cecd.exitmed.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignUpPasswordActivity :
     BindingActivity<ActivitySignUpPasswordBinding>(R.layout.activity_sign_up_password) {
-    private val viewModel: SignViewModel by viewModels()
+    private val viewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,7 +23,7 @@ class SignUpPasswordActivity :
     }
 
     private fun addListeners() {
-        binding.root.setOnClickListener {
+        binding.layoutSignUpPassword.setOnClickListener {
             showKeyboard(it, false)
         }
         binding.btnNext.setOnClickListener {
@@ -32,9 +32,27 @@ class SignUpPasswordActivity :
         binding.btnBack.setOnClickListener {
             finish()
         }
+        binding.ivClose.setOnClickListener {
+            moveToHSignIn()
+        }
     }
 
     private fun moveToSignUpInfo() {
-        startActivity(Intent(this, SignUpInfoActivity::class.java))
+        val email = intent.getStringExtra(EMAIL)
+        val intent = Intent(this, SignUpInfoActivity::class.java)
+        intent.putExtra(EMAIL, email)
+        intent.putExtra(PASSWORD, viewModel.inputPW.value)
+        startActivity(intent)
+    }
+
+    private fun moveToHSignIn() {
+        val intent = Intent(this, SignInActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
+    companion object {
+        const val EMAIL = "email"
+        const val PASSWORD = "password"
     }
 }

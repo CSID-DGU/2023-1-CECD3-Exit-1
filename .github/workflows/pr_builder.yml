@@ -35,6 +35,11 @@ jobs:
           FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
         run: echo $FIREBASE_SECRET > app/google-services.json
 
+      - name: Access EXIT_BASE_URL
+        env:
+          EXIT_BASE_URL: ${{ secrets.EXIT_BASE_URL }}
+        run: echo "EXIT_BASE_URL=\"$EXIT_BASE_URL\"" >> local.properties
+
       - name: Touch local properties
         run: touch local.properties
 
