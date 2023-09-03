@@ -108,4 +108,7 @@
     <string name="image_capture_identification_pharse">[식별문구]를 신경써서\n촬영해주세요</string>
     <string name="image_capture_pill_front">알약의 [앞면]을\n촬영해주세요</string>
     <string name="image_capture_center">카메라 [중앙]에\n알약을 두세요</string>
+
+    <!--  pill detail  -->
+    <string name="pill_detail_title">의약품 상세</string>
 </resources>
