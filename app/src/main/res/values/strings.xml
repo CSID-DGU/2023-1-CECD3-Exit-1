@@ -111,4 +111,15 @@
 
     <!--  pill detail  -->
     <string name="pill_detail_title">의약품 상세</string>
+    <string name="pill_detail_bookmark_toast">즐겨찾기에 추가했습니다!</string>
+    <string name="pill_detail_medication">복약</string>
+    <string name="pill_detail_components_content">성분/함량</string>
+    <string name="pill_detail_usage">용법</string>
+    <string name="pill_detail_dur">DUR</string>
+    <string name="pill_detail_drug_interaction">약물 상호작용</string>
+    <string name="pill_detail_medication_effect">이 약은 무슨 약인가요?</string>
+    <string name="pill_detail_medication_storage_method_title">이 약은 어떻게 보관해야하나요?</string>
+    <string name="pill_detail_components_content_title">이 약의 성분, 함량은 어떻게 되나요?</string>
+    <string name="pill_detail_usage_title">이 약은 어떻게 먹어야 하나요?</string>
+    <string name="pill_detail_drug_interaction_question_title">내가 복용중인 약과의 상호작용은 어떻게 되나요?</string>
 </resources>
