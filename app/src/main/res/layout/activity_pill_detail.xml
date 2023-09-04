@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:elevation="0dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/headerLayout"
@@ -135,7 +136,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="즐겨찾기"
-                        android:textAppearance="@style/TextAppearance.BodyM3" />
+                        android:textAppearance="@style/TextAppearance.BodyM1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -159,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="약서랍"
-                        android:textAppearance="@style/TextAppearance.BodyM3" />
+                        android:textAppearance="@style/TextAppearance.BodyM1" />
                 </LinearLayout>
 
                 <View
@@ -182,18 +183,25 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_pill_detail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/spacing24"
                 android:layout_marginTop="20dp"
+                app:tabBackground="@drawable/selector_pill_detail_tab"
                 app:tabGravity="fill"
-                app:tabMode="fixed" />
-
+                app:tabIndicator="@null"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="scrollable"
+                app:tabRippleColor="@android:color/transparent"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextAppearance="@style/TextAppearance.BodyM3"
+                app:tabTextColor="@color/orange_500" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_pill_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="36dp"
             android:overScrollMode="never"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:layout_constrainedHeight="true" />
