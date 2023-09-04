@@ -140,6 +140,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layout_pill_drawer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="8dp"

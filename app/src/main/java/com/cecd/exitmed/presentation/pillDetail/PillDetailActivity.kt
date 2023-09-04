@@ -1,9 +1,11 @@
 package com.cecd.exitmed.presentation.pillDetail
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityPillDetailBinding
+import com.cecd.exitmed.presentation.pillCreation.PillCreationActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.extension.showToast
 import com.google.android.material.tabs.TabLayoutMediator
@@ -36,6 +38,9 @@ class PillDetailActivity :
         binding.layoutPillBookmark.setOnClickListener {
             bookMark()
         }
+        binding.layoutPillDrawer.setOnClickListener {
+            moveToAddPillDrawer()
+        }
         binding.ivBack.setOnClickListener {
             finish()
         }
@@ -55,5 +60,9 @@ class PillDetailActivity :
 
     private fun bookMark() {
         showToast(getString(R.string.pill_detail_bookmark_toast))
+    }
+
+    private fun moveToAddPillDrawer() {
+        startActivity(Intent(this, PillCreationActivity::class.java))
     }
 }

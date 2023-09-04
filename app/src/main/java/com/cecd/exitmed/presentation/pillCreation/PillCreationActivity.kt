@@ -39,7 +39,7 @@ class PillCreationActivity :
             }
         }
         binding.ivClose.setOnClickListener {
-            // TODO 화면 finish()
+            finish()
         }
     }
 
