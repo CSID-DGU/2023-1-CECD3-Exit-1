@@ -36,6 +36,9 @@ class PillDetailActivity :
         binding.layoutPillBookmark.setOnClickListener {
             bookMark()
         }
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setTabTitle() {

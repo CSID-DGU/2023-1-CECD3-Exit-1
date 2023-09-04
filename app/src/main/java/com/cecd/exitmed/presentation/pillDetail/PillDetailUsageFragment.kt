@@ -3,7 +3,6 @@ package com.cecd.exitmed.presentation.pillDetail
 import android.os.Bundle
 import android.view.View
 import com.cecd.exitmed.R
-import com.cecd.exitmed.databinding.FragmentPillDetailMedicationBinding
 import com.cecd.exitmed.databinding.FragmentPillDetailUsageBinding
 import com.cecd.exitmed.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint

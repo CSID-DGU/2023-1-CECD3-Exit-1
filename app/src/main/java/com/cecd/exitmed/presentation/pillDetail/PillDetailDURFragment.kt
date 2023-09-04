@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.FragmentPillDetailDurBinding
-import com.cecd.exitmed.databinding.FragmentPillDetailMedicationBinding
 import com.cecd.exitmed.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
