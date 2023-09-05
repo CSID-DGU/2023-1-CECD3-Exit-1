@@ -37,6 +37,8 @@
     <string name="sign_up_email_duplicated_toast">이미 존재하는 이메일이에요.</string>
     <string name="sign_up_email_not_duplicated_toast">사용 가능한 이메일이에요</string>
     <string name="sign_in_fail_toast">이메일, 비밀번호를 다시 확인해주세요</string>
+    <string name="sign_up_info_pregnant_no">아니요/선택안함</string>
+    <string name="sign_up_info_pregnant_yes">예</string>
 
     <!--  home  -->
     <string name="home_title2">에게 물어보세요!</string>
