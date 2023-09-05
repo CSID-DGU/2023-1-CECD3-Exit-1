@@ -8,6 +8,6 @@ data class RequestSignUp(
     val userPassword: String,
     val dateOfBirth: Int,
     val fullName: String,
-    val sex: String,
+    val sex: String?,
     val isPregnant: Boolean
 )
