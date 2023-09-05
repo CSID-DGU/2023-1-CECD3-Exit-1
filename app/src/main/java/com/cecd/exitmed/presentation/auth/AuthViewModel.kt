@@ -74,8 +74,7 @@ class AuthViewModel @Inject constructor(
         inputBirth,
         inputGender
     ) { name, birth, gender ->
-        (name.isNotEmpty() && birth.length == 4 && inputGender.value == GenderType.FEMALE && inputPregnancyStatus.value != null)
-                || (name.isNotEmpty() && birth.length == 4 && inputGender.value != GenderType.FEMALE)
+        (name.isNotEmpty() && birth.length == 4 && inputGender.value == GenderType.FEMALE && inputPregnancyStatus.value != null) || (name.isNotEmpty() && birth.length == 4 && inputGender.value != GenderType.FEMALE)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
     fun signUp(email: String, password: String) {
