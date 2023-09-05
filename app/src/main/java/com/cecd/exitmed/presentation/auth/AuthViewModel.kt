@@ -8,6 +8,7 @@ import com.cecd.exitmed.data.model.request.RequestSignIn
 import com.cecd.exitmed.data.model.request.RequestSignUp
 import com.cecd.exitmed.domain.repository.AuthRepository
 import com.cecd.exitmed.type.GenderType
+import com.cecd.exitmed.type.PregnantType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -32,6 +33,8 @@ class AuthViewModel @Inject constructor(
     val inputBirth = MutableStateFlow("")
     private var _inputGender = MutableStateFlow<GenderType?>(null)
     val inputGender get() = _inputGender.asStateFlow()
+    private var _inputPregnancyStatus = MutableStateFlow<PregnantType?>(null)
+    val inputPregnancyStatus get() = _inputPregnancyStatus.asStateFlow()
     private var _isCompleteSignUp = MutableStateFlow<Boolean?>(null)
     val isCompleteSignUp get() = _isCompleteSignUp.asStateFlow()
     private val _isEmailDuplicated = MutableStateFlow<Boolean?>(null)
@@ -62,24 +65,29 @@ class AuthViewModel @Inject constructor(
         _inputGender.value = genderType
     }
 
+    fun setUserPregnancyStatus(pregnantType: PregnantType) {
+        _inputPregnancyStatus.value = pregnantType
+    }
+
     val isInfoComplete: StateFlow<Boolean?> = combine(
         inputName,
         inputBirth,
         inputGender
     ) { name, birth, gender ->
-        name.isNotEmpty() && birth.length == 4 && _inputGender.value != null
+        (name.isNotEmpty() && birth.length == 4 && inputGender.value == GenderType.FEMALE && inputPregnancyStatus.value != null) || (name.isNotEmpty() && birth.length == 4 && inputGender.value != GenderType.FEMALE)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
-    fun signUp(email: String, password: String, birth: Int, name: String, gender: String) {
+    fun signUp(email: String, password: String) {
         viewModelScope.launch {
             authRepository.signUp(
                 RequestSignUp(
                     email,
                     password,
-                    birth,
-                    name,
-                    gender,
-                    false
+                    inputBirth.value.toInt(),
+                    inputName.value,
+                    inputGender.value?.genderRequest,
+                    if (inputGender.value == GenderType.FEMALE) inputPregnancyStatus.value == PregnantType.PREGNANT
+                    else false
                 )
             )
                 .onSuccess {
@@ -114,7 +122,6 @@ class AuthViewModel @Inject constructor(
                 }
                 .onFailure { throwable ->
                     _isCompleteSignIn.value = false
-                    Timber.tag("aaaaa").e(throwable.message)
                 }
         }
     }
@@ -123,6 +130,5 @@ class AuthViewModel @Inject constructor(
     companion object {
         const val EMAIL_PATTERN = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
         const val PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{10,}\$"
-        const val NAME_PATERN = ""
     }
 }

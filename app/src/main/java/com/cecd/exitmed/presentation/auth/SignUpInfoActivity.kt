@@ -42,10 +42,7 @@ class SignUpInfoActivity :
             val password = intent.getStringExtra(PASSWORD) ?: ""
             viewModel.signUp(
                 email,
-                password,
-                viewModel.inputBirth.value.toInt(),
-                viewModel.inputName.value,
-                viewModel.inputGender.value?.genderRequest ?: ""
+                password
             )
             showKeyboard(it, false)
         }
