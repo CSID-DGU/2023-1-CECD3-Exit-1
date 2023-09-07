@@ -40,6 +40,16 @@ jobs:
           EXIT_BASE_URL: ${{ secrets.EXIT_BASE_URL }}
         run: echo "EXIT_BASE_URL=\"$EXIT_BASE_URL\"" >> local.properties
 
+      - name: Access DUR_BASE_URL
+        env:
+          DUR_BASE_URL: ${{ secrets.DUR_BASE_URL }}
+        run: echo "DUR_BASE_URL=\"$DUR_BASE_URL\"" >> local.properties
+
+      - name: Access DUR_DECODE_KEY
+        env:
+          DUR_DECODE_KEY: ${{ secrets.DUR_DECODE_KEY }}
+        run: echo "DUR_DECODE_KEY=\"$DUR_DECODE_KEY\"" >> local.properties
+        
       - name: Touch local properties
         run: touch local.properties
 
