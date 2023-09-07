@@ -1,6 +1,8 @@
 package com.cecd.exitmed.di
 
 import com.cecd.exitmed.data.service.AuthService
+import com.cecd.exitmed.data.service.DURService
+import com.cecd.exitmed.data.type.BaseUrlType
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +15,17 @@ import javax.inject.Singleton
 object ServiceModule {
     @Singleton
     @Provides
-    fun provideAuthService(retrofit: Retrofit): AuthService =
+    fun provideAuthService(
+        @NetworkModule.Retrofit2(BaseUrlType.EXIT)
+        retrofit: Retrofit
+    ): AuthService =
         retrofit.create(AuthService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideDURService(
+        @NetworkModule.Retrofit2(BaseUrlType.DUR)
+        retrofit: Retrofit
+    ): DURService =
+        retrofit.create(DURService::class.java)
 }
