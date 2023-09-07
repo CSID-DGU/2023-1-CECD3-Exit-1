@@ -124,4 +124,10 @@
     <string name="pill_detail_components_content_title">이 약의 성분, 함량은 어떻게 되나요?</string>
     <string name="pill_detail_usage_title">이 약은 어떻게 먹어야 하나요?</string>
     <string name="pill_detail_drug_interaction_question_title">내가 복용중인 약과의 상호작용은 어떻게 되나요?</string>
+    <string name="pill_detail_dur_age_prohibit_title">특정 연령대 금기</string>
+    <string name="pill_detail_dur_pregnant_prohibit_title">임부 금기</string>
+    <string name="pill_detail_dur_capacity_caution_title">용량 주의</string>
+    <string name="pill_detail_dur_administration_duration_caution_title">투여기간 주의</string>
+    <string name="pill_detail_dur_elder_caution_title">노인 주의</string>
+    <string name="dur_meaning">의약품 처방·조제 시 의약품 안전성 관련 정보를 실시간으로 제공하여 부적절한 약물사용을 사전에 점검할 수 있도록 의사 및 약사에게 의약품 안전 정보를 제공하는 것을 DUR(Drug Utilization Review)라고 합니다.</string>
 </resources>
