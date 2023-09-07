@@ -12,5 +12,16 @@ class PillDetailDURFragment :
     BindingFragment<FragmentPillDetailDurBinding>(R.layout.fragment_pill_detail_dur) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        addListeners()
+    }
+
+    private fun addListeners() {
+        binding.ivDurQuestionMark.setOnClickListener {
+            binding.layoutDurMeaningBubble.visibility = View.VISIBLE
+        }
+        binding.ivDurMeaningClose.setOnClickListener {
+            binding.layoutDurMeaningBubble.visibility = View.INVISIBLE
+        }
     }
 }
