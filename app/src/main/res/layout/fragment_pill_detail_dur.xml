@@ -152,6 +152,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_pill_detail_dur_administration_duration_caution"
+                    isGone="@{viewModel.durAdministrationDurationCaution != null}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing24"
@@ -174,12 +175,13 @@
 
                     <TextView
                         android:id="@+id/tv_pill_detail_dur_administration_duration_caution_content"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="dur 본문 임시"
+                        android:text="@{viewModel.durAdministrationDurationCaution}"
                         android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_administration_duration_caution_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

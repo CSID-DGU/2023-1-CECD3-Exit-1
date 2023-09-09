@@ -22,6 +22,11 @@ class DURDataSource @Inject constructor(
     ): ResponseDURCaution =
         durService.fetchCapacityCaution(itemSeq = itemSeq)
 
+    suspend fun fetchAdministrationDurationCaution(
+        itemSeq: String
+    ): ResponseDURCaution =
+        durService.fetchAdministrationDurationCaution(itemSeq = itemSeq)
+
     suspend fun fetchSeniorCaution(
         itemSeq: String
     ): ResponseDURCaution =

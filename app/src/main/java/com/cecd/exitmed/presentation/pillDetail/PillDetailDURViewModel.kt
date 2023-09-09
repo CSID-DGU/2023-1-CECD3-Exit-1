@@ -20,6 +20,8 @@ class PillDetailDURViewModel @Inject constructor(
     val durPregnantProhibition get() = _durPregnantProhibition.asStateFlow()
     private val _durCapacityCaution = MutableStateFlow<String?>(null)
     val durCapacityCaution get() = _durCapacityCaution.asStateFlow()
+    private val _durAdministrationDurationCaution = MutableStateFlow<String?>(null)
+    val durAdministrationDurationCaution get() = _durAdministrationDurationCaution.asStateFlow()
     private val _durSeniorCaution = MutableStateFlow<String?>(null)
     val durSeniorCaution get() = _durSeniorCaution.asStateFlow()
 
@@ -27,6 +29,7 @@ class PillDetailDURViewModel @Inject constructor(
         fetchDURAgeProhibitionContents("201309959")
         fetchDURPregnantProhibitionContents("201309959")
         fetchDURCapacityCautionContents("201309959")
+        fetchDURAdministrationDurationCaution("201309959")
         fetchDURSeniorCautionContents("201309959")
     }
 
@@ -64,9 +67,25 @@ class PillDetailDURViewModel @Inject constructor(
 
     private fun fetchDURCapacityCautionContents(itemSeq: String) {
         viewModelScope.launch {
-            durRepository.fetchDURAgeProhibition(itemSeq)
+            durRepository.fetchDURCapacityCaution(itemSeq)
                 .onSuccess { item ->
                     _durCapacityCaution.value =
+                        if (item[0].REMARK != null)
+                            item[0].PROHBT_CONTENT + item[0].REMARK
+                        else
+                            item[0].PROHBT_CONTENT
+                }
+                .onFailure { throwable ->
+                    Timber.d(throwable.message)
+                }
+        }
+    }
+
+    private fun fetchDURAdministrationDurationCaution(itemSeq: String) {
+        viewModelScope.launch {
+            durRepository.fetchDURAdministrationDurationCaution(itemSeq)
+                .onSuccess { item ->
+                    _durAdministrationDurationCaution.value =
                         if (item[0].REMARK != null)
                             item[0].PROHBT_CONTENT + item[0].REMARK
                         else

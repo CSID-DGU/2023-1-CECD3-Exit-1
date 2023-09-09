@@ -23,6 +23,11 @@ class DURRepositoryImpl @Inject constructor(
             durDataSource.fetchCapacityCaution(itemSeq = itemSeq).body.items
         }
 
+    override suspend fun fetchDURAdministrationDurationCaution(itemSeq: String): Result<List<ResponseDURCaution.Body.Item>> =
+        runCatching {
+            durDataSource.fetchAdministrationDurationCaution(itemSeq = itemSeq).body.items
+        }
+
     override suspend fun fetchDURSeniorCaution(itemSeq: String): Result<List<ResponseDURCaution.Body.Item>> =
         runCatching {
             durDataSource.fetchSeniorCaution(itemSeq = itemSeq).body.items
