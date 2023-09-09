@@ -20,6 +20,13 @@ interface DURService {
         @Query("itemSeq") itemSeq: String
     ): ResponseDURCaution
 
+    @GET("getCpctyAtentInfoList03")
+    suspend fun fetchCapacityCaution(
+        @Query("serviceKey") serviceKey: String = BuildConfig.DUR_DECODE_KEY,
+        @Query("type") type: String = "json",
+        @Query("itemSeq") itemSeq: String
+    ): ResponseDURCaution
+
     @GET("getOdsnAtentInfoList03")
     suspend fun fetchSeniorCaution(
         @Query("serviceKey") serviceKey: String = BuildConfig.DUR_DECODE_KEY,

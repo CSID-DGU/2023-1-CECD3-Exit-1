@@ -18,12 +18,15 @@ class PillDetailDURViewModel @Inject constructor(
     val durAgeProhibition get() = _durAgeProhibition.asStateFlow()
     private val _durPregnantProhibition = MutableStateFlow<String?>(null)
     val durPregnantProhibition get() = _durPregnantProhibition.asStateFlow()
+    private val _durCapacityCaution = MutableStateFlow<String?>(null)
+    val durCapacityCaution get() = _durCapacityCaution.asStateFlow()
     private val _durSeniorCaution = MutableStateFlow<String?>(null)
     val durSeniorCaution get() = _durSeniorCaution.asStateFlow()
 
     init {
         fetchDURAgeProhibitionContents("201309959")
         fetchDURPregnantProhibitionContents("201309959")
+        fetchDURCapacityCautionContents("201309959")
         fetchDURSeniorCautionContents("201309959")
     }
 
@@ -48,6 +51,22 @@ class PillDetailDURViewModel @Inject constructor(
             durRepository.fetchDURPregnantProhibition(itemSeq)
                 .onSuccess { item ->
                     _durPregnantProhibition.value =
+                        if (item[0].REMARK != null)
+                            item[0].PROHBT_CONTENT + item[0].REMARK
+                        else
+                            item[0].PROHBT_CONTENT
+                }
+                .onFailure { throwable ->
+                    Timber.d(throwable.message)
+                }
+        }
+    }
+
+    private fun fetchDURCapacityCautionContents(itemSeq: String) {
+        viewModelScope.launch {
+            durRepository.fetchDURAgeProhibition(itemSeq)
+                .onSuccess { item ->
+                    _durCapacityCaution.value =
                         if (item[0].REMARK != null)
                             item[0].PROHBT_CONTENT + item[0].REMARK
                         else

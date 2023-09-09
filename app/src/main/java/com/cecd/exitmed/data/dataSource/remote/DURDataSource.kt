@@ -11,10 +11,16 @@ class DURDataSource @Inject constructor(
         itemSeq: String
     ): ResponseDURCaution =
         durService.fetchAgeProhibition(itemSeq = itemSeq)
+
     suspend fun fetchPregnantProhibition(
         itemSeq: String
     ): ResponseDURCaution =
         durService.fetchPregnantProhibition(itemSeq = itemSeq)
+
+    suspend fun fetchCapacityCaution(
+        itemSeq: String
+    ): ResponseDURCaution =
+        durService.fetchCapacityCaution(itemSeq = itemSeq)
 
     suspend fun fetchSeniorCaution(
         itemSeq: String

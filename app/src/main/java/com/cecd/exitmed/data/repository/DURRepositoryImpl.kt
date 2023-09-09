@@ -18,6 +18,11 @@ class DURRepositoryImpl @Inject constructor(
             durDataSource.fetchPregnantProhibition(itemSeq = itemSeq).body.items
         }
 
+    override suspend fun fetchDURCapacityCaution(itemSeq: String): Result<List<ResponseDURCaution.Body.Item>> =
+        runCatching {
+            durDataSource.fetchCapacityCaution(itemSeq = itemSeq).body.items
+        }
+
     override suspend fun fetchDURSeniorCaution(itemSeq: String): Result<List<ResponseDURCaution.Body.Item>> =
         runCatching {
             durDataSource.fetchSeniorCaution(itemSeq = itemSeq).body.items
