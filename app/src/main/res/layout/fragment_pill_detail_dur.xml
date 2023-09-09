@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_pill_detail_dur_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:text="@string/pill_detail_dur"
+                    android:textAppearance="@style/TextAppearance.BodyB2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_dur_question_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_question_mark"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_pill_detail_dur_title"
+                    app:layout_constraintStart_toEndOf="@id/tv_pill_detail_dur_title"
+                    app:layout_constraintTop_toTopOf="@+id/tv_pill_detail_dur_title" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_pill_detail_dur_age_prohibit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/shape_radius_12"
+                    android:backgroundTint="@color/orange_25"
+                    android:padding="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_title">
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_age_prohibit_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pill_detail_dur_age_prohibit_title"
+                        android:textAppearance="@style/TextAppearance.BodyB1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_age_prohibit_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineHeight="24dp"
+                        android:text="dur 본문 임시"
+                        android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_age_prohibit_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_pill_detail_dur_pregnant_prohibit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/shape_radius_12"
+                    android:backgroundTint="@color/orange_25"
+                    android:padding="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_pill_detail_dur_age_prohibit">
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_pregnant_prohibit_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pill_detail_dur_pregnant_prohibit_title"
+                        android:textAppearance="@style/TextAppearance.BodyB1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_pregnant_prohibit_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineHeight="24dp"
+                        android:text="dur 본문 임시"
+                        android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_pregnant_prohibit_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_pill_detail_dur_capacity_caution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/shape_radius_12"
+                    android:backgroundTint="@color/orange_25"
+                    android:padding="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_pill_detail_dur_pregnant_prohibit">
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_capacity_caution_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pill_detail_dur_capacity_caution_title"
+                        android:textAppearance="@style/TextAppearance.BodyB1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_capacity_caution_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineHeight="24dp"
+                        android:text="dur 본문 임시"
+                        android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_capacity_caution_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_pill_detail_dur_administration_duration_caution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/shape_radius_12"
+                    android:backgroundTint="@color/orange_25"
+                    android:padding="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_pill_detail_dur_capacity_caution">
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_administration_duration_caution_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pill_detail_dur_administration_duration_caution_title"
+                        android:textAppearance="@style/TextAppearance.BodyB1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_administration_duration_caution_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineHeight="24dp"
+                        android:text="dur 본문 임시"
+                        android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_administration_duration_caution_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_pill_detail_dur_elder_caution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="36dp"
+                    android:background="@drawable/shape_radius_12"
+                    android:backgroundTint="@color/orange_25"
+                    android:padding="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_pill_detail_dur_administration_duration_caution">
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_elder_caution_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pill_detail_dur_elder_caution_title"
+                        android:textAppearance="@style/TextAppearance.BodyB1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_pill_detail_dur_elder_caution_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineHeight="24dp"
+                        android:text="dur 본문 임시"
+                        android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_elder_caution_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_dur_meaning_bubble"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="@drawable/background_speech_bubble"
+                    android:paddingHorizontal="10dp"
+                    android:paddingTop="@dimen/spacing24"
+                    android:paddingBottom="10dp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_dur_question_mark">
+
+                    <TextView
+                        android:id="@+id/tv_dur_meaning_bubble"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/dur_meaning"
+                        android:textAppearance="@style/TextAppearance.CaptionM1"
+                        android:textColor="@color/gray_500"
+                        app:layout_constraintEnd_toStartOf="@id/iv_dur_meaning_close"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_dur_meaning_close"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_close"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

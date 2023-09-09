@@ -110,4 +110,24 @@
     <string name="image_capture_identification_pharse">[식별문구]를 신경써서\n촬영해주세요</string>
     <string name="image_capture_pill_front">알약의 [앞면]을\n촬영해주세요</string>
     <string name="image_capture_center">카메라 [중앙]에\n알약을 두세요</string>
+
+    <!--  pill detail  -->
+    <string name="pill_detail_title">의약품 상세</string>
+    <string name="pill_detail_bookmark_toast">즐겨찾기에 추가했습니다!</string>
+    <string name="pill_detail_medication">복약</string>
+    <string name="pill_detail_components_content">성분/함량</string>
+    <string name="pill_detail_usage">용법</string>
+    <string name="pill_detail_dur">DUR</string>
+    <string name="pill_detail_drug_interaction">약물 상호작용</string>
+    <string name="pill_detail_medication_effect">이 약은 무슨 약인가요?</string>
+    <string name="pill_detail_medication_storage_method_title">이 약은 어떻게 보관해야하나요?</string>
+    <string name="pill_detail_components_content_title">이 약의 성분, 함량은 어떻게 되나요?</string>
+    <string name="pill_detail_usage_title">이 약은 어떻게 먹어야 하나요?</string>
+    <string name="pill_detail_drug_interaction_question_title">내가 복용중인 약과의 상호작용은 어떻게 되나요?</string>
+    <string name="pill_detail_dur_age_prohibit_title">특정 연령대 금기</string>
+    <string name="pill_detail_dur_pregnant_prohibit_title">임부 금기</string>
+    <string name="pill_detail_dur_capacity_caution_title">용량 주의</string>
+    <string name="pill_detail_dur_administration_duration_caution_title">투여기간 주의</string>
+    <string name="pill_detail_dur_elder_caution_title">노인 주의</string>
+    <string name="dur_meaning">의약품 처방·조제 시 의약품 안전성 관련 정보를 실시간으로 제공하여 부적절한 약물사용을 사전에 점검할 수 있도록 의사 및 약사에게 의약품 안전 정보를 제공하는 것을 DUR(Drug Utilization Review)라고 합니다.</string>
 </resources>

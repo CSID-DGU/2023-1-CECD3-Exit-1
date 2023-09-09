@@ -5,14 +5,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cecd.exitmed.databinding.ItemSearchBookmarkBinding
 
-class SearchBookmarkAdapter : RecyclerView.Adapter<SearchBookmarkAdapter.BookmarkViewHolder>() {
+class SearchBookmarkAdapter(
+    private val moveToPillDetail: () -> Unit
+) : RecyclerView.Adapter<SearchBookmarkAdapter.BookmarkViewHolder>() {
     private var bookmarkList: MutableList<String> = mutableListOf()
 
     class BookmarkViewHolder(
         private val binding: ItemSearchBookmarkBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(pillName: String) {
+        fun onBind(
+            pillName: String,
+            moveToPillDetail: () -> Unit
+        ) {
             binding.pillName = pillName
+            binding.tvSearchTitle.setOnClickListener {
+                moveToPillDetail()
+            }
             binding.executePendingBindings()
         }
     }
@@ -26,7 +34,7 @@ class SearchBookmarkAdapter : RecyclerView.Adapter<SearchBookmarkAdapter.Bookmar
     override fun getItemCount(): Int = bookmarkList.size
 
     override fun onBindViewHolder(holder: BookmarkViewHolder, position: Int) {
-        holder.onBind(bookmarkList[position])
+        holder.onBind(bookmarkList[position], moveToPillDetail)
     }
 
     fun setBookmarkList(bookmarkList: MutableList<String>) {

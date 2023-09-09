@@ -1,5 +1,6 @@
 package com.cecd.exitmed.presentation.textSearch
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MotionEvent
@@ -10,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySearchBinding
 import com.cecd.exitmed.presentation.common.PillListAdapter
+import com.cecd.exitmed.presentation.pillDetail.PillDetailActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.binding.setVisibility
 import com.cecd.exitmed.util.extension.showKeyboard
@@ -68,7 +70,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun setPillResultList() {
-        val searchListAdapter = PillListAdapter()
+        val searchListAdapter = PillListAdapter(::moveToPillDetail)
         binding.rvSearchList.adapter = searchListAdapter
         searchListAdapter.submitList(searchViewModel.mockSearchList)
     }
@@ -87,5 +89,9 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
                 1 -> tab.text = getString(R.string.search_bookmark)
             }
         }.attach()
+    }
+
+    private fun moveToPillDetail() {
+        startActivity(Intent(this, PillDetailActivity::class.java))
     }
 }
