@@ -3,7 +3,7 @@ package com.cecd.exitmed.data.model.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseDURSeniorCaution(
+data class ResponseDURCaution(
     val body: Body,
     val header: Header
 ) {
@@ -31,7 +31,7 @@ data class ResponseDURSeniorCaution(
             val ITEM_PERMIT_DATE: String,
             val ITEM_SEQ: String,
             val MAIN_INGR: String,
-            val MIX_INGR: String,
+            val MIX_INGR: String?,
             val MIX_TYPE: String,
             val NOTIFICATION_DATE: String,
             val PROHBT_CONTENT: String,

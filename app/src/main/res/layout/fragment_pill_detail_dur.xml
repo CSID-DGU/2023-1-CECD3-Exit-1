@@ -4,6 +4,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cecd.exitmed.presentation.pillDetail.PillDetailDURViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,6 +44,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_pill_detail_dur_age_prohibit"
+                    isGone="@{viewModel.durAgeProhibition != null}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing24"
@@ -62,18 +67,20 @@
 
                     <TextView
                         android:id="@+id/tv_pill_detail_dur_age_prohibit_content"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="dur 본문 임시"
+                        android:text="@{viewModel.durAgeProhibition}"
                         android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_age_prohibit_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_pill_detail_dur_pregnant_prohibit"
+                    isGone="@{viewModel.durPregnantProhibition != null}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing24"
@@ -96,12 +103,13 @@
 
                     <TextView
                         android:id="@+id/tv_pill_detail_dur_pregnant_prohibit_content"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="dur 본문 임시"
+                        android:text="@{viewModel.durPregnantProhibition}"
                         android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_pregnant_prohibit_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -181,6 +189,7 @@
                     android:layout_marginHorizontal="@dimen/spacing24"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="36dp"
+                    isGone="@{viewModel.durSeniorCaution != null}"
                     android:background="@drawable/shape_radius_12"
                     android:backgroundTint="@color/orange_25"
                     android:padding="14dp"
@@ -200,12 +209,13 @@
 
                     <TextView
                         android:id="@+id/tv_pill_detail_dur_elder_caution_content"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="dur 본문 임시"
+                        android:text="@{viewModel.durSeniorCaution}"
                         android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_elder_caution_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

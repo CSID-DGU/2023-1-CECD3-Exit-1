@@ -2,7 +2,9 @@ package com.cecd.exitmed.presentation.pillDetail
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityPillDetailBinding
 import com.cecd.exitmed.presentation.pillCreation.PillCreationActivity
@@ -14,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PillDetailActivity :
     BindingActivity<ActivityPillDetailBinding>(R.layout.activity_pill_detail) {
+    private val durViewModel: PillDetailDURViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
