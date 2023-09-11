@@ -45,5 +45,4 @@ interface DURService {
         @Query("type") type: String = "json",
         @Query("itemSeq") itemSeq: String
     ): ResponseDURCaution
-
 }

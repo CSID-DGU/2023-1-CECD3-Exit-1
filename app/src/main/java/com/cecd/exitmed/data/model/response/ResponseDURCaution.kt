@@ -34,7 +34,7 @@ data class ResponseDURCaution(
             val MIX_INGR: String?,
             val MIX_TYPE: String,
             val NOTIFICATION_DATE: String,
-            val PROHBT_CONTENT: String,
+            val PROHBT_CONTENT: String?,
             val REMARK: String?,
             val TYPE_NAME: String
         )
