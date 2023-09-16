@@ -1,6 +1,8 @@
 package com.example.exitmedserver.util.config;
 
+import com.example.exitmedserver.user.repository.UserRepository;
 import com.example.exitmedserver.util.auth.JwtAuthenticationFilter;
+import com.example.exitmedserver.util.auth.JwtAuthorizationFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private final UserRepository userRepository;
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -46,7 +49,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
 
                         // auth로 시작하는 url은 admin, user만 접근 가능
-                        //.requestMatchers("/auth").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/auth").hasAnyRole("ADMIN", "USER")
 
                         // 이외의 링크는 모두 접근 가능
                         .anyRequest().permitAll())
@@ -68,6 +71,9 @@ public class SecurityConfig {
 
                 // JwtAuthenticationFilter의 parameter로 아까 만들어둔 authenticaitonManager 넘겨주기
                 .addFilter(new JwtAuthenticationFilter(authenticationManager))
+
+                // JwtAuthorizationFilter추가해주기
+                .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository))
                 ;
         return http.build();
     }
