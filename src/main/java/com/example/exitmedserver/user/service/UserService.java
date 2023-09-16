@@ -1,5 +1,7 @@
 package com.example.exitmedserver.user.service;
 
+import com.example.exitmedserver.user.dto.UserCheckDuplicatedRequestDto;
+import com.example.exitmedserver.user.dto.UserCheckDuplicatedResponseDto;
 import com.example.exitmedserver.user.dto.UserSignupRequestDto;
 import com.example.exitmedserver.user.dto.UserSignupResponseDto;
 import com.example.exitmedserver.user.entity.User;
@@ -19,12 +21,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserProfileRepository userProfileRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public UserSignupResponseDto signup(UserSignupRequestDto userSignupRequestDto) {
         System.out.println("user service started");
         User user = User.builder()
                 .userId(userSignupRequestDto.getUserId())
                 .userPassword(bCryptPasswordEncoder.encode(userSignupRequestDto.getUserPassword()))
                 .createdAt(Timestamp.from(Instant.now()))
+                .userRole("ROLE_USER")
                 .build();
 
         byte isPregnant;
@@ -50,5 +54,13 @@ public class UserService {
                 .userId(userSignupRequestDto.getUserId())
                 .fullName(userSignupRequestDto.getFullName())
                 .build();
+    }
+
+    public UserCheckDuplicatedResponseDto checkDuplicated(UserCheckDuplicatedRequestDto userCheckDuplicatedRequestDto) {
+        String userId = userCheckDuplicatedRequestDto.getUserId();
+        UserCheckDuplicatedResponseDto userCheckDuplicatedResponseDto = new UserCheckDuplicatedResponseDto();
+
+        userCheckDuplicatedResponseDto.setDuplicated(userRepository.findByUserId(userId) != null);
+        return userCheckDuplicatedResponseDto;
     }
 }
