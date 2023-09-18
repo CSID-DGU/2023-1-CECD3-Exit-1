@@ -5,8 +5,9 @@ import com.cecd.exitmed.domain.type.SearchPill
 import com.cecd.exitmed.util.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel @Inject constructor() : ViewModel() {
     val searchText = MutableStateFlow("")
     private var _searchCount = MutableStateFlow<Int?>(5)
     val searchCount get() = _searchCount.asStateFlow()

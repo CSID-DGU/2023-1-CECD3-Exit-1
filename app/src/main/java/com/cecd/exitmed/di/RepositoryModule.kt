@@ -1,7 +1,9 @@
 package com.cecd.exitmed.di
 
 import com.cecd.exitmed.data.repository.AuthRepositoryImpl
+import com.cecd.exitmed.data.repository.DURRepositoryImpl
 import com.cecd.exitmed.domain.repository.AuthRepository
+import com.cecd.exitmed.domain.repository.DURRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,4 +18,10 @@ interface RepositoryModule {
     fun bindAuthRepository(
         authRepositoryImpl: AuthRepositoryImpl
     ): AuthRepository
+
+    @Binds
+    @Singleton
+    fun bindDURRepository(
+        durRepositoryImpl: DURRepositoryImpl
+    ): DURRepository
 }

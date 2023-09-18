@@ -3,6 +3,7 @@ package com.cecd.exitmed.di
 import com.cecd.exitmed.BuildConfig
 import com.cecd.exitmed.BuildConfig.DEBUG
 import com.cecd.exitmed.data.interceptor.AuthInterceptor
+import com.cecd.exitmed.data.type.BaseUrlType
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -16,6 +17,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -34,10 +36,21 @@ object NetworkModule {
     @ExperimentalSerializationApi
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient, json: Json): Retrofit = Retrofit.Builder()
+    @Retrofit2(BaseUrlType.EXIT)
+    fun provideExitRetrofit(client: OkHttpClient, json: Json): Retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.EXIT_BASE_URL)
         .client(client)
         .addConverterFactory(json.asConverterFactory(requireNotNull("application/json".toMediaTypeOrNull())))
+        .build()
+
+    @ExperimentalSerializationApi
+    @Provides
+    @Singleton
+    @Retrofit2(BaseUrlType.DUR)
+    fun provideDURRetrofit(client: OkHttpClient, json: Json): Retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.DUR_BASE_URL)
+        .addConverterFactory(json.asConverterFactory(requireNotNull("application/json".toMediaTypeOrNull())))
+        .client(client)
         .build()
 
     @Provides
@@ -60,4 +73,7 @@ object NetworkModule {
                 }
             )
         }.build()
+
+    @Qualifier
+    annotation class Retrofit2(val type: BaseUrlType)
 }

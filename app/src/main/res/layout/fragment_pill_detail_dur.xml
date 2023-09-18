@@ -4,6 +4,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cecd.exitmed.presentation.pillDetail.PillDetailDURViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +20,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingBottom="36dp">
 
                 <TextView
                     android:id="@+id/tv_pill_detail_dur_title"
@@ -62,12 +67,12 @@
 
                     <TextView
                         android:id="@+id/tv_pill_detail_dur_age_prohibit_content"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="dur 본문 임시"
                         android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_age_prohibit_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,12 +101,12 @@
 
                     <TextView
                         android:id="@+id/tv_pill_detail_dur_pregnant_prohibit_content"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="dur 본문 임시"
                         android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_pregnant_prohibit_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -130,12 +135,12 @@
 
                     <TextView
                         android:id="@+id/tv_pill_detail_dur_capacity_caution_content"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="dur 본문 임시"
                         android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_capacity_caution_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -164,12 +169,12 @@
 
                     <TextView
                         android:id="@+id/tv_pill_detail_dur_administration_duration_caution_content"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="dur 본문 임시"
                         android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_administration_duration_caution_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -180,11 +185,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing24"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="36dp"
                     android:background="@drawable/shape_radius_12"
                     android:backgroundTint="@color/orange_25"
                     android:padding="14dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_pill_detail_dur_administration_duration_caution">
@@ -200,12 +203,12 @@
 
                     <TextView
                         android:id="@+id/tv_pill_detail_dur_elder_caution_content"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="dur 본문 임시"
                         android:textAppearance="@style/TextAppearance.BodyM3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_dur_elder_caution_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -246,7 +249,6 @@
                         android:src="@drawable/ic_close"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

@@ -26,6 +26,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "EXIT_BASE_URL", properties["EXIT_BASE_URL"]
+        buildConfigField "String", "DUR_BASE_URL", properties["DUR_BASE_URL"]
+        buildConfigField "String", "DUR_DECODE_KEY", properties["DUR_DECODE_KEY"]
     }
 
     buildTypes {
