@@ -39,4 +39,13 @@ public class Pill {
 
     @Column(name = "classification")
     private String classification;
+
+    @Column(name = "atc_code")
+    private String atcCode;
+
+    @Column(name = "ingredient_code")
+    private String ingredientCode;
+
+    @Column(name = "max_main_ingredient")
+    private String maxMainIngredient;
 }
