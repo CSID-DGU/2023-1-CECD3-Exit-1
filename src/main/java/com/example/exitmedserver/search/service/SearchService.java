@@ -61,12 +61,17 @@ public class SearchService {
         List<FavoriteList> searchedFavoriteList = favoriteListRepository.findFavoriteListByUserId(userId);
 
         if (!searchedFavoriteList.isEmpty()) {
+            int i = 0;
             for (FavoriteList f : searchedFavoriteList) {
                 Optional<Pill> pill = pillRepository.findById(f.getPillItemSequence());
                 if (pill.isPresent()) {
                     SearchGetFavoriteResponseDto searchGetFavoriteResponseDto = new SearchGetFavoriteResponseDto();
                     searchGetFavoriteResponseDto.setPillName(pill.get().getPillName());
                     favoriteList.add(searchGetFavoriteResponseDto);
+                    i++;
+                }
+                if (i == 5) {
+                    break;
                 }
             }
         }
