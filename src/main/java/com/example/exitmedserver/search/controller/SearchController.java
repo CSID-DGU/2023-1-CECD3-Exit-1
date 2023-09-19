@@ -27,7 +27,6 @@ public class SearchController {
 
     @GetMapping("/auth/search/favorite")
     public List<SearchGetFavoriteResponseDto> getFavorite(@RequestHeader("Authorization") String jwtToken) {
-        searchService.getFavorite(jwtToken);
         return searchService.getFavorite(jwtToken);
     }
 }

@@ -49,15 +49,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         // 서명이 정상적으로 됨
         if (userId != null) {
             User user = userRepository.findByUserId(userId);
-            System.out.println("userId 정상");
-            System.out.println(user.getUserId());
             PrincipalDetails principalDetails = new PrincipalDetails(user);
-            System.out.println(principalDetails.getAuthorities().size());
 
             // Authentication 객체를 만들어준다
             Authentication authentication =
                     new UsernamePasswordAuthenticationToken(principalDetails, null, principalDetails.getAuthorities());
-            System.out.println(authentication.isAuthenticated());
 
             // 강제로 spring security의 세션에 접근하여 위에서 만든 authentication 객체를 저장함
             SecurityContextHolder.getContext().setAuthentication(authentication);
