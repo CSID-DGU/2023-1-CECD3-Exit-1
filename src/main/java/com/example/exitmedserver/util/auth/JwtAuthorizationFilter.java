@@ -30,10 +30,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("인증이나 권한 필요한 주소 요청됨");
 
         String jwtHeader = request.getHeader("Authorization");
-        System.out.println("jwt header: " + jwtHeader);
 
         // header가 있는지 확인
         if (jwtHeader == null || !jwtHeader.startsWith("Bearer")) {
@@ -43,12 +41,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         // 이렇게 받은 JWT의 헤더를 디코딩해서 정상적인 사용자인지 확인한다
         String token = jwtHeader.replace("Bearer ", "");
-        System.out.println(token);
 
         JwtProvider jwtProvider = new JwtProvider();
 
         String userId = jwtProvider.getUserIdFromToken(token);
-        System.out.println("decoded userId: " + userId);
 
         // 서명이 정상적으로 됨
         if (userId != null) {
