@@ -21,12 +21,12 @@ public class SearchService {
     private final FavoriteListRepository favoriteListRepository;
 
     public List<SearchTextResponseDto> searchText(String searchText) {
-        SearchTextResponseDto searchTextResponseDto = new SearchTextResponseDto();
         List<SearchTextResponseDto> searchResults = new ArrayList<>();
         List<Pill> searchedPillList = pillRepository.findPillByPillNameContaining(searchText);
 
         if (!searchedPillList.isEmpty()) {
             for (Pill p : searchedPillList) {
+                SearchTextResponseDto searchTextResponseDto = new SearchTextResponseDto();
                 searchTextResponseDto.setPillItemSequence(p.getPillItemSequence());
                 searchResults.add(searchTextResponseDto);
             }
@@ -54,22 +54,22 @@ public class SearchService {
 
     public List<SearchGetFavoriteResponseDto> getFavorite(String jwtToken) {
         List<SearchGetFavoriteResponseDto> favoriteList = new ArrayList<>();
-        SearchGetFavoriteResponseDto searchGetFavoriteResponseDto = new SearchGetFavoriteResponseDto();
 
         JwtProvider jwtProvider = new JwtProvider();
         String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
 
-        //System.out.println(pillRepository.findById(195900043L).get());
         List<FavoriteList> searchedFavoriteList = favoriteListRepository.findFavoriteListByUserId(userId);
+
         if (!searchedFavoriteList.isEmpty()) {
             for (FavoriteList f : searchedFavoriteList) {
                 Optional<Pill> pill = pillRepository.findById(f.getPillItemSequence());
-                pill.ifPresent(value -> searchGetFavoriteResponseDto.setPillName(value.getPillName()));
-
-                favoriteList.add(searchGetFavoriteResponseDto);
+                if (pill.isPresent()) {
+                    SearchGetFavoriteResponseDto searchGetFavoriteResponseDto = new SearchGetFavoriteResponseDto();
+                    searchGetFavoriteResponseDto.setPillName(pill.get().getPillName());
+                    favoriteList.add(searchGetFavoriteResponseDto);
+                }
             }
         }
-        System.out.println(favoriteList);
 
         return favoriteList;
     }
