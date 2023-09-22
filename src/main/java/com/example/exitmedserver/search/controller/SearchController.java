@@ -14,8 +14,9 @@ import java.util.List;
 public class SearchController {
     private final SearchService searchService;
     @GetMapping("/auth/search/text-search/{searchText}")
-    public List<SearchTextResponseDto> textSearch(@PathVariable String searchText) {
+    public List<SearchTextResponseDto> textSearch(@RequestHeader("Authorization") String jwtToken, @PathVariable String searchText) {
         List<SearchTextResponseDto> searchTextResponse = searchService.searchText(searchText);
+        searchService.addToSearchHistory(jwtToken, searchText);
         System.out.println(searchTextResponse);
         return searchTextResponse;
     }

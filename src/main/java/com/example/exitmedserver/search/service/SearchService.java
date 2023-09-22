@@ -5,11 +5,14 @@ import com.example.exitmedserver.pill.repository.PillRepository;
 import com.example.exitmedserver.search.dto.SearchGetFavoriteResponseDto;
 import com.example.exitmedserver.search.dto.SearchTextResponseDto;
 import com.example.exitmedserver.search.entity.FavoriteList;
+import com.example.exitmedserver.search.entity.SearchHistoryList;
 import com.example.exitmedserver.search.repository.FavoriteListRepository;
+import com.example.exitmedserver.search.repository.SearchHistoryListRepository;
 import com.example.exitmedserver.util.auth.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +22,7 @@ import java.util.Optional;
 public class SearchService {
     private final PillRepository pillRepository;
     private final FavoriteListRepository favoriteListRepository;
+    private final SearchHistoryListRepository searchHistoryListRepository;
 
     public List<SearchTextResponseDto> searchText(String searchText) {
         List<SearchTextResponseDto> searchResults = new ArrayList<>();
@@ -77,5 +81,34 @@ public class SearchService {
         }
 
         return favoriteList;
+    }
+
+    public void addToSearchHistory(String jwtToken, String searchText) {
+        JwtProvider jwtProvider = new JwtProvider();
+        String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        SearchHistoryList searchHistoryList = searchHistoryListRepository.findSearchHistoryListByUserIdAndSearchText(userId, searchText);
+        if (searchHistoryList == null) {
+            // create new list
+            Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+            searchHistoryList = SearchHistoryList.builder()
+                    .id(null)
+                    .userId(userId)
+                    .searchText(searchText)
+                    .createdAt(createdAt)
+                    .build();
+            searchHistoryListRepository.save(searchHistoryList);
+        } else {
+            // update createdAt
+            Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+            searchHistoryListRepository.delete(searchHistoryList);
+            searchHistoryList = SearchHistoryList.builder()
+                    .id(null)
+                    .userId(userId)
+                    .searchText(searchText)
+                    .createdAt(createdAt)
+                    .build();
+            searchHistoryListRepository.save(searchHistoryList);
+        }
     }
 }
