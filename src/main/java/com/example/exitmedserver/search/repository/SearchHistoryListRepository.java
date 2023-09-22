@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SearchHistoryListRepository extends JpaRepository<SearchHistoryList, String> {
+    public SearchHistoryList findSearchHistoryListByUserIdAndSearchText(String userId, String searchText);
 }
