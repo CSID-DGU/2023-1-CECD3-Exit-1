@@ -120,12 +120,18 @@ public class SearchService {
         List<SearchHistoryList> searchHistoryList = searchHistoryListRepository.findSearchHistoryListByUserId(userId);
         List<SearchGetSearchListResponseDto> searchList = new ArrayList<>();
 
-        for (SearchHistoryList s : searchHistoryList) {
-            SearchGetSearchListResponseDto searchGetSearchListResponseDto = new SearchGetSearchListResponseDto();
-            searchGetSearchListResponseDto.setSearchText(s.getSearchText());
-            searchList.add(searchGetSearchListResponseDto);
+        if (!searchHistoryList.isEmpty()){
+            int i = 0;
+            for (SearchHistoryList s : searchHistoryList) {
+                SearchGetSearchListResponseDto searchGetSearchListResponseDto = new SearchGetSearchListResponseDto();
+                searchGetSearchListResponseDto.setSearchText(s.getSearchText());
+                searchList.add(searchGetSearchListResponseDto);
+                i++;
+                if (i == 5) {
+                    break;
+                }
+            }
         }
-
         return searchList;
     }
 }
