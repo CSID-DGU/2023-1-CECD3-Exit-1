@@ -2,6 +2,7 @@ package com.example.exitmedserver.search.controller;
 
 import com.example.exitmedserver.search.dto.SearchAddFavoriteRequestDto;
 import com.example.exitmedserver.search.dto.SearchGetFavoriteResponseDto;
+import com.example.exitmedserver.search.dto.SearchGetSearchListResponseDto;
 import com.example.exitmedserver.search.dto.SearchTextResponseDto;
 import com.example.exitmedserver.search.service.SearchService;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,10 @@ public class SearchController {
     @GetMapping("/auth/search/favorite")
     public List<SearchGetFavoriteResponseDto> getFavorite(@RequestHeader("Authorization") String jwtToken) {
         return searchService.getFavorite(jwtToken);
+    }
+
+    @GetMapping("/auth/search/search-list")
+    public List<SearchGetSearchListResponseDto> getSearchHistory(@RequestHeader("Authorization") String jwtToken) {
+        return searchService.getSearchList(jwtToken);
     }
 }

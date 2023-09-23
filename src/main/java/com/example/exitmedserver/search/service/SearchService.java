@@ -3,6 +3,7 @@ package com.example.exitmedserver.search.service;
 import com.example.exitmedserver.pill.entity.Pill;
 import com.example.exitmedserver.pill.repository.PillRepository;
 import com.example.exitmedserver.search.dto.SearchGetFavoriteResponseDto;
+import com.example.exitmedserver.search.dto.SearchGetSearchListResponseDto;
 import com.example.exitmedserver.search.dto.SearchTextResponseDto;
 import com.example.exitmedserver.search.entity.FavoriteList;
 import com.example.exitmedserver.search.entity.SearchHistoryList;
@@ -110,5 +111,21 @@ public class SearchService {
                     .build();
             searchHistoryListRepository.save(searchHistoryList);
         }
+    }
+
+    public List<SearchGetSearchListResponseDto> getSearchList(String jwtToken) {
+        JwtProvider jwtProvider = new JwtProvider();
+        String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        List<SearchHistoryList> searchHistoryList = searchHistoryListRepository.findSearchHistoryListByUserId(userId);
+        List<SearchGetSearchListResponseDto> searchList = new ArrayList<>();
+
+        for (SearchHistoryList s : searchHistoryList) {
+            SearchGetSearchListResponseDto searchGetSearchListResponseDto = new SearchGetSearchListResponseDto();
+            searchGetSearchListResponseDto.setSearchText(s.getSearchText());
+            searchList.add(searchGetSearchListResponseDto);
+        }
+
+        return searchList;
     }
 }
