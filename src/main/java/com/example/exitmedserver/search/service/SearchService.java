@@ -1,6 +1,7 @@
 package com.example.exitmedserver.search.service;
 
 import com.example.exitmedserver.pill.entity.Pill;
+import com.example.exitmedserver.pill.repository.PillImageRepository;
 import com.example.exitmedserver.pill.repository.PillRepository;
 import com.example.exitmedserver.search.dto.SearchGetFavoriteResponseDto;
 import com.example.exitmedserver.search.dto.SearchGetSearchListResponseDto;
@@ -22,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SearchService {
     private final PillRepository pillRepository;
+    private final PillImageRepository pillImageRepository;
     private final FavoriteListRepository favoriteListRepository;
     private final SearchHistoryListRepository searchHistoryListRepository;
 
@@ -33,6 +35,9 @@ public class SearchService {
             for (Pill p : searchedPillList) {
                 SearchTextResponseDto searchTextResponseDto = new SearchTextResponseDto();
                 searchTextResponseDto.setPillItemSequence(p.getPillItemSequence());
+                searchTextResponseDto.setPillName(p.getPillName());
+                searchTextResponseDto.setClassification(p.getClassification());
+                searchTextResponseDto.setImage(pillImageRepository.findById(p.getPillItemSequence()).get().getImageLink());
                 searchResults.add(searchTextResponseDto);
             }
         }

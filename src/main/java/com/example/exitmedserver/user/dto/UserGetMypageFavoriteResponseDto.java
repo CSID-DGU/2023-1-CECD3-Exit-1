@@ -1,9 +1,9 @@
-package com.example.exitmedserver.search.dto;
+package com.example.exitmedserver.user.dto;
 
 import lombok.Data;
 
 @Data
-public class SearchTextResponseDto {
+public class UserGetMypageFavoriteResponseDto {
     private Long pillItemSequence;
     private String pillName;
     private String image;
