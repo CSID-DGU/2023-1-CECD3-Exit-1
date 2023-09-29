@@ -130,7 +130,7 @@ public class SearchService {
         JwtProvider jwtProvider = new JwtProvider();
         String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
 
-        List<SearchHistoryList> searchHistoryList = searchHistoryListRepository.findSearchHistoryListByUserId(userId);
+        List<SearchHistoryList> searchHistoryList = searchHistoryListRepository.findSearchHistoryListByUserIdOrderByCreatedAtDesc(userId);
         List<SearchGetSearchListResponseDto> searchList = new ArrayList<>();
 
         if (!searchHistoryList.isEmpty()) {

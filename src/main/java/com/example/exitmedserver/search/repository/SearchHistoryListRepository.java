@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface SearchHistoryListRepository extends JpaRepository<SearchHistoryList, String> {
     public SearchHistoryList findSearchHistoryListByUserIdAndSearchText(String userId, String searchText);
-    public List<SearchHistoryList> findSearchHistoryListByUserId(String userId);
+    public List<SearchHistoryList> findSearchHistoryListByUserIdOrderByCreatedAtDesc(String userId);
 }
