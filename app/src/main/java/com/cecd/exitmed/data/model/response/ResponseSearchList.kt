@@ -4,7 +4,7 @@ import com.cecd.exitmed.domain.type.SearchPill
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseTextSearchList(
+data class ResponseSearchList(
     val data: List<Data>
 ) {
     @Serializable
