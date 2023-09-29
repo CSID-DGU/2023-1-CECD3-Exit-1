@@ -1,6 +1,6 @@
 package com.cecd.exitmed.data.model.response
 
-import com.cecd.exitmed.domain.type.SearchPill
+import com.cecd.exitmed.domain.type.Pill
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -16,7 +16,7 @@ data class ResponseSearchList(
     )
 
     fun toSearchPill() = data.map { searchPill ->
-        SearchPill(
+        Pill(
             pillItemSequence = searchPill.pillItemSequence,
             image = searchPill.image,
             pillName = searchPill.pillName,

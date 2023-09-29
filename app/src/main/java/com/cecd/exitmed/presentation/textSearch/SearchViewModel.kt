@@ -3,7 +3,7 @@ package com.cecd.exitmed.presentation.textSearch
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cecd.exitmed.domain.repository.TextSearchRepository
-import com.cecd.exitmed.domain.type.SearchPill
+import com.cecd.exitmed.domain.type.Pill
 import com.cecd.exitmed.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +19,7 @@ class SearchViewModel @Inject constructor(
     val searchText = MutableStateFlow("")
     private var _searchCount = MutableStateFlow<Int?>(null)
     val searchCount get() = _searchCount.asStateFlow()
-    private var _searchListState = MutableStateFlow<UiState<List<SearchPill>>>(UiState.Loading)
+    private var _searchListState = MutableStateFlow<UiState<List<Pill>>>(UiState.Loading)
     val searchListState get() = _searchListState.asStateFlow()
     private var _recentSearchTermsState = MutableStateFlow<UiState<List<String>>>(UiState.Loading)
     val recentSearchTermsState get() = _recentSearchTermsState.asStateFlow()

@@ -10,7 +10,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySearchBinding
-import com.cecd.exitmed.domain.type.SearchPill
+import com.cecd.exitmed.domain.type.Pill
 import com.cecd.exitmed.presentation.common.PillListAdapter
 import com.cecd.exitmed.presentation.pillDetail.PillDetailActivity
 import com.cecd.exitmed.util.UiState
@@ -80,7 +80,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         return super.dispatchTouchEvent(ev)
     }
 
-    private fun setTextPillSearchAdapter(searchList: List<SearchPill>) {
+    private fun setTextPillSearchAdapter(searchList: List<Pill>) {
         val searchListAdapter = PillListAdapter(::moveToPillDetail)
         binding.rvSearchList.adapter = searchListAdapter
         searchListAdapter.submitList(searchList)
