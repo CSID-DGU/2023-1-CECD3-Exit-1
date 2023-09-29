@@ -14,7 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MyPillListActivity :
     BindingActivity<ActivityBookmarkListBinding>(R.layout.activity_bookmark_list) {
-    // TODO 뷰모델 수정
     private val viewModel: SearchViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +25,6 @@ class MyPillListActivity :
     private fun initLayout() {
         val pillAdapter = PillListAdapter(::moveToPillDetail)
         binding.rvBookmarkPillList.adapter = pillAdapter
-        pillAdapter.submitList(viewModel.mockSearchList)
     }
 
     private fun addListeners() {

@@ -15,14 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/spacing24"
-        android:paddingVertical="8dp">
+        android:paddingVertical="12dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_pill"
+            image="@{searchPill.image}"
             android:layout_width="60dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,11 +31,14 @@
 
         <TextView
             android:id="@+id/tv_pill_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@{searchPill.title}"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{searchPill.pillName}"
             android:textAppearance="@style/TextAppearance.BodyM1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_pill"
             app:layout_constraintTop_toTopOf="@id/iv_pill"
             tools:text="타이레놀" />
@@ -46,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="6dp"
-            android:text="@{searchPill.category}"
+            android:text="@{searchPill.classification}"
             android:textAppearance="@style/TextAppearance.BodyM3"
             android:textColor="@color/gray_400"
             app:layout_constraintStart_toEndOf="@id/iv_pill"
