@@ -4,8 +4,10 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import coil.load
 import com.cecd.exitmed.R
 
 @BindingAdapter("visibility")
@@ -17,6 +19,11 @@ fun View.setVisibility(isVisible: Boolean?) {
 @BindingAdapter("selected")
 fun View.setSelected(isSelected: Boolean) {
     this.isSelected = isSelected
+}
+
+@BindingAdapter("image")
+fun ImageView.setImage(imageUrl: String) {
+    this.load(imageUrl)
 }
 
 @BindingAdapter("coloredText")
