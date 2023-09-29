@@ -10,6 +10,9 @@ import com.example.exitmedserver.search.entity.FavoriteList;
 import com.example.exitmedserver.search.entity.SearchHistoryList;
 import com.example.exitmedserver.search.repository.FavoriteListRepository;
 import com.example.exitmedserver.search.repository.SearchHistoryListRepository;
+import com.example.exitmedserver.user.dto.SearchGetFavoriteResponse;
+import com.example.exitmedserver.user.dto.SearchGetSearchListResponse;
+import com.example.exitmedserver.user.dto.SearchTextResponse;
 import com.example.exitmedserver.util.auth.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +30,7 @@ public class SearchService {
     private final FavoriteListRepository favoriteListRepository;
     private final SearchHistoryListRepository searchHistoryListRepository;
 
-    public List<SearchTextResponseDto> searchText(String searchText) {
+    public SearchTextResponse searchText(String searchText) {
         List<SearchTextResponseDto> searchResults = new ArrayList<>();
         List<Pill> searchedPillList = pillRepository.findPillByPillNameContaining(searchText);
 
@@ -42,7 +45,10 @@ public class SearchService {
             }
         }
 
-        return searchResults;
+        SearchTextResponse searchTextResponse = new SearchTextResponse();
+        searchTextResponse.setData(searchResults);
+
+        return searchTextResponse;
     }
 
     public boolean addToFavorite(String jwtToken, Long pillItemSequence) {
@@ -62,13 +68,12 @@ public class SearchService {
         return true;
     }
 
-    public List<SearchGetFavoriteResponseDto> getFavorite(String jwtToken) {
-        List<SearchGetFavoriteResponseDto> favoriteList = new ArrayList<>();
-
+    public SearchGetFavoriteResponse getFavorite(String jwtToken) {
         JwtProvider jwtProvider = new JwtProvider();
         String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
 
         List<FavoriteList> searchedFavoriteList = favoriteListRepository.findFavoriteListByUserId(userId);
+        List<SearchGetFavoriteResponseDto> favoriteList = new ArrayList<>();
 
         if (!searchedFavoriteList.isEmpty()) {
             int i = 0;
@@ -86,7 +91,10 @@ public class SearchService {
             }
         }
 
-        return favoriteList;
+        SearchGetFavoriteResponse searchGetFavoriteResponse = new SearchGetFavoriteResponse();
+        searchGetFavoriteResponse.setData(favoriteList);
+
+        return searchGetFavoriteResponse;
     }
 
     public void addToSearchHistory(String jwtToken, String searchText) {
@@ -118,14 +126,14 @@ public class SearchService {
         }
     }
 
-    public List<SearchGetSearchListResponseDto> getSearchList(String jwtToken) {
+    public SearchGetSearchListResponse getSearchList(String jwtToken) {
         JwtProvider jwtProvider = new JwtProvider();
         String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
 
         List<SearchHistoryList> searchHistoryList = searchHistoryListRepository.findSearchHistoryListByUserId(userId);
         List<SearchGetSearchListResponseDto> searchList = new ArrayList<>();
 
-        if (!searchHistoryList.isEmpty()){
+        if (!searchHistoryList.isEmpty()) {
             int i = 0;
             for (SearchHistoryList s : searchHistoryList) {
                 SearchGetSearchListResponseDto searchGetSearchListResponseDto = new SearchGetSearchListResponseDto();
@@ -137,6 +145,10 @@ public class SearchService {
                 }
             }
         }
-        return searchList;
+
+        SearchGetSearchListResponse searchGetSearchListResponse = new SearchGetSearchListResponse();
+        searchGetSearchListResponse.setData(searchList);
+
+        return searchGetSearchListResponse;
     }
 }
