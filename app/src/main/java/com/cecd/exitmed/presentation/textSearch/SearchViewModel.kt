@@ -17,16 +17,22 @@ class SearchViewModel @Inject constructor(
     private val textSearchRepository: TextSearchRepository
 ) : ViewModel() {
     val searchText = MutableStateFlow("")
-    private var _searchCount = MutableStateFlow<Int?>(5)
+    private var _searchCount = MutableStateFlow<Int?>(null)
     val searchCount get() = _searchCount.asStateFlow()
-    private var _searchList = MutableStateFlow<UiState<List<SearchPill>>>(UiState.Empty)
-    val searchList get() = _searchList.asStateFlow()
+    private var _searchListState = MutableStateFlow<UiState<List<SearchPill>>>(UiState.Loading)
+    val searchListState get() = _searchListState.asStateFlow()
+    private var _recentSearchTermsState = MutableStateFlow<UiState<List<String>>>(UiState.Loading)
+    val recentSearchTermsState get() = _recentSearchTermsState.asStateFlow()
+
+    init {
+        fetchRecentSearchTerms()
+    }
 
     fun textPillSearch() {
         viewModelScope.launch {
             textSearchRepository.textPillSearch(searchText.value)
                 .onSuccess { searchList ->
-                    _searchList.value = UiState.Success(searchList)
+                    _searchListState.value = UiState.Success(searchList)
                     _searchCount.value = UiState.Success(searchList).data.size
                 }
                 .onFailure { throwable ->
@@ -35,12 +41,17 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    val mockHistoryList = listOf(
-        "타이레놀",
-        "스리반정",
-        "자나팜정",
-        "인데놀정",
-    )
+    private fun fetchRecentSearchTerms() {
+        viewModelScope.launch {
+            textSearchRepository.fetchRecentSearchTerm()
+                .onSuccess { recentSearchTerms ->
+                    _recentSearchTermsState.value = UiState.Success(recentSearchTerms)
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
 
     val mockBookmarkList = listOf(
         "스리반정",

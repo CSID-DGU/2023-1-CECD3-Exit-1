@@ -12,4 +12,9 @@ class TextSearchRepositoryImpl @Inject constructor(
         runCatching {
             textSearchDataSource.textPillSearch(textSearchTerm).toSearchPill()
         }
+
+    override suspend fun fetchRecentSearchTerm(): Result<List<String>> =
+        runCatching {
+            textSearchDataSource.fetchRecentSearchTerm().toStringList()
+        }
 }

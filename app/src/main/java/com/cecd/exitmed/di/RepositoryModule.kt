@@ -27,7 +27,6 @@ interface RepositoryModule {
         durRepositoryImpl: DURRepositoryImpl
     ): DURRepository
 
-
     @Binds
     @Singleton
     fun bindTextSearchRepository(

@@ -64,10 +64,10 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
                 rvSearchList.setVisibility(searchCount != null && searchCount > 0)
             }
         }.launchIn(lifecycleScope)
-        searchViewModel.searchList.flowWithLifecycle(lifecycle).onEach {
+        searchViewModel.searchListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    setPillResultList(it.data)
+                    setTextPillSearchAdapter(it.data)
                 }
 
                 else -> {}
@@ -80,7 +80,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         return super.dispatchTouchEvent(ev)
     }
 
-    private fun setPillResultList(searchList: List<SearchPill>) {
+    private fun setTextPillSearchAdapter(searchList: List<SearchPill>) {
         val searchListAdapter = PillListAdapter(::moveToPillDetail)
         binding.rvSearchList.adapter = searchListAdapter
         searchListAdapter.submitList(searchList)
