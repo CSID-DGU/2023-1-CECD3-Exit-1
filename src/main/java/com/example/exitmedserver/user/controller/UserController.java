@@ -1,18 +1,14 @@
 package com.example.exitmedserver.user.controller;
 
-import com.example.exitmedserver.user.dto.UserCheckDuplicatedRequestDto;
-import com.example.exitmedserver.user.dto.UserCheckDuplicatedResponseDto;
-import com.example.exitmedserver.user.dto.UserSignupRequestDto;
-import com.example.exitmedserver.user.dto.UserSignupResponseDto;
+import com.example.exitmedserver.user.dto.*;
 import com.example.exitmedserver.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +28,11 @@ public class UserController {
     @PostMapping("/user/signup/check-duplicated")
     public UserCheckDuplicatedResponseDto checkDuplicated(@Valid @RequestBody UserCheckDuplicatedRequestDto userCheckDuplicatedRequestDto, BindingResult bindingResult) {
         return userService.checkDuplicated(userCheckDuplicatedRequestDto);
+    }
+
+    @GetMapping("/auth/user/favorite")
+    public List<UserGetMypageFavoriteResponseDto> getMypageFavorite(@RequestHeader("Authorization") String jwtToken) {
+        return userService.getMypageFavorite(jwtToken);
     }
 
     @GetMapping("/auth/test")

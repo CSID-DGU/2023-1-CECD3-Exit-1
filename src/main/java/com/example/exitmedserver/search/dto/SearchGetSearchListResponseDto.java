@@ -3,5 +3,6 @@ package com.example.exitmedserver.search.dto;
 import lombok.Data;
 
 @Data
-public class SearchGetSearchListResponse {
+public class SearchGetSearchListResponseDto {
+    String searchText;
 }
