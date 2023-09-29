@@ -3,6 +3,7 @@ package com.example.exitmedserver.search.service;
 import com.example.exitmedserver.pill.entity.Pill;
 import com.example.exitmedserver.pill.repository.PillImageRepository;
 import com.example.exitmedserver.pill.repository.PillRepository;
+import com.example.exitmedserver.search.dto.SearchAddFavoriteResponseDto;
 import com.example.exitmedserver.search.dto.SearchGetFavoriteResponseDto;
 import com.example.exitmedserver.search.dto.SearchGetSearchListResponseDto;
 import com.example.exitmedserver.search.dto.SearchTextResponseDto;
@@ -51,9 +52,12 @@ public class SearchService {
         return searchTextResponse;
     }
 
-    public boolean addToFavorite(String jwtToken, Long pillItemSequence) {
+    public SearchAddFavoriteResponseDto addToFavorite(String jwtToken, Long pillItemSequence) {
         JwtProvider jwtProvider = new JwtProvider();
         String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        SearchAddFavoriteResponseDto searchAddFavoriteResponseDto = new SearchAddFavoriteResponseDto();
+        searchAddFavoriteResponseDto.setBookMarked(false);
         // FavoriteList favoriteList = new Favor; kyosunim gwajaeguman plz
         FavoriteList favoriteList = favoriteListRepository.findFavoriteListByUserIdAndPillItemSequence(userId, pillItemSequence);
         if (favoriteList == null) {
@@ -63,9 +67,10 @@ public class SearchService {
                     .pillItemSequence(pillItemSequence)
                     .build();
             favoriteListRepository.save(favoriteList);
+            searchAddFavoriteResponseDto.setBookMarked(true);
         }
 
-        return true;
+        return searchAddFavoriteResponseDto;
     }
 
     public SearchGetFavoriteResponse getFavorite(String jwtToken) {

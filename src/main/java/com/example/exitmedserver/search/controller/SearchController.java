@@ -1,6 +1,7 @@
 package com.example.exitmedserver.search.controller;
 
 import com.example.exitmedserver.search.dto.SearchAddFavoriteRequestDto;
+import com.example.exitmedserver.search.dto.SearchAddFavoriteResponseDto;
 import com.example.exitmedserver.search.service.SearchService;
 import com.example.exitmedserver.user.dto.SearchGetFavoriteResponse;
 import com.example.exitmedserver.user.dto.SearchGetSearchListResponse;
@@ -19,7 +20,7 @@ public class SearchController {
     }
 
     @PostMapping("/auth/search/favorite")
-    public boolean addToFavorite(@RequestHeader("Authorization") String jwtToken, @RequestBody SearchAddFavoriteRequestDto searchAddFavoriteRequestDto) {
+    public SearchAddFavoriteResponseDto addToFavorite(@RequestHeader("Authorization") String jwtToken, @RequestBody SearchAddFavoriteRequestDto searchAddFavoriteRequestDto) {
         return searchService.addToFavorite(jwtToken, searchAddFavoriteRequestDto.getPillItemSequence());
     }
 
