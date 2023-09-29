@@ -10,8 +10,10 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySearchBinding
+import com.cecd.exitmed.domain.type.SearchPill
 import com.cecd.exitmed.presentation.common.PillListAdapter
 import com.cecd.exitmed.presentation.pillDetail.PillDetailActivity
+import com.cecd.exitmed.util.UiState
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.binding.setVisibility
 import com.cecd.exitmed.util.extension.showKeyboard
@@ -30,7 +32,6 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
         addListeners()
         collectData()
-        setPillResultList()
         setSearchPagerAdapter()
     }
 
@@ -40,6 +41,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         }
         binding.etSearchBox.setOnKeyListener { _, keyCode, event ->
             if ((event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                searchViewModel.textPillSearch()
                 showKeyboard(binding.root, false)
                 true
             } else {
@@ -62,6 +64,15 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
                 rvSearchList.setVisibility(searchCount != null && searchCount > 0)
             }
         }.launchIn(lifecycleScope)
+        searchViewModel.searchList.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    setPillResultList(it.data)
+                }
+
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -69,10 +80,10 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         return super.dispatchTouchEvent(ev)
     }
 
-    private fun setPillResultList() {
+    private fun setPillResultList(searchList: List<SearchPill>) {
         val searchListAdapter = PillListAdapter(::moveToPillDetail)
         binding.rvSearchList.adapter = searchListAdapter
-        searchListAdapter.submitList(searchViewModel.mockSearchList)
+        searchListAdapter.submitList(searchList)
     }
 
     private fun setSearchPagerAdapter() {
