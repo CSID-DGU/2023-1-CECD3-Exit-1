@@ -23,9 +23,13 @@ class SearchViewModel @Inject constructor(
     val searchListState get() = _searchListState.asStateFlow()
     private var _recentSearchTermsState = MutableStateFlow<UiState<List<String>>>(UiState.Loading)
     val recentSearchTermsState get() = _recentSearchTermsState.asStateFlow()
+    private var _searchBookmarkedListState =
+        MutableStateFlow<UiState<List<String>>>(UiState.Loading)
+    val searchBookmarkedListState get() = _searchBookmarkedListState.asStateFlow()
 
     init {
         fetchRecentSearchTerms()
+        fetchTextSearchBookmarkedList()
     }
 
     fun textPillSearch() {
@@ -53,12 +57,15 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    val mockBookmarkList = listOf(
-        "스리반정",
-        "에나팜정",
-        "자나팜정",
-        "인데놀정",
-        "환인트라조돈캡슐",
-        "타이레놀"
-    )
+    private fun fetchTextSearchBookmarkedList() {
+        viewModelScope.launch {
+            textSearchRepository.fetchTextSearchBookmarkedList()
+                .onSuccess { searchBookMarkedList ->
+                    _searchBookmarkedListState.value = UiState.Success(searchBookMarkedList)
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
 }

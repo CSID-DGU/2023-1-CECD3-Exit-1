@@ -3,15 +3,15 @@ package com.cecd.exitmed.data.model.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseRecentSearchTerm(
+data class ResponseTextSearchBookmarkedList(
     val data: List<Data>
 ) {
     @Serializable
     data class Data(
-        val searchText: String
+        val pillName: String
     )
 
-    fun toRecentSearchTermString() = data.map { searchText ->
-        searchText.searchText
+    fun toBookmarkedString() = data.map { bookmark ->
+        bookmark.pillName
     }
 }

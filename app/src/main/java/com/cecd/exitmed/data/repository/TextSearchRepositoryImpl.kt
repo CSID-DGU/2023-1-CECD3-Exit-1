@@ -15,6 +15,11 @@ class TextSearchRepositoryImpl @Inject constructor(
 
     override suspend fun fetchRecentSearchTerm(): Result<List<String>> =
         runCatching {
-            textSearchDataSource.fetchRecentSearchTerm().toStringList()
+            textSearchDataSource.fetchRecentSearchTerm().toRecentSearchTermString()
+        }
+
+    override suspend fun fetchTextSearchBookmarkedList(): Result<List<String>> =
+        runCatching {
+            textSearchDataSource.fetchTextSearchBookmarkedList().toBookmarkedString()
         }
 }

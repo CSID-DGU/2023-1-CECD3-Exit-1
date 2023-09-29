@@ -1,6 +1,7 @@
 package com.cecd.exitmed.data.dataSource.remote
 
 import com.cecd.exitmed.data.model.response.ResponseRecentSearchTerm
+import com.cecd.exitmed.data.model.response.ResponseTextSearchBookmarkedList
 import com.cecd.exitmed.data.model.response.ResponseTextSearchList
 import com.cecd.exitmed.data.service.TextSearchService
 import javax.inject.Inject
@@ -13,4 +14,7 @@ class TextSearchDataSource @Inject constructor(
 
     suspend fun fetchRecentSearchTerm(): ResponseRecentSearchTerm =
         textSearchService.fetchRecentSearchTerm()
+
+    suspend fun fetchTextSearchBookmarkedList(): ResponseTextSearchBookmarkedList =
+        textSearchService.fetchTextSearchBookmarkedList()
 }
