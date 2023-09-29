@@ -12,7 +12,7 @@ class PillListAdapter(
     private val moveToPillDetail: () -> Unit
 ) : ListAdapter<SearchPill, PillListAdapter.SearchResultViewHolder>(
     ItemDiffCallback<SearchPill>(
-        onItemTheSame = { old, new -> old.pillId == new.pillId },
+        onItemTheSame = { old, new -> old.pillItemSequence == new.pillItemSequence },
         onContentsTheSame = { old, new -> old == new }
     )
 ) {

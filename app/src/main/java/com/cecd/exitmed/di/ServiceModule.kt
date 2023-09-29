@@ -2,6 +2,7 @@ package com.cecd.exitmed.di
 
 import com.cecd.exitmed.data.service.AuthService
 import com.cecd.exitmed.data.service.DURService
+import com.cecd.exitmed.data.service.TextSearchService
 import com.cecd.exitmed.data.type.BaseUrlType
 import dagger.Module
 import dagger.Provides
@@ -28,4 +29,12 @@ object ServiceModule {
         retrofit: Retrofit
     ): DURService =
         retrofit.create(DURService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideTextSearchService(
+        @NetworkModule.Retrofit2(BaseUrlType.EXIT)
+        retrofit: Retrofit
+    ): TextSearchService =
+        retrofit.create(TextSearchService::class.java)
 }

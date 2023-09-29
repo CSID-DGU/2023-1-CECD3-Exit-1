@@ -100,6 +100,7 @@
                 android:id="@+id/tv_search_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:text="@{@string/search_count(viewModel.searchCount)}"
                 android:textAppearance="@style/TextAppearance.BodyM1"
                 android:textColor="@color/orange_600"

@@ -2,7 +2,7 @@
 buildscript {
     ext {
         hilt_version = '2.47'
-        lifecycle_version = '2.6.1'
+        lifecycle_version = '2.6.2'
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
