@@ -1,9 +1,6 @@
 package com.example.exitmedserver.pill.service;
 
-import com.example.exitmedserver.pill.dto.PillAddDrawerRequestDto;
-import com.example.exitmedserver.pill.dto.PillAddDrawerResponseDto;
-import com.example.exitmedserver.pill.dto.PillGetDrawerListResponse;
-import com.example.exitmedserver.pill.dto.PillGetDrawerListResponseDto;
+import com.example.exitmedserver.pill.dto.*;
 import com.example.exitmedserver.pill.entity.Alarm;
 import com.example.exitmedserver.pill.entity.Drawer;
 import com.example.exitmedserver.pill.entity.Pill;
@@ -100,5 +97,28 @@ public class PillService {
             pillGetDrawerListResponse.setData(drawerList);
         }
         return pillGetDrawerListResponse;
+    }
+
+    public PillGetPillInDrawerResponseDto getPillInDrawer(String jwtToken, Long pillItemSequence) {
+        PillGetPillInDrawerResponseDto pillGetPillInDrawerResponseDto = new PillGetPillInDrawerResponseDto();
+
+        JwtProvider jwtProvider = new JwtProvider();
+        String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        Drawer searchedDrawer = drawerRepository.findDrawerByUserIdAndPillItemSequence(userId, pillItemSequence);
+        if (searchedDrawer != null) {
+            Alarm searchedAlarm = alarmRepository.findByPillItemSequence(pillItemSequence);
+            Pill searchedPill = pillRepository.findPillByPillItemSequence(pillItemSequence);
+            PillImage searchedPillImage = pillImageRepository.findByPillItemSequence(pillItemSequence);
+            pillGetPillInDrawerResponseDto.setPillName(searchedPill.getPillName());
+            pillGetPillInDrawerResponseDto.setImageLink(searchedPillImage.getImageLink());
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+            pillGetPillInDrawerResponseDto.setAlarm(timeFormatter.format(searchedAlarm.getTakeTime()));
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+            pillGetPillInDrawerResponseDto.setFinalDate(dateFormatter.format(searchedDrawer.getFinalDate()));
+            pillGetPillInDrawerResponseDto.setDosage(searchedPill.getDosage());
+            pillGetPillInDrawerResponseDto.setComment(searchedDrawer.getComment());
+        }
+        return pillGetPillInDrawerResponseDto;
     }
 }
