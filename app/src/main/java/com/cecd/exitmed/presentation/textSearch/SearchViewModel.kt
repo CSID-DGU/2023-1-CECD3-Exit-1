@@ -14,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val textSearchRepository: TextSearchRepository
+    private val textSearchRepository: TextSearchRepository,
+    private val bookmarkRepository: BookmarkRepository
 ) : ViewModel() {
     val searchText = MutableStateFlow("")
     private var _searchCount = MutableStateFlow<Int?>(null)
@@ -50,6 +51,19 @@ class SearchViewModel @Inject constructor(
             textSearchRepository.fetchRecentSearchTerm()
                 .onSuccess { recentSearchTerms ->
                     _recentSearchTermsState.value = UiState.Success(recentSearchTerms)
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
+
+    // TODO detail view로 이동
+    fun bookmark(pillItemSeq: Int) {
+        viewModelScope.launch {
+            bookmarkRepository.bookmark(RequestBookmark(pillItemSeq))
+                .onSuccess { isBookmarked ->
+                    Timber.tag("bookmark").e(isBookmarked.toString())
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
