@@ -11,6 +11,7 @@ import com.example.exitmedserver.pill.repository.PillImageRepository;
 import com.example.exitmedserver.pill.repository.PillRepository;
 import com.example.exitmedserver.util.auth.JwtProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -120,5 +121,41 @@ public class PillService {
             pillGetPillInDrawerResponseDto.setComment(searchedDrawer.getComment());
         }
         return pillGetPillInDrawerResponseDto;
+    }
+
+    public PillToggleAlarmResponseDto toggleAlarm(String jwtToken, Long pillItemSequence) {
+        PillToggleAlarmResponseDto pillToggleAlarmResponseDto = new PillToggleAlarmResponseDto();
+
+        JwtProvider jwtProvider = new JwtProvider();
+        String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        Alarm searchedAlarm = alarmRepository.findAlarmByUserIdAndPillItemSequence(userId, pillItemSequence);
+        if (searchedAlarm.isTurnedOn()) {
+            Alarm newAlarm = Alarm.builder()
+                    .id(null)
+                    .userId(userId)
+                    .pillItemSequence(pillItemSequence)
+                    .takeTime(searchedAlarm.getTakeTime())
+                    .isTurnedOn(false)
+                    .build();
+            alarmRepository.delete(searchedAlarm);
+            alarmRepository.save(newAlarm);
+            pillToggleAlarmResponseDto.setOn(false);
+            pillToggleAlarmResponseDto.setPillItemSequence(pillItemSequence);
+        } else {
+            Alarm newAlarm = Alarm.builder()
+                    .id(null)
+                    .userId(userId)
+                    .pillItemSequence(pillItemSequence)
+                    .takeTime(searchedAlarm.getTakeTime())
+                    .isTurnedOn(true)
+                    .build();
+            alarmRepository.delete(searchedAlarm);
+            alarmRepository.save(newAlarm);
+            pillToggleAlarmResponseDto.setOn(true);
+            pillToggleAlarmResponseDto.setPillItemSequence(pillItemSequence);
+        }
+
+        return pillToggleAlarmResponseDto;
     }
 }

@@ -24,4 +24,9 @@ public class PillController {
     public PillGetPillInDrawerResponseDto getPillInDrawer(@RequestHeader("Authorization") String jwtToken, @PathVariable Long pillItemSequence) {
         return pillService.getPillInDrawer(jwtToken, pillItemSequence);
     }
+
+    @GetMapping("/auth/pill/toggle-alarm/{pillItemSequence}")
+    public PillToggleAlarmResponseDto toggleAlarm(@RequestHeader("Authorization") String jwtToken, @PathVariable Long pillItemSequence) {
+        return pillService.toggleAlarm(jwtToken, pillItemSequence);
+    }
 }
