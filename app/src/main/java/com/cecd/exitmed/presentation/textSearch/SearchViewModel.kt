@@ -2,6 +2,8 @@ package com.cecd.exitmed.presentation.textSearch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cecd.exitmed.data.model.request.RequestBookmark
+import com.cecd.exitmed.domain.repository.BookmarkRepository
 import com.cecd.exitmed.domain.repository.TextSearchRepository
 import com.cecd.exitmed.domain.type.SearchPill
 import com.cecd.exitmed.util.UiState
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val textSearchRepository: TextSearchRepository
+    private val textSearchRepository: TextSearchRepository,
+    private val bookmarkRepository: BookmarkRepository
 ) : ViewModel() {
     val searchText = MutableStateFlow("")
     private var _searchCount = MutableStateFlow<Int?>(null)
@@ -46,6 +49,19 @@ class SearchViewModel @Inject constructor(
             textSearchRepository.fetchRecentSearchTerm()
                 .onSuccess { recentSearchTerms ->
                     _recentSearchTermsState.value = UiState.Success(recentSearchTerms)
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
+
+    // TODO detail view로 이동
+    fun bookmark(pillItemSeq: Int) {
+        viewModelScope.launch {
+            bookmarkRepository.bookmark(RequestBookmark(pillItemSeq))
+                .onSuccess { isBookmarked ->
+                    Timber.tag("bookmark").e(isBookmarked.toString())
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)

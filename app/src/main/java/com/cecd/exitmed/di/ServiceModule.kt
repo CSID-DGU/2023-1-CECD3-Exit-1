@@ -1,6 +1,7 @@
 package com.cecd.exitmed.di
 
 import com.cecd.exitmed.data.service.AuthService
+import com.cecd.exitmed.data.service.BookmarkService
 import com.cecd.exitmed.data.service.DURService
 import com.cecd.exitmed.data.service.TextSearchService
 import com.cecd.exitmed.data.type.BaseUrlType
@@ -37,4 +38,12 @@ object ServiceModule {
         retrofit: Retrofit
     ): TextSearchService =
         retrofit.create(TextSearchService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideBookmarkService(
+        @NetworkModule.Retrofit2(BaseUrlType.EXIT)
+        retrofit: Retrofit
+    ): BookmarkService =
+        retrofit.create(BookmarkService::class.java)
 }
