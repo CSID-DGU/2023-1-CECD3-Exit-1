@@ -108,7 +108,7 @@ public class PillService {
 
         Drawer searchedDrawer = drawerRepository.findDrawerByUserIdAndPillItemSequence(userId, pillItemSequence);
         if (searchedDrawer != null) {
-            Alarm searchedAlarm = alarmRepository.findByPillItemSequence(pillItemSequence);
+            Alarm searchedAlarm = alarmRepository.findAlarmByUserIdAndPillItemSequence(userId, pillItemSequence);
             Pill searchedPill = pillRepository.findPillByPillItemSequence(pillItemSequence);
             PillImage searchedPillImage = pillImageRepository.findByPillItemSequence(pillItemSequence);
             pillGetPillInDrawerResponseDto.setPillName(searchedPill.getPillName());
