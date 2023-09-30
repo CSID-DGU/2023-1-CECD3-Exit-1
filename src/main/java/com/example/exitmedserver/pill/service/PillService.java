@@ -18,6 +18,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,5 +159,33 @@ public class PillService {
         }
 
         return pillToggleAlarmResponseDto;
+    }
+
+    public PillGetAlarmListResponse getAlarmList(String jwtToken) {
+        PillGetAlarmListResponse pillGetAlarmListResponse = new PillGetAlarmListResponse();
+        List<PillGetAlarmListResponseDto> alarmList = new ArrayList<>();
+        List<Alarm> searchedAlarm = new ArrayList<>();
+
+        JwtProvider jwtProvider = new JwtProvider();
+        String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        searchedAlarm = alarmRepository.findAlarmByUserIdAndIsTurnedOnOrderByTakeTimeAsc(userId, true);
+        if (!searchedAlarm.isEmpty()) {
+            for (Alarm alarm : searchedAlarm) {
+                Pill searchedPill = pillRepository.findPillByPillItemSequence(alarm.getPillItemSequence());
+                PillGetAlarmListResponseDto pillGetAlarmListResponseDto = new PillGetAlarmListResponseDto();
+                pillGetAlarmListResponseDto.setPillName(searchedPill.getPillName());
+                SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                String takeTime = timeFormatter.format(alarm.getTakeTime());
+                pillGetAlarmListResponseDto.setTakeTime(takeTime);
+                LocalTime timeFromInput = LocalTime.parse(takeTime, DateTimeFormatter.ofPattern("HH:mm"));
+                pillGetAlarmListResponseDto.setPassed(LocalTime.now().isAfter(timeFromInput));
+
+                alarmList.add(pillGetAlarmListResponseDto);
+            }
+            pillGetAlarmListResponse.setData(alarmList);
+        }
+
+        return pillGetAlarmListResponse;
     }
 }
