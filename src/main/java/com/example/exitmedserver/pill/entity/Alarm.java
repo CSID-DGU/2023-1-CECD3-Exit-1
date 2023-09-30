@@ -23,11 +23,15 @@ public class Alarm {
     @Column(name = "take_time")
     private Time takeTime;
 
+    @Column(name = "is_turned_on", columnDefinition = "TINYINT")
+    private boolean isTurnedOn;
+
     @Builder
-    public Alarm(Integer id, String userId, Long pillItemSequence, Time takeTime) {
+    public Alarm(Integer id, String userId, Long pillItemSequence, Time takeTime, boolean isTurnedOn) {
         this.id = id;
         this.userId = userId;
         this.pillItemSequence = pillItemSequence;
         this.takeTime = takeTime;
+        this.isTurnedOn = isTurnedOn;
     }
 }

@@ -49,6 +49,7 @@ public class PillService {
                         .pillItemSequence(pillAddDrawerRequestDto.getPillItemSequence())
                         .userId(userId)
                         .takeTime(takeTime)
+                        .isTurnedOn(true)
                         .build();
 
                 drawerRepository.save(drawer);
