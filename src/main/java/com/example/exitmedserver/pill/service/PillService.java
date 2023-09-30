@@ -121,4 +121,10 @@ public class PillService {
         }
         return pillGetPillInDrawerResponseDto;
     }
+
+    public PillToggleAlarmResponseDto toggleAlarmO(String jwtToken, Long pillItemSequence) {
+        PillToggleAlarmResponseDto pillToggleAlarmResponseDto = new PillToggleAlarmResponseDto();
+
+        return pillToggleAlarmResponseDto;
+    }
 }
