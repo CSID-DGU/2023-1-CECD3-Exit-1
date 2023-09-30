@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface PillRepository extends JpaRepository<Pill, Long> {
     List<Pill> findPillByPillNameContaining(String searchText);
+    Pill findPillByPillItemSequence(Long pillItemSequence);
 }

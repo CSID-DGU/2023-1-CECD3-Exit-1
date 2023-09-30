@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PillImageRepository extends JpaRepository<PillImage, Long> {
+    PillImage findByPillItemSequence(Long pillItemSequence);
 }
