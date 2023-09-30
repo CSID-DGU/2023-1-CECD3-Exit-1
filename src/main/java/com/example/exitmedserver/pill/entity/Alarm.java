@@ -2,16 +2,13 @@ package com.example.exitmedserver.pill.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
 import java.sql.Time;
 
 @Entity
-@Getter
 @NoArgsConstructor
-public class Drawer {
+public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,22 +20,14 @@ public class Drawer {
     @Column(name = "pill_item_sequence")
     private Long pillItemSequence;
 
-    @Column(name = "final_date")
-    private Date finalDate;
-
-    @Column(name = "dosage_cycle")
-    private String dosageCycle;
-
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "take_time")
+    private Time takeTime;
 
     @Builder
-    public Drawer(Integer id, String userId, Long pillItemSequence, Date finalDate, String dosageCycle, String comment) {
+    public Alarm(Integer id, String userId, Long pillItemSequence, Time takeTime) {
         this.id = id;
         this.userId = userId;
         this.pillItemSequence = pillItemSequence;
-        this.finalDate = finalDate;
-        this.dosageCycle = dosageCycle;
-        this.comment = comment;
+        this.takeTime = takeTime;
     }
 }
