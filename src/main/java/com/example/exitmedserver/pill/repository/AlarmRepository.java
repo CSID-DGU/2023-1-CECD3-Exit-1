@@ -10,4 +10,5 @@ import java.util.List;
 public interface AlarmRepository extends JpaRepository<Alarm, Integer> {
     List<Alarm> findAlarmByUserId(String userId);
     Alarm findByPillItemSequence(Long pillItemSequence);
+    Alarm findAlarmByUserIdAndPillItemSequence(String userId, Long pillItemSequence);
 }
