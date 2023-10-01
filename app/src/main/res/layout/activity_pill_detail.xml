@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -28,8 +29,9 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <ImageView
+                    android:id="@+id/iv_pill_image"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_launcher_background"
@@ -73,35 +75,25 @@
                 android:background="@color/gray_100"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_pill_basic_info_pill_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing24"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="약 이름"
-                    android:textAppearance="@style/TextAppearance.BodyB2" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp"
-                    android:text="약 대분류"
-                    android:textAppearance="@style/TextAppearance.BodyM1" />
-            </LinearLayout>
+                android:layout_marginTop="@dimen/spacing12"
+                android:layout_marginEnd="24dp"
+                android:textAppearance="@style/TextAppearance.BodyB2"
+                tools:text="약 이름" />
 
             <TextView
+                android:id="@+id/tv_pill_basic_info_pill_classification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="10dp"
-                android:text="회사명"
-                android:textAppearance="@style/TextAppearance.BodyM1" />
+                android:layout_marginTop="@dimen/spacing12"
+                android:textAppearance="@style/TextAppearance.BodyM1"
+                tools:text="약 대분류" />
 
             <View
                 android:layout_width="match_parent"
@@ -126,10 +118,11 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
+                        android:id="@+id/iv_heart_bookmark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/ic_heart_bookmark" />
+                        tools:src="@drawable/ic_heart_bookmark_false" />
 
                     <TextView
                         android:layout_width="wrap_content"
