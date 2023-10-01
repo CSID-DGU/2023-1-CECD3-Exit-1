@@ -188,4 +188,10 @@ public class PillService {
 
         return pillGetAlarmListResponse;
     }
+
+    public PillGetPillDetailInfoResponseDto getPillDetailInfo(String jwtToken, Long pillItemSequence) {
+        PillGetPillDetailInfoResponseDto pillGetPillDetailInfoResponseDto = new PillGetPillDetailInfoResponseDto();
+
+        return pillGetPillDetailInfoResponseDto;
+    }
 }
