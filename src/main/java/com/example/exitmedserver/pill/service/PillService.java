@@ -233,4 +233,28 @@ public class PillService {
         pillGetPillDetailInfoResponseDto.setDuplicatedPills(duplicatedPills);
         return pillGetPillDetailInfoResponseDto;
     }
+
+    public PillGetClosestResponseDto getClosest(String jwtToken) {
+        PillGetClosestResponseDto pillGetClosestResponseDto = new PillGetClosestResponseDto();
+
+        JwtProvider jwtProvider = new JwtProvider();
+        String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        List<Alarm> searchedAlarmList = alarmRepository.findAlarmByUserIdAndIsTurnedOnOrderByTakeTimeAsc(userId, true);
+        if (!searchedAlarmList.isEmpty()) {
+            LocalTime curTime = LocalTime.now();
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+            for (Alarm searchedAlarm : searchedAlarmList) {
+                String takeTime = timeFormatter.format(searchedAlarm.getTakeTime());
+                LocalTime timeFromInput = LocalTime.parse(takeTime, DateTimeFormatter.ofPattern("HH:mm"));
+                if (curTime.isBefore(timeFromInput)) {
+                    Pill searchedPill = pillRepository.findPillByPillItemSequence(searchedAlarm.getPillItemSequence());
+                    pillGetClosestResponseDto.setPillName(searchedPill.getPillName());
+                    pillGetClosestResponseDto.setTakeTime(takeTime);
+                    break;
+                }
+            }
+        }
+        return pillGetClosestResponseDto;
+    }
 }
