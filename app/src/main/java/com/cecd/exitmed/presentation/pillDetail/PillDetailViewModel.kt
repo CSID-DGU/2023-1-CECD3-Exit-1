@@ -2,6 +2,8 @@ package com.cecd.exitmed.presentation.pillDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cecd.exitmed.data.model.request.RequestBookmark
+import com.cecd.exitmed.domain.repository.BookmarkRepository
 import com.cecd.exitmed.domain.repository.PillDetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PillDetailViewModel @Inject constructor(
-    private val pillDetailRepository: PillDetailRepository
+    private val pillDetailRepository: PillDetailRepository,
+    private val bookmarkRepository: BookmarkRepository
 ) : ViewModel() {
     private val _pillName = MutableStateFlow("")
     val pillName get() = _pillName.asStateFlow()
@@ -46,6 +49,18 @@ class PillDetailViewModel @Inject constructor(
                     _pillIngredient.value = pillDetail.ingredient
                     _pillDosageMethod.value = pillDetail.dosage
                     _pillCaution.value = pillDetail.warning
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
+
+    fun bookmark(pillItemSeq: Int) {
+        viewModelScope.launch {
+            bookmarkRepository.bookmark(RequestBookmark(pillItemSeq))
+                .onSuccess { isBookmarked ->
+                    fetchPillDetail(pillItemSeq)
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)

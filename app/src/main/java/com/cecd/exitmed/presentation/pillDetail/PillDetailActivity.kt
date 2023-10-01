@@ -22,9 +22,10 @@ class PillDetailActivity :
     BindingActivity<ActivityPillDetailBinding>(R.layout.activity_pill_detail) {
     private val pillDetailViewModel: PillDetailViewModel by viewModels()
     private val pillDURViewModel: PillDetailDURViewModel by viewModels()
+    var itemSeq: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initLayout()
         addListeners()
         collectData()
@@ -43,15 +44,17 @@ class PillDetailActivity :
         binding.vpPillDetail.adapter = adapter
         setTabTitle()
 
-        val itemSeq = intent.getIntExtra(ITEM_SEQ, 0)
+        itemSeq = intent.getIntExtra(ITEM_SEQ, 0)
         fetchPillBasicInfo(itemSeq)
         fetchDurInfo(itemSeq.toString())
     }
 
     private fun addListeners() {
         binding.layoutPillBookmark.setOnClickListener {
-            if (!pillDetailViewModel.isBookMarked.value)
+            if (!pillDetailViewModel.isBookMarked.value) {
                 bookMarkToast()
+                bookmark(itemSeq)
+            }
         }
         binding.layoutPillDrawer.setOnClickListener {
             moveToAddPillDrawer()
@@ -111,6 +114,10 @@ class PillDetailActivity :
         pillDURViewModel.fetchDURCapacityCautionContents(itemSeq)
         pillDURViewModel.fetchDURAdministrationDurationCaution(itemSeq)
         pillDURViewModel.fetchDURSeniorCautionContents(itemSeq)
+    }
+
+    private fun bookmark(itemSeq: Int) {
+        pillDetailViewModel.bookmark(itemSeq)
     }
 
     private fun bookMarkToast() {
