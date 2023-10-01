@@ -22,6 +22,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -211,7 +212,10 @@ public class PillService {
         pillGetPillDetailInfoResponseDto.setPillName(searchedPill.getPillName());
         pillGetPillDetailInfoResponseDto.setDosage(searchedPill.getDosage());
         pillGetPillDetailInfoResponseDto.setWarning(searchedPill.getWarning());
-
+        pillGetPillDetailInfoResponseDto.setPregnant(searchedUserProfile.isPregnant());
+        pillGetPillDetailInfoResponseDto.setAge(Year.now().getValue() - searchedUserProfile.getDateOfBirth());
+        pillGetPillDetailInfoResponseDto.setFavorite(searchedFavoriteList != null);
+        pillGetPillDetailInfoResponseDto.setImageLink(searchedPillImage.getImageLink());
 
         return pillGetPillDetailInfoResponseDto;
     }
