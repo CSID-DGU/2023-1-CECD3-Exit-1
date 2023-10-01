@@ -40,12 +40,8 @@ public class UserService {
                 .userRole("ROLE_USER")
                 .build();
 
-        byte isPregnant;
-        if (userSignupRequestDto.isPregnant()) {
-            isPregnant = 1;
-        } else {
-            isPregnant = 0;
-        }
+        boolean isPregnant;
+        isPregnant = userSignupRequestDto.isPregnant();
 
         UserProfile userProfile = UserProfile.builder()
                 .userId(userSignupRequestDto.getUserId())
