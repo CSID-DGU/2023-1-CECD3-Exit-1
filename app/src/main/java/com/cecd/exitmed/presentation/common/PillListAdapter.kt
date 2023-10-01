@@ -9,8 +9,7 @@ import com.cecd.exitmed.domain.type.SearchPill
 import com.cecd.exitmed.util.ItemDiffCallback
 
 class PillListAdapter(
-    private val moveToPillDetail: (Int) -> Unit,
-    private val bookmark: (Int) -> Unit
+    private val moveToPillDetail: (Int) -> Unit
 ) : ListAdapter<SearchPill, PillListAdapter.SearchResultViewHolder>(
     ItemDiffCallback<SearchPill>(
         onItemTheSame = { old, new -> old.pillItemSequence == new.pillItemSequence },
@@ -23,12 +22,10 @@ class PillListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             pill: SearchPill,
-            moveToPillDetail: (Int) -> Unit,
-            bookmark: (Int) -> Unit
+            moveToPillDetail: (Int) -> Unit
         ) {
             binding.searchPill = pill
             binding.root.setOnClickListener {
-                bookmark(pill.pillItemSequence)
                 moveToPillDetail(pill.pillItemSequence)
             }
             binding.executePendingBindings()
@@ -42,6 +39,6 @@ class PillListAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
-        holder.onBind(getItem(position), moveToPillDetail, bookmark)
+        holder.onBind(getItem(position), moveToPillDetail)
     }
 }

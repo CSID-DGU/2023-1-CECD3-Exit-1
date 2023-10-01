@@ -81,7 +81,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun setTextPillSearchAdapter(searchList: List<SearchPill>) {
-        val searchListAdapter = PillListAdapter(::moveToPillDetail, ::bookmark)
+        val searchListAdapter = PillListAdapter(::moveToPillDetail)
         binding.rvSearchList.adapter = searchListAdapter
         searchListAdapter.submitList(searchList)
     }
@@ -108,11 +108,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         startActivity(intent)
     }
 
-    private fun bookmark(pillItemSeq: Int) {
-        searchViewModel.bookmark(pillItemSeq)
-    }
-
-    companion object{
+    companion object {
         const val ITEM_SEQ = "itemSeq"
     }
 }
