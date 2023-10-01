@@ -6,13 +6,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/spacing24"
         android:paddingVertical="12dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_pill"
             android:layout_width="60dp"
             android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing24"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
@@ -26,8 +26,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:textAppearance="@style/TextAppearance.BodyM1"
             app:layout_constraintEnd_toStartOf="@+id/iv_pill_drawer_alarm"
             app:layout_constraintStart_toEndOf="@id/iv_pill"
@@ -50,6 +48,8 @@
             android:id="@+id/iv_pill_drawer_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_pill"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/iv_pill"
