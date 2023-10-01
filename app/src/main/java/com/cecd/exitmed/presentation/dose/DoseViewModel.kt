@@ -1,78 +1,41 @@
 package com.cecd.exitmed.presentation.dose
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.cecd.exitmed.domain.repository.MyRepository
 import com.cecd.exitmed.domain.type.DoseTimeTable
-import com.cecd.exitmed.domain.type.DrawerPill
+import com.cecd.exitmed.domain.type.PillDrawerData
+import com.cecd.exitmed.util.UiState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class DoseViewModel : ViewModel() {
-    val mockPillDrawerList = listOf(
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            true
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            false
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            true
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            true
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            false
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            true
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            true
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            true
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            true
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            true
-        ),
-        DrawerPill(
-            1,
-            "타이레놀",
-            "진통제",
-            true
-        ),
-    )
+@HiltViewModel
+class DoseViewModel @Inject constructor(
+    private val myRepository: MyRepository
+) : ViewModel() {
+    private val _myDrawerListState =
+        MutableStateFlow<UiState<List<PillDrawerData>>>(UiState.Loading)
+    val myDrawerListState get() = _myDrawerListState.asStateFlow()
+
+    init {
+        fetchMyDrawerList()
+    }
+
+    private fun fetchMyDrawerList() {
+        viewModelScope.launch {
+            myRepository.fetchPillDrawerList()
+                .onSuccess { myDrawerList ->
+                    _myDrawerListState.value = UiState.Success(myDrawerList)
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
 
     val mockDoseTimeTable = listOf(
         DoseTimeTable(
