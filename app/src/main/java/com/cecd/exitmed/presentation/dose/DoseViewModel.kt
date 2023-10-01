@@ -2,7 +2,7 @@ package com.cecd.exitmed.presentation.dose
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cecd.exitmed.domain.repository.MyRepository
+import com.cecd.exitmed.domain.repository.DoseRepository
 import com.cecd.exitmed.domain.type.DoseTimeTable
 import com.cecd.exitmed.domain.type.PillDrawerData
 import com.cecd.exitmed.util.UiState
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DoseViewModel @Inject constructor(
-    private val myRepository: MyRepository
+    private val doseRepository: DoseRepository
 ) : ViewModel() {
     private val _myDrawerListState =
         MutableStateFlow<UiState<List<PillDrawerData>>>(UiState.Loading)
@@ -27,7 +27,7 @@ class DoseViewModel @Inject constructor(
 
     private fun fetchMyDrawerList() {
         viewModelScope.launch {
-            myRepository.fetchPillDrawerList()
+            doseRepository.fetchPillDrawerList()
                 .onSuccess { myDrawerList ->
                     _myDrawerListState.value = UiState.Success(myDrawerList)
                 }

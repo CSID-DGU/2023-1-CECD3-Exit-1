@@ -10,9 +10,9 @@ import com.cecd.exitmed.domain.type.PillDrawerData
 import com.cecd.exitmed.util.ItemDiffCallback
 import com.cecd.exitmed.util.binding.setImage
 
-class MyPillDrawerListAdapter(
+class PillDrawerListAdapter(
     private val moveToPillDrawerDetail: () -> Unit,
-) : ListAdapter<PillDrawerData, MyPillDrawerListAdapter.PillDrawerListViewHolder>(
+) : ListAdapter<PillDrawerData, PillDrawerListAdapter.PillDrawerListViewHolder>(
     ItemDiffCallback<PillDrawerData>(
         onItemTheSame = { old, new -> old.pillItemSequence == new.pillItemSequence },
         onContentsTheSame = { old, new -> old == new }

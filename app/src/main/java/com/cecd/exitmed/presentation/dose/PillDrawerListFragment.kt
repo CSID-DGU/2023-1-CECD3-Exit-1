@@ -48,7 +48,7 @@ class PillDrawerListFragment :
     }
 
     private fun setMyPillDrawerListAdapter(it: UiState.Success<List<PillDrawerData>>) {
-        val pillDrawerAdapter = MyPillDrawerListAdapter(::moveToPillDrawerDetail)
+        val pillDrawerAdapter = PillDrawerListAdapter(::moveToPillDrawerDetail)
         binding.rvPillDrawer.adapter = pillDrawerAdapter
         pillDrawerAdapter.submitList(it.data)
     }
