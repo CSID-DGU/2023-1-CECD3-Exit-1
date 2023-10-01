@@ -136,4 +136,6 @@
     <string name="init_dur_capacity_caution_contents">섭취 용량에 주의 해야 하는 의약품 입니다. 건강 보험 심사 평가원 홈페이지에 접속해 참고해 주세요.</string>
     <string name="init_dur_administration_duration_caution_contents">투여 기간에 주의 해야 하는 의약품 입니다. 건강 보험 심사 평가원 홈페이지에 접속해 참고해 주세요.</string>
     <string name="init_dur_senior_caution_contents">노인 분들은 주의 해야 하는 의약품 입니다. 건강 보험 심사 평가원 홈페이지에 접속해 참고해 주세요.</string>
+    <string name="pill_detail_caution">주의</string>
+    <string name="pill_detail_caution_title">이 약의 주의사항은 무엇인가요?</string>
 </resources>
