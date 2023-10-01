@@ -1,12 +1,16 @@
 package com.cecd.exitmed.data.dataSource.remote
 
+import com.cecd.exitmed.data.model.response.ResponseDoseTimeTable
 import com.cecd.exitmed.data.model.response.ResponsePillDrawerList
-import com.cecd.exitmed.data.service.DoseyService
+import com.cecd.exitmed.data.service.DoseService
 import javax.inject.Inject
 
 class DoseDataSource @Inject constructor(
-    private val doseyService: DoseyService
+    private val doseService: DoseService
 ) {
     suspend fun fetchPillDrawerList(): ResponsePillDrawerList =
-        doseyService.fetchPillDrawerList()
+        doseService.fetchPillDrawerList()
+
+    suspend fun fetchDoseTimeTable(): ResponseDoseTimeTable =
+        doseService.fetchDoseTimeTable()
 }
