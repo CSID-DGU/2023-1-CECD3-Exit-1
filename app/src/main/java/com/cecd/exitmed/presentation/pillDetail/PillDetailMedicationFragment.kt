@@ -23,11 +23,12 @@ class PillDetailMedicationFragment :
     }
 
     private fun collectData() {
-        pillDetailViewModel.pillEffect.flowWithLifecycle(lifecycle).onEach { pillEffect->
+        pillDetailViewModel.pillEffect.flowWithLifecycle(lifecycle).onEach { pillEffect ->
             binding.tvPillDetailMedicationEffectContent.text = pillEffect
         }.launchIn(lifecycleScope)
-        pillDetailViewModel.pillStorageMethod.flowWithLifecycle(lifecycle).onEach { pillStorageMethod->
-            binding.tvPillDetailMedicationStorageMethodContent.text = pillStorageMethod
-        }.launchIn(lifecycleScope)
+        pillDetailViewModel.pillStorageMethod.flowWithLifecycle(lifecycle)
+            .onEach { pillStorageMethod ->
+                binding.tvPillDetailMedicationStorageMethodContent.text = pillStorageMethod
+            }.launchIn(lifecycleScope)
     }
 }

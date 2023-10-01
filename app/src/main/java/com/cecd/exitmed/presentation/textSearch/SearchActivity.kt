@@ -108,7 +108,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         startActivity(intent)
     }
 
-    companion object{
+    companion object {
         const val ITEM_SEQ = "itemSeq"
     }
 }
