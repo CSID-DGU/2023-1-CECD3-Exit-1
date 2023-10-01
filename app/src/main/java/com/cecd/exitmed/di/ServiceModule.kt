@@ -3,6 +3,7 @@ package com.cecd.exitmed.di
 import com.cecd.exitmed.data.service.AuthService
 import com.cecd.exitmed.data.service.BookmarkService
 import com.cecd.exitmed.data.service.DURService
+import com.cecd.exitmed.data.service.PillDetailService
 import com.cecd.exitmed.data.service.TextSearchService
 import com.cecd.exitmed.data.type.BaseUrlType
 import dagger.Module
@@ -46,4 +47,12 @@ object ServiceModule {
         retrofit: Retrofit
     ): BookmarkService =
         retrofit.create(BookmarkService::class.java)
+
+    @Singleton
+    @Provides
+    fun providePillDetailService(
+        @NetworkModule.Retrofit2(BaseUrlType.EXIT)
+        retrofit: Retrofit
+    ): PillDetailService =
+        retrofit.create(PillDetailService::class.java)
 }
