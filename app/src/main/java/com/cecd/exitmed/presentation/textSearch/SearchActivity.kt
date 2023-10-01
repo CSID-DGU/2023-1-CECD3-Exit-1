@@ -102,11 +102,17 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         }.attach()
     }
 
-    private fun moveToPillDetail() {
-        startActivity(Intent(this, PillDetailActivity::class.java))
+    private fun moveToPillDetail(itemSeq: Int) {
+        val intent = Intent(this, PillDetailActivity::class.java)
+        intent.putExtra(ITEM_SEQ, itemSeq)
+        startActivity(intent)
     }
 
     private fun bookmark(pillItemSeq: Int) {
         searchViewModel.bookmark(pillItemSeq)
+    }
+
+    companion object{
+        const val ITEM_SEQ = "itemSeq"
     }
 }
