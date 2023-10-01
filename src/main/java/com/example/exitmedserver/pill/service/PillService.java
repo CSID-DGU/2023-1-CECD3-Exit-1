@@ -208,6 +208,7 @@ public class PillService {
         UserProfile searchedUserProfile = userProfileRepository.findUserProfileByUserId(userId);
         FavoriteList searchedFavoriteList = favoriteListRepository.findFavoriteListByUserIdAndPillItemSequence(userId, pillItemSequence);
         PillImage searchedPillImage = pillImageRepository.findByPillItemSequence(pillItemSequence);
+        List<Drawer> searchedDrawerList = drawerRepository.findDrawerByUserId(userId);
 
         pillGetPillDetailInfoResponseDto.setPillName(searchedPill.getPillName());
         pillGetPillDetailInfoResponseDto.setDosage(searchedPill.getDosage());
@@ -221,6 +222,15 @@ public class PillService {
         pillGetPillDetailInfoResponseDto.setFavorite(searchedFavoriteList != null);
         pillGetPillDetailInfoResponseDto.setImageLink(searchedPillImage.getImageLink());
 
+        String searchedAtcCode = searchedPill.getAtcCode();
+        List<String> duplicatedPills = new ArrayList<>();
+        for (Drawer drawer : searchedDrawerList) {
+            Pill searchedPillInDrawer = pillRepository.findPillByPillItemSequence(drawer.getPillItemSequence());
+            if (searchedPillInDrawer.getAtcCode().equals(searchedAtcCode)) {
+                duplicatedPills.add(searchedPillInDrawer.getPillName());
+            }
+        }
+        pillGetPillDetailInfoResponseDto.setDuplicatedPills(duplicatedPills);
         return pillGetPillDetailInfoResponseDto;
     }
 }

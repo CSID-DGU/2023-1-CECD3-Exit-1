@@ -2,6 +2,8 @@ package com.example.exitmedserver.pill.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class PillGetPillDetailInfoResponseDto {
     private String pillName;
@@ -15,4 +17,5 @@ public class PillGetPillDetailInfoResponseDto {
     private String effect;
     private String storage;
     private String ingredient;
+    private List<String> duplicatedPills;
 }
