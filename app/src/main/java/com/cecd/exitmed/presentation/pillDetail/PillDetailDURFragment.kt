@@ -3,7 +3,7 @@ package com.cecd.exitmed.presentation.pillDetail
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class PillDetailDURFragment :
     BindingFragment<FragmentPillDetailDurBinding>(R.layout.fragment_pill_detail_dur) {
-    private val durViewModel: PillDetailDURViewModel by viewModels()
+    private val durViewModel: PillDetailDURViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = durViewModel

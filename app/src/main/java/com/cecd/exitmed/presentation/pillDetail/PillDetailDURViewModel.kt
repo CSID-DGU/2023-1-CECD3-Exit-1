@@ -27,15 +27,7 @@ class PillDetailDURViewModel @Inject constructor(
     private val _durSeniorCaution = MutableStateFlow<UiState<String?>>(UiState.Loading)
     val durSeniorCaution get() = _durSeniorCaution.asStateFlow()
 
-    init {
-        fetchDURAgeProhibitionContents(ITEM_SEQ)
-        fetchDURPregnantProhibitionContents(ITEM_SEQ)
-        fetchDURCapacityCautionContents(ITEM_SEQ)
-        fetchDURAdministrationDurationCaution(ITEM_SEQ)
-        fetchDURSeniorCautionContents(ITEM_SEQ)
-    }
-
-    private fun fetchDURAgeProhibitionContents(itemSeq: String) {
+    fun fetchDURAgeProhibitionContents(itemSeq: String) {
         viewModelScope.launch {
             durRepository.fetchDURAgeProhibition(itemSeq)
                 .onSuccess { item ->
@@ -51,7 +43,7 @@ class PillDetailDURViewModel @Inject constructor(
         }
     }
 
-    private fun fetchDURPregnantProhibitionContents(itemSeq: String) {
+    fun fetchDURPregnantProhibitionContents(itemSeq: String) {
         viewModelScope.launch {
             durRepository.fetchDURPregnantProhibition(itemSeq)
                 .onSuccess { item ->
@@ -67,7 +59,7 @@ class PillDetailDURViewModel @Inject constructor(
         }
     }
 
-    private fun fetchDURCapacityCautionContents(itemSeq: String) {
+    fun fetchDURCapacityCautionContents(itemSeq: String) {
         viewModelScope.launch {
             durRepository.fetchDURCapacityCaution(itemSeq)
                 .onSuccess { item ->
@@ -83,7 +75,7 @@ class PillDetailDURViewModel @Inject constructor(
         }
     }
 
-    private fun fetchDURAdministrationDurationCaution(itemSeq: String) {
+    fun fetchDURAdministrationDurationCaution(itemSeq: String) {
         viewModelScope.launch {
             durRepository.fetchDURAdministrationDurationCaution(itemSeq)
                 .onSuccess { item ->
@@ -100,7 +92,7 @@ class PillDetailDURViewModel @Inject constructor(
         }
     }
 
-    private fun fetchDURSeniorCautionContents(itemSeq: String) {
+    fun fetchDURSeniorCautionContents(itemSeq: String) {
         viewModelScope.launch {
             durRepository.fetchDURSeniorCaution(itemSeq)
                 .onSuccess { item ->
@@ -114,9 +106,5 @@ class PillDetailDURViewModel @Inject constructor(
                     Timber.d(throwable.message)
                 }
         }
-    }
-
-    companion object {
-        const val ITEM_SEQ = "197200484"
     }
 }
