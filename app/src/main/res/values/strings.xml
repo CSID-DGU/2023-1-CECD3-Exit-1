@@ -62,6 +62,7 @@
     <string name="my_page_modify_member_information">회원정보 수정</string>
     <string name="my_page_terms_conditions">이용약관</string>
     <string name="my_page_personal_information">개인정보처리방침</string>
+    <string name="pill_administration">복용관리</string>
 
     <!--  pill creation  -->
     <string name="pill_creation_title">약 서랍 생성</string>
