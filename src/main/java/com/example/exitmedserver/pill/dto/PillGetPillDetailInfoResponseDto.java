@@ -11,4 +11,8 @@ public class PillGetPillDetailInfoResponseDto {
     private String imageLink;
     private String dosage;
     private String warning;
+    private String classification;
+    private String effect;
+    private String storage;
+    private String ingredient;
 }

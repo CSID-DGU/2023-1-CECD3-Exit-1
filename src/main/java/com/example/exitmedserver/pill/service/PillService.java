@@ -212,6 +212,10 @@ public class PillService {
         pillGetPillDetailInfoResponseDto.setPillName(searchedPill.getPillName());
         pillGetPillDetailInfoResponseDto.setDosage(searchedPill.getDosage());
         pillGetPillDetailInfoResponseDto.setWarning(searchedPill.getWarning());
+        pillGetPillDetailInfoResponseDto.setClassification(searchedPill.getClassification());
+        pillGetPillDetailInfoResponseDto.setEffect(searchedPill.getEffect());
+        pillGetPillDetailInfoResponseDto.setStorage(searchedPill.getStorage());
+        pillGetPillDetailInfoResponseDto.setIngredient(searchedPill.getIngredient());
         pillGetPillDetailInfoResponseDto.setPregnant(searchedUserProfile.isPregnant());
         pillGetPillDetailInfoResponseDto.setAge(Year.now().getValue() - searchedUserProfile.getDateOfBirth());
         pillGetPillDetailInfoResponseDto.setFavorite(searchedFavoriteList != null);
