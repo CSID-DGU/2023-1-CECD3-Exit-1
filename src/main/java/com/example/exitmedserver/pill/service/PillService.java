@@ -233,4 +233,10 @@ public class PillService {
         pillGetPillDetailInfoResponseDto.setDuplicatedPills(duplicatedPills);
         return pillGetPillDetailInfoResponseDto;
     }
+
+    public PillGetClosestResponseDto getClosest(String jwtToken) {
+        PillGetClosestResponseDto pillGetClosestResponseDto = new PillGetClosestResponseDto();
+
+        return pillGetClosestResponseDto;
+    }
 }

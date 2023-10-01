@@ -39,4 +39,9 @@ public class PillController {
     public PillGetPillDetailInfoResponseDto getPillDetailInfo(@RequestHeader("Authorization") String jwtToken, @PathVariable Long pillItemSequence) {
         return pillService.getPillDetailInfo(jwtToken, pillItemSequence);
     }
+
+    @GetMapping("/auth/pill/get-closest")
+    public PillGetClosestResponseDto getClosest(@RequestHeader("Authorization") String jwtToken) {
+        return pillService.getClosest(jwtToken);
+    }
 }
