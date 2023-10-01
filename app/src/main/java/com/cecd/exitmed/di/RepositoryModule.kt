@@ -3,10 +3,12 @@ package com.cecd.exitmed.di
 import com.cecd.exitmed.data.repository.AuthRepositoryImpl
 import com.cecd.exitmed.data.repository.BookmarkRepositoryImpl
 import com.cecd.exitmed.data.repository.DURRepositoryImpl
+import com.cecd.exitmed.data.repository.MyRepositoryImpl
 import com.cecd.exitmed.data.repository.TextSearchRepositoryImpl
 import com.cecd.exitmed.domain.repository.AuthRepository
 import com.cecd.exitmed.domain.repository.BookmarkRepository
 import com.cecd.exitmed.domain.repository.DURRepository
+import com.cecd.exitmed.domain.repository.MyRepository
 import com.cecd.exitmed.domain.repository.TextSearchRepository
 import dagger.Binds
 import dagger.Module
@@ -34,6 +36,12 @@ interface RepositoryModule {
     fun bindTextSearchRepository(
         textSearchRepositoryImpl: TextSearchRepositoryImpl
     ): TextSearchRepository
+
+    @Binds
+    @Singleton
+    fun bindMyRepository(
+        myRepositoryImpl: MyRepositoryImpl
+    ): MyRepository
 
     @Binds
     @Singleton

@@ -3,27 +3,29 @@ package com.cecd.exitmed.presentation.my
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityBookmarkListBinding
+import com.cecd.exitmed.domain.type.Pill
+import com.cecd.exitmed.presentation.common.PillListAdapter
 import com.cecd.exitmed.presentation.pillDetail.PillDetailActivity
-import com.cecd.exitmed.presentation.textSearch.SearchViewModel
+import com.cecd.exitmed.util.UiState
 import com.cecd.exitmed.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class MyPillListActivity :
     BindingActivity<ActivityBookmarkListBinding>(R.layout.activity_bookmark_list) {
-    private val viewModel: SearchViewModel by viewModels()
+    private val viewModel: MyViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initLayout()
+        viewModel.fetchMyBookmarkedList()
         addListeners()
-    }
-
-    private fun initLayout() {
-//        val pillAdapter = PillListAdapter(::moveToPillDetail)
-//        binding.rvBookmarkPillList.adapter = pillAdapter
+        collectData()
     }
 
     private fun addListeners() {
@@ -32,7 +34,30 @@ class MyPillListActivity :
         }
     }
 
+    private fun collectData() {
+        viewModel.myBookmarkedListState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    setBookmarkListAdapter(it)
+                }
+
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun setBookmarkListAdapter(it: UiState.Success<List<Pill>>) {
+        val bookmarkedListAdapter = PillListAdapter(::moveToPillDetail, ::bookmark)
+        binding.rvBookmarkPillList.adapter = bookmarkedListAdapter
+        bookmarkedListAdapter.submitList(it.data)
+    }
+
     private fun moveToPillDetail() {
         startActivity(Intent(this, PillDetailActivity::class.java))
+    }
+
+    // TODO 임의 로직, 삭제
+    private fun bookmark(itemSeq: Int) {
+
     }
 }

@@ -2,6 +2,8 @@ package com.cecd.exitmed.presentation.textSearch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cecd.exitmed.data.model.request.RequestBookmark
+import com.cecd.exitmed.domain.repository.BookmarkRepository
 import com.cecd.exitmed.domain.repository.TextSearchRepository
 import com.cecd.exitmed.domain.type.Pill
 import com.cecd.exitmed.util.UiState
