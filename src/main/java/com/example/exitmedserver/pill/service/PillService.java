@@ -9,9 +9,12 @@ import com.example.exitmedserver.pill.repository.AlarmRepository;
 import com.example.exitmedserver.pill.repository.DrawerRepository;
 import com.example.exitmedserver.pill.repository.PillImageRepository;
 import com.example.exitmedserver.pill.repository.PillRepository;
+import com.example.exitmedserver.search.entity.FavoriteList;
+import com.example.exitmedserver.search.repository.FavoriteListRepository;
+import com.example.exitmedserver.user.entity.UserProfile;
+import com.example.exitmedserver.user.repository.UserProfileRepository;
 import com.example.exitmedserver.util.auth.JwtProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -19,6 +22,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +34,8 @@ public class PillService {
     private final AlarmRepository alarmRepository;
     private final PillRepository pillRepository;
     private final PillImageRepository pillImageRepository;
+    private final UserProfileRepository userProfileRepository;
+    private final FavoriteListRepository favoriteListRepository;
 
     public PillAddDrawerResponseDto addDrawer(String jwtToken, PillAddDrawerRequestDto pillAddDrawerRequestDto) {
         PillAddDrawerResponseDto pillAddDrawerResponseDto = new PillAddDrawerResponseDto();
@@ -164,12 +170,11 @@ public class PillService {
     public PillGetAlarmListResponse getAlarmList(String jwtToken) {
         PillGetAlarmListResponse pillGetAlarmListResponse = new PillGetAlarmListResponse();
         List<PillGetAlarmListResponseDto> alarmList = new ArrayList<>();
-        List<Alarm> searchedAlarm = new ArrayList<>();
 
         JwtProvider jwtProvider = new JwtProvider();
         String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
 
-        searchedAlarm = alarmRepository.findAlarmByUserIdAndIsTurnedOnOrderByTakeTimeAsc(userId, true);
+        List<Alarm> searchedAlarm = alarmRepository.findAlarmByUserIdAndIsTurnedOnOrderByTakeTimeAsc(userId, true);
         if (!searchedAlarm.isEmpty()) {
             for (Alarm alarm : searchedAlarm) {
                 Pill searchedPill = pillRepository.findPillByPillItemSequence(alarm.getPillItemSequence());
@@ -187,5 +192,45 @@ public class PillService {
         }
 
         return pillGetAlarmListResponse;
+    }
+
+    public PillGetPillDetailInfoResponseDto getPillDetailInfo(String jwtToken, Long pillItemSequence) {
+        PillGetPillDetailInfoResponseDto pillGetPillDetailInfoResponseDto = new PillGetPillDetailInfoResponseDto();
+
+        JwtProvider jwtProvider = new JwtProvider();
+        String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        // pillName, dosage, warning => Pill
+        // isPregnant, age => UserProfile
+        // isFavorite => FavoriteList
+        // imageLink => PillImage
+        Pill searchedPill = pillRepository.findPillByPillItemSequence(pillItemSequence);
+        UserProfile searchedUserProfile = userProfileRepository.findUserProfileByUserId(userId);
+        FavoriteList searchedFavoriteList = favoriteListRepository.findFavoriteListByUserIdAndPillItemSequence(userId, pillItemSequence);
+        PillImage searchedPillImage = pillImageRepository.findByPillItemSequence(pillItemSequence);
+        List<Drawer> searchedDrawerList = drawerRepository.findDrawerByUserId(userId);
+
+        pillGetPillDetailInfoResponseDto.setPillName(searchedPill.getPillName());
+        pillGetPillDetailInfoResponseDto.setDosage(searchedPill.getDosage());
+        pillGetPillDetailInfoResponseDto.setWarning(searchedPill.getWarning());
+        pillGetPillDetailInfoResponseDto.setClassification(searchedPill.getClassification());
+        pillGetPillDetailInfoResponseDto.setEffect(searchedPill.getEffect());
+        pillGetPillDetailInfoResponseDto.setStorage(searchedPill.getStorage());
+        pillGetPillDetailInfoResponseDto.setIngredient(searchedPill.getIngredient());
+        pillGetPillDetailInfoResponseDto.setPregnant(searchedUserProfile.isPregnant());
+        pillGetPillDetailInfoResponseDto.setAge(Year.now().getValue() - searchedUserProfile.getDateOfBirth());
+        pillGetPillDetailInfoResponseDto.setFavorite(searchedFavoriteList != null);
+        pillGetPillDetailInfoResponseDto.setImageLink(searchedPillImage.getImageLink());
+
+        String searchedAtcCode = searchedPill.getAtcCode();
+        List<String> duplicatedPills = new ArrayList<>();
+        for (Drawer drawer : searchedDrawerList) {
+            Pill searchedPillInDrawer = pillRepository.findPillByPillItemSequence(drawer.getPillItemSequence());
+            if (searchedPillInDrawer.getAtcCode().equals(searchedAtcCode)) {
+                duplicatedPills.add(searchedPillInDrawer.getPillName());
+            }
+        }
+        pillGetPillDetailInfoResponseDto.setDuplicatedPills(duplicatedPills);
+        return pillGetPillDetailInfoResponseDto;
     }
 }

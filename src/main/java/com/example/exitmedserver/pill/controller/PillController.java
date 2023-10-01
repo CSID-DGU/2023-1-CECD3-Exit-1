@@ -34,4 +34,9 @@ public class PillController {
     public PillGetAlarmListResponse getAlarmList(@RequestHeader("Authorization") String jwtToken) {
         return pillService.getAlarmList(jwtToken);
     }
+
+    @GetMapping("/auth/pill/pill-info/{pillItemSequence}")
+    public PillGetPillDetailInfoResponseDto getPillDetailInfo(@RequestHeader("Authorization") String jwtToken, @PathVariable Long pillItemSequence) {
+        return pillService.getPillDetailInfo(jwtToken, pillItemSequence);
+    }
 }

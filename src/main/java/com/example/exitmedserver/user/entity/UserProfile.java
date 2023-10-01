@@ -27,11 +27,11 @@ public class UserProfile {
     @Column(name = "sex")
     private String sex;
 
-    @Column(name = "is_pregnant")
-    private Byte isPregnant;
+    @Column(name = "is_pregnant", columnDefinition = "TINYINT")
+    private boolean isPregnant;
 
     @Builder
-    public UserProfile(String userId, String fullName, int dateOfBirth, String profilePicture, String sex, Byte isPregnant) {
+    public UserProfile(String userId, String fullName, int dateOfBirth, String profilePicture, String sex, boolean isPregnant) {
         this.userId = userId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
