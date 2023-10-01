@@ -3,7 +3,7 @@ package com.cecd.exitmed.di
 import com.cecd.exitmed.data.service.AuthService
 import com.cecd.exitmed.data.service.BookmarkService
 import com.cecd.exitmed.data.service.DURService
-import com.cecd.exitmed.data.service.DoseyService
+import com.cecd.exitmed.data.service.DoseService
 import com.cecd.exitmed.data.service.PillDetailService
 import com.cecd.exitmed.data.service.TextSearchService
 import com.cecd.exitmed.data.type.BaseUrlType
@@ -62,6 +62,6 @@ object ServiceModule {
     fun provideMyService(
         @NetworkModule.Retrofit2(BaseUrlType.EXIT)
         retrofit: Retrofit
-    ): DoseyService =
-        retrofit.create(DoseyService::class.java)
+    ): DoseService =
+        retrofit.create(DoseService::class.java)
 }

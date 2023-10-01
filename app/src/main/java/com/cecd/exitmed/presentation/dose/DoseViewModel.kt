@@ -20,9 +20,13 @@ class DoseViewModel @Inject constructor(
     private val _myDrawerListState =
         MutableStateFlow<UiState<List<PillDrawerData>>>(UiState.Loading)
     val myDrawerListState get() = _myDrawerListState.asStateFlow()
+    private val _doseTimeTableState =
+        MutableStateFlow<UiState<List<DoseTimeTable>>>(UiState.Loading)
+    val doseTimeTableState get() = _doseTimeTableState.asStateFlow()
 
     init {
         fetchMyDrawerList()
+        fetchDoseTimeTable()
     }
 
     private fun fetchMyDrawerList() {
@@ -37,36 +41,15 @@ class DoseViewModel @Inject constructor(
         }
     }
 
-    val mockDoseTimeTable = listOf(
-        DoseTimeTable(
-            1,
-            "오전 10:00",
-            "타이레놀",
-            true
-        ),
-        DoseTimeTable(
-            1,
-            "오후 12:00",
-            "타이레놀",
-            true
-        ),
-        DoseTimeTable(
-            1,
-            "오후 12:00",
-            "타이레놀",
-            true
-        ),
-        DoseTimeTable(
-            1,
-            "오후 6:00",
-            "타이레놀",
-            false
-        ),
-        DoseTimeTable(
-            1,
-            "오전 6:00",
-            "타이레놀",
-            false
-        )
-    )
+    private fun fetchDoseTimeTable() {
+        viewModelScope.launch {
+            doseRepository.fetchDoseTimeTable()
+                .onSuccess { doseTimeTable ->
+                    _doseTimeTableState.value = UiState.Success(doseTimeTable)
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
 }
