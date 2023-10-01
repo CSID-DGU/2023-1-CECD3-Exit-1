@@ -26,6 +26,7 @@ class PillDetailActivity :
         fragmentList.add(PillDetailMedicationFragment())
         fragmentList.add(PillDetailComponentsContentFragment())
         fragmentList.add(PillDetailUsageFragment())
+        fragmentList.add(PillDetailCautionFragment())
         fragmentList.add(PillDetailDURFragment())
         fragmentList.add(PillDetailDrugInteractionFragment())
 
