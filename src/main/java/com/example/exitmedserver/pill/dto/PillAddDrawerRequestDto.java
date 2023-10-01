@@ -9,4 +9,5 @@ public class PillAddDrawerRequestDto {
     private String dosageCycle;
     private String comment;
     private String takeTime;
+    private DayForDrawer dayForDrawer;
 }

@@ -58,8 +58,14 @@ public class PillService {
                         .finalDate(date)
                         .pillItemSequence(pillAddDrawerRequestDto.getPillItemSequence())
                         .comment(pillAddDrawerRequestDto.getComment())
+                        .monday(pillAddDrawerRequestDto.getDayForDrawer().isMonday())
+                        .tuesday(pillAddDrawerRequestDto.getDayForDrawer().isTuesday())
+                        .wednesday(pillAddDrawerRequestDto.getDayForDrawer().isWednesday())
+                        .thursday(pillAddDrawerRequestDto.getDayForDrawer().isThursday())
+                        .friday(pillAddDrawerRequestDto.getDayForDrawer().isFriday())
+                        .saturday(pillAddDrawerRequestDto.getDayForDrawer().isSaturday())
+                        .sunday(pillAddDrawerRequestDto.getDayForDrawer().isSunday())
                         .build();
-
                 Alarm alarm = Alarm.builder()
                         .id(null)
                         .pillItemSequence(pillAddDrawerRequestDto.getPillItemSequence())
