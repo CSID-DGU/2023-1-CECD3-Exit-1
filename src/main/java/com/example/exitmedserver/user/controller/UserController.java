@@ -4,11 +4,8 @@ import com.example.exitmedserver.user.dto.*;
 import com.example.exitmedserver.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,12 +23,12 @@ public class UserController {
     }
 
     @PostMapping("/user/signup/check-duplicated")
-    public UserCheckDuplicatedResponseDto checkDuplicated(@Valid @RequestBody UserCheckDuplicatedRequestDto userCheckDuplicatedRequestDto, BindingResult bindingResult) {
+    public UserCheckDuplicatedResponseDto checkDuplicated(@Valid @RequestBody UserCheckDuplicatedRequestDto userCheckDuplicatedRequestDto) {
         return userService.checkDuplicated(userCheckDuplicatedRequestDto);
     }
 
     @GetMapping("/auth/user/favorite")
-    public List<UserGetMypageFavoriteResponseDto> getMypageFavorite(@RequestHeader("Authorization") String jwtToken) {
+    public UserGetMypageFavoriteResponse getMypageFavorite(@RequestHeader("Authorization") String jwtToken) {
         return userService.getMypageFavorite(jwtToken);
     }
 

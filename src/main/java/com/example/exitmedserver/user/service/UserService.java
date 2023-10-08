@@ -69,7 +69,7 @@ public class UserService {
         return userCheckDuplicatedResponseDto;
     }
 
-    public List<UserGetMypageFavoriteResponseDto> getMypageFavorite(String jwtToken) {
+    public UserGetMypageFavoriteResponse getMypageFavorite(String jwtToken) {
         JwtProvider jwtProvider = new JwtProvider();
         String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
 
@@ -88,6 +88,9 @@ public class UserService {
                 mypageFavoriteList.add(userGetMypageFavoriteResponseDto);
             }
         }
-        return mypageFavoriteList;
+
+        UserGetMypageFavoriteResponse userGetMypageFavoriteResponse = new UserGetMypageFavoriteResponse();
+        userGetMypageFavoriteResponse.setData(mypageFavoriteList);
+        return userGetMypageFavoriteResponse;
     }
 }
