@@ -15,9 +15,13 @@ import com.example.exitmedserver.user.dto.SearchGetFavoriteResponse;
 import com.example.exitmedserver.user.dto.SearchGetSearchListResponse;
 import com.example.exitmedserver.user.dto.SearchTextResponse;
 import com.example.exitmedserver.util.auth.JwtProvider;
+import com.example.exitmedserver.util.file.FileProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,5 +159,10 @@ public class SearchService {
         searchGetSearchListResponse.setData(searchList);
 
         return searchGetSearchListResponse;
+    }
+
+    public byte[] getImage(String pillItemSequence) throws IOException {
+        FileProvider fileProvider = new FileProvider();
+        return Files.readAllBytes(new File(fileProvider.getServerDisplayPath() + "/" + pillItemSequence + ".jpg").toPath());
     }
 }
