@@ -7,7 +7,10 @@ import com.example.exitmedserver.user.dto.SearchGetFavoriteResponse;
 import com.example.exitmedserver.user.dto.SearchGetSearchListResponse;
 import com.example.exitmedserver.user.dto.SearchTextResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,5 +35,13 @@ public class SearchController {
     @GetMapping("/auth/search/search-list")
     public SearchGetSearchListResponse getSearchHistory(@RequestHeader("Authorization") String jwtToken) {
         return searchService.getSearchList(jwtToken);
+    }
+
+    @GetMapping(
+            value = "/test-get-image/{pillItemSequence}",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    public byte[] getImage(@PathVariable String pillItemSequence) throws IOException {
+        return searchService.getImage(pillItemSequence);
     }
 }
