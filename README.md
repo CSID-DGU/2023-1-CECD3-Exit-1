@@ -19,15 +19,13 @@
 
 
 ## 📷 *****ScreenShot*****
-| <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src=""/> | 
+| <img width="200" src="https://github.com/CSID-DGU/2023-1-CECD3-Exit-1/assets/77060011/a1c0865e-a6c3-4906-9392-36a6a5672c37"/> | <img width="200" src="https://github.com/CSID-DGU/2023-1-CECD3-Exit-1/assets/77060011/9171abb2-90bf-4a8a-a680-fdc0f6cd0643"/> | <img width="200" src="https://github.com/CSID-DGU/2023-1-CECD3-Exit-1/assets/77060011/641674ad-f94f-4319-a974-5c7edac48511"/> | <img width="200" src="https://github.com/CSID-DGU/2023-1-CECD3-Exit-1/assets/77060011/a7d17908-4527-46e2-9bc7-ffb72e3837bd"/> | 
 | :---: | :---: | :---: |:------------------------------------------------------------------------------------------------------------------------------:|
-|`SignUpView`|`FilterView`|`HomeView`|                                                        `BakeryListView`                                                        |
-| <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src=""/> |<img width="200" src="">
-|`SearchView`|`DetailView`|`ReviewWritingView`|`MyPageView`|
+|`Home`|`TextSearch`|`ImageSearch`|                                                        `PillDetail`                                                        |
+| <img width="200" src="https://github.com/CSID-DGU/2023-1-CECD3-Exit-1/assets/77060011/44b569b6-5e03-444f-a908-381c8ca7f8b7"/> | <img width="200" src="https://github.com/CSID-DGU/2023-1-CECD3-Exit-1/assets/77060011/f507712b-7af8-4032-8721-2796e954a3e6"/> | <img width="200" src="https://github.com/CSID-DGU/2023-1-CECD3-Exit-1/assets/77060011/3c81096c-9a0b-4fd6-9b64-160fc2521bf7"/> |<img width="200" src="https://github.com/CSID-DGU/2023-1-CECD3-Exit-1/assets/77060011/fe81f810-fdb2-4ff9-83cd-622f64cc3c07">
+|`DrawerList`|`DrawerDetail`|`DoseTable`|`MyPageView`|
 
 <br>
-
-## 📘 *****Convention*****
 
 
 ## 👩🏻‍💻 ***Android Skill Specification***
@@ -48,7 +46,7 @@
 ## 📁 *****Android Foldering*****
 
 ```
-📂 com.Geonppang
+📂 com.cecd.exitmed
 ┣ 📂 data
 ┃ ┣ 📂 datasource
 ┃ ┣ 📂 model
@@ -59,7 +57,16 @@
 ┃ ┣ 📂 model
 ┃ ┣ 📂 repository
 ┣ 📂 presentation
-┃ ┣ 📂 
+┃ ┣ 📂 auth
+┃ ┣ 📂 common
+┃ ┣ 📂 dose
+┃ ┣ 📂 home
+┃ ┣ 📂 imageSearch
+┃ ┣ 📂 myPage
+┃ ┣ 📂 pillCreation
+┃ ┣ 📂 pillDetail
+┃ ┣ 📂 pillDrawerDetail
+┃ ┣ 📂 textSearch
 ┃ ┣ 📂 type
 ┣ 📂 util
 ┃ ┣ 📂 binding
