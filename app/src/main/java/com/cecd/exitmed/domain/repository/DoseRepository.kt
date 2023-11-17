@@ -8,4 +8,5 @@ interface DoseRepository {
     suspend fun fetchPillDrawerList(): Result<List<PillDrawerData>>
     suspend fun fetchDoseTimeTable(): Result<List<DoseTimeTable>>
     suspend fun addToPillDrawer(requestPillCreation: RequestPillCreation): Result<Boolean>
+    suspend fun onOffDoseAlarm(itemSeq: Int): Result<Boolean>
 }

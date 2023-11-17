@@ -45,12 +45,21 @@ class PillDrawerListFragment :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
+
+        // TODO 알람 상태를 local에서 임시적으로 수정할 순 업는가?
+        viewModel.alarmState.flowWithLifecycle(lifecycle).onEach {
+            viewModel.fetchMyDrawerList()
+        }.launchIn(lifecycleScope)
     }
 
     private fun setMyPillDrawerListAdapter(it: UiState.Success<List<PillDrawerData>>) {
-        val pillDrawerAdapter = PillDrawerListAdapter(::moveToPillDrawerDetail)
+        val pillDrawerAdapter = PillDrawerListAdapter(::moveToPillDrawerDetail, ::onOffDoseAlarm)
         binding.rvPillDrawer.adapter = pillDrawerAdapter
         pillDrawerAdapter.submitList(it.data)
+    }
+
+    private fun onOffDoseAlarm(itemSeq: Int) {
+        viewModel.onOffDoseAlarm(itemSeq)
     }
 
     private fun moveToPillDrawerDetail() {

@@ -23,13 +23,15 @@ class DoseViewModel @Inject constructor(
     private val _doseTimeTableState =
         MutableStateFlow<UiState<List<DoseTimeTable>>>(UiState.Loading)
     val doseTimeTableState get() = _doseTimeTableState.asStateFlow()
+    private val _alarmState = MutableStateFlow<Boolean?>(null)
+    val alarmState get() = _alarmState.asStateFlow()
 
     init {
         fetchMyDrawerList()
         fetchDoseTimeTable()
     }
 
-    private fun fetchMyDrawerList() {
+    fun fetchMyDrawerList() {
         viewModelScope.launch {
             doseRepository.fetchPillDrawerList()
                 .onSuccess { myDrawerList ->
@@ -49,6 +51,18 @@ class DoseViewModel @Inject constructor(
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
+                }
+        }
+    }
+
+    fun onOffDoseAlarm(itemSeq: Int) {
+        viewModelScope.launch {
+            doseRepository.onOffDoseAlarm(itemSeq)
+                .onSuccess { alarmState ->
+                    _alarmState.value = alarmState
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable)
                 }
         }
     }

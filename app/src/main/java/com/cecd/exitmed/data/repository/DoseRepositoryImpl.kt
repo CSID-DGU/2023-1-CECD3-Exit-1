@@ -21,7 +21,12 @@ class DoseRepositoryImpl @Inject constructor(
         }
 
     override suspend fun addToPillDrawer(requestPillCreation: RequestPillCreation): Result<Boolean> =
-        kotlin.runCatching {
+        runCatching {
             doseDataSource.addToPillDrawer(requestPillCreation).added
+        }
+
+    override suspend fun onOffDoseAlarm(itemSeq: Int): Result<Boolean> =
+        runCatching {
+            doseDataSource.onOffDoseAlarm(itemSeq).on
         }
 }
