@@ -3,7 +3,6 @@ package com.cecd.exitmed.presentation.pillCreation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.FragmentPillCreationPeriodBinding
 import com.cecd.exitmed.util.binding.BindingFragment
