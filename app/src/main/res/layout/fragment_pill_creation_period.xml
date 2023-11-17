@@ -44,30 +44,30 @@
         <TextView
             android:id="@+id/tv_pill_creation_period_everyday"
             style="@style/Widget.Pill.Creation.Chip"
-            selected="@{viewModel.pillPeriodType == PillPeriodType.EVERYDAY}"
+            selected="@{viewModel.pillPeriodType == PillPeriodType.EVERY_DAY}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:onClick="@{() -> viewModel.setPillPeriod(PillPeriodType.EVERYDAY)}"
-            android:text="@{PillPeriodType.EVERYDAY.titleRes}"
+            android:onClick="@{() -> viewModel.setPillPeriod(PillPeriodType.EVERY_DAY)}"
+            android:text="@{PillPeriodType.EVERY_DAY.titleRes}"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/tv_pill_creation_period_title"
             tools:text="매일" />
 
         <TextView
             style="@style/Widget.Pill.Creation.Chip"
-            selected="@{viewModel.pillPeriodType == PillPeriodType.FIXEDDAY}"
+            selected="@{viewModel.pillPeriodType == PillPeriodType.FIXED_DAY}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:onClick="@{() -> viewModel.setPillPeriod(PillPeriodType.FIXEDDAY)}"
-            android:text="@{PillPeriodType.FIXEDDAY.titleRes}"
+            android:onClick="@{() -> viewModel.setPillPeriod(PillPeriodType.FIXED_DAY)}"
+            android:text="@{PillPeriodType.FIXED_DAY.titleRes}"
             app:layout_constraintStart_toEndOf="@id/tv_pill_creation_period_everyday"
             app:layout_constraintTop_toTopOf="@id/tv_pill_creation_period_everyday"
             tools:text="정해진 요일마다" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            visibility="@{viewModel.pillPeriodType == PillPeriodType.FIXEDDAY}"
+            visibility="@{viewModel.pillPeriodType == PillPeriodType.FIXED_DAY}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
