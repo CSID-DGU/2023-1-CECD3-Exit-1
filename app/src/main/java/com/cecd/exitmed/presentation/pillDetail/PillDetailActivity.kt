@@ -125,7 +125,9 @@ class PillDetailActivity :
     }
 
     private fun moveToAddPillDrawer() {
-        startActivity(Intent(this, PillCreationActivity::class.java))
+        val intent = Intent(this, PillCreationActivity::class.java)
+        intent.putExtra(ITEM_SEQ, itemSeq)
+        startActivity(intent)
     }
 
     companion object {

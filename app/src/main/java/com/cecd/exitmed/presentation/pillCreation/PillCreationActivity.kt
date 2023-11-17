@@ -1,5 +1,6 @@
 package com.cecd.exitmed.presentation.pillCreation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityPillCreationBinding
+import com.cecd.exitmed.presentation.dose.DoseActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +30,10 @@ class PillCreationActivity :
 
     private fun addListeners() {
         binding.btnNext.setOnClickListener {
-            binding.vpPillCreation.currentItem++
+            if (binding.vpPillCreation.currentItem == 3) {
+                viewModel.addToPillDrawer(intent.getIntExtra(ITEM_SEQ, -1))
+            } else
+                binding.vpPillCreation.currentItem++
         }
         binding.btnBack.setOnClickListener {
             when (binding.vpPillCreation.currentItem) {
@@ -49,6 +54,15 @@ class PillCreationActivity :
             binding.tvPillCreationStep.text =
                 String.format(getString(R.string.pill_creation_step), position + 1)
         }.launchIn(lifecycleScope)
+        viewModel.isAdded.flowWithLifecycle(lifecycle).onEach { isAdded ->
+            if (isAdded)
+                moveToPillDrawerList()
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun moveToPillDrawerList() {
+        startActivity(Intent(this, DoseActivity::class.java))
+        finish()
     }
 
     private fun getPageChangeCallback() =
@@ -78,5 +92,9 @@ class PillCreationActivity :
         TabLayoutMediator(
             binding.pillCreationTabIndicator, binding.vpPillCreation
         ) { _, _ -> }.attach()
+    }
+
+    companion object {
+        const val ITEM_SEQ = "itemSeq"
     }
 }
