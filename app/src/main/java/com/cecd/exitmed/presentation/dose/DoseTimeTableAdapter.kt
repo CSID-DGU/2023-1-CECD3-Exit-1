@@ -11,7 +11,7 @@ import com.cecd.exitmed.util.ItemDiffCallback
 class DoseTimeTableAdapter :
     ListAdapter<DoseTimeTable, DoseTimeTableAdapter.DoseTimeTableViewHolder>(
         ItemDiffCallback(
-            onItemTheSame = { old, new -> old.pillId == new.pillId },
+            onItemTheSame = { old, new -> old.pillName == new.pillName },
             onContentsTheSame = { old, new -> old == new }
         )
     ) {

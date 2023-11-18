@@ -4,12 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.FragmentPillDrawerBinding
+import com.cecd.exitmed.domain.type.PillDrawerData
 import com.cecd.exitmed.presentation.pillDrawerDetail.PillDrawerDetailActivity
 import com.cecd.exitmed.presentation.textSearch.SearchActivity
+import com.cecd.exitmed.util.UiState
 import com.cecd.exitmed.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class PillDrawerListFragment :
@@ -19,16 +25,8 @@ class PillDrawerListFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
 
-        initLayout()
         addListeners()
-    }
-
-    private fun initLayout() {
-        val pillDrawerAdapter = PillDrawerListAdapter(::moveTOPillDrawerDetail)
-        binding.rvPillDrawer.apply {
-            adapter = pillDrawerAdapter
-        }
-        pillDrawerAdapter.submitList(viewModel.mockPillDrawerList)
+        collectData()
     }
 
     private fun addListeners() {
@@ -37,7 +35,25 @@ class PillDrawerListFragment :
         }
     }
 
-    private fun moveTOPillDrawerDetail() {
+    private fun collectData() {
+        viewModel.myDrawerListState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    setMyPillDrawerListAdapter(it)
+                }
+
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun setMyPillDrawerListAdapter(it: UiState.Success<List<PillDrawerData>>) {
+        val pillDrawerAdapter = PillDrawerListAdapter(::moveToPillDrawerDetail)
+        binding.rvPillDrawer.adapter = pillDrawerAdapter
+        pillDrawerAdapter.submitList(it.data)
+    }
+
+    private fun moveToPillDrawerDetail() {
         startActivity(Intent(requireActivity(), PillDrawerDetailActivity::class.java))
     }
 

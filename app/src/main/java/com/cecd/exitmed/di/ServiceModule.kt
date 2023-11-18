@@ -3,7 +3,8 @@ package com.cecd.exitmed.di
 import com.cecd.exitmed.data.service.AuthService
 import com.cecd.exitmed.data.service.BookmarkService
 import com.cecd.exitmed.data.service.DURService
-import com.cecd.exitmed.data.service.MyService
+import com.cecd.exitmed.data.service.DoseService
+import com.cecd.exitmed.data.service.PillDetailService
 import com.cecd.exitmed.data.service.TextSearchService
 import com.cecd.exitmed.data.type.BaseUrlType
 import dagger.Module
@@ -50,9 +51,18 @@ object ServiceModule {
 
     @Singleton
     @Provides
+    fun providePillDetailService(
+        @NetworkModule.Retrofit2(BaseUrlType.EXIT)
+        retrofit: Retrofit
+    ): PillDetailService =
+        retrofit.create(PillDetailService::class.java)
+
+    @Singleton
+    @Provides
     fun provideMyService(
         @NetworkModule.Retrofit2(BaseUrlType.EXIT)
         retrofit: Retrofit
-    ): MyService =
-        retrofit.create(MyService::class.java)
+    ): DoseService =
+        retrofit.create(DoseService::class.java)
+
 }

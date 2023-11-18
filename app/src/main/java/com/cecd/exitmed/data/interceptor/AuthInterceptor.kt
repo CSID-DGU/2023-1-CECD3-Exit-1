@@ -11,7 +11,7 @@ class AuthInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val authRequest = if (!dataSource.isLogin) originalRequest
-        else originalRequest.newBuilder().addHeader("Authorization", dataSource.accessToken).build()
+        else originalRequest.newBuilder().addHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJleGl0VG9rZW4iLCJleHAiOjE3MDI2MjE3NjEsInVzZXJJZCI6ImV4aXQxQG5hdmVyLmNvbSIsInVzZXJQYXNzd29yZCI6IiQyYSQxMCRGenZHNWM3UWluNkhJZVNBbG13dlFldlN2RXJPSHhWdWpBSTRZRWI5N241LkEwdGtmR09mZSJ9.mfKSEnM_WGUdtqN20qIfv6BSHrqN3t9c_oi8T3LHzrRVOBnoYlVydsH9mgzqWT4zrsJcZ3zRU_ax5T6BYQV2Xw").build()
         val response = chain.proceed(authRequest)
 
         return response

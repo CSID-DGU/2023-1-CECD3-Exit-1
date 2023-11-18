@@ -32,7 +32,6 @@ class SearchViewModel @Inject constructor(
 
     init {
         fetchRecentSearchTerms()
-        fetchTextSearchBookmarkedList()
     }
 
     fun textPillSearch() {

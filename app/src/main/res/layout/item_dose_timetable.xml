@@ -50,12 +50,14 @@
 
         <TextView
             android:id="@+id/tv_dose_pill_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             android:text="@{doseTimeTable.pillName}"
             android:textAppearance="@style/TextAppearance.BodyM1"
             android:textColor="@{doseTimeTable.passed == true? @color/gray_400 : @color/black}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_dose_time"
             app:layout_constraintTop_toBottomOf="@id/tv_dose_time"
             tools:text="타이레놀" />
