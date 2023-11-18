@@ -62,7 +62,8 @@ class PillDrawerListFragment :
     private fun moveToTextSearch() {
         startActivity(Intent(requireActivity(), SearchActivity::class.java))
     }
-    companion object{
+
+    companion object {
         const val ITEM_SEQ = "itemSeq"
     }
 }

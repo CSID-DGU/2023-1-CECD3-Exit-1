@@ -30,7 +30,7 @@ class PillDrawerDetailInfoFragment :
     }
 
     private fun collectData() {
-        viewModel.drawerPillDetail.flowWithLifecycle(lifecycle).onEach { drawerPillDetail->
+        viewModel.drawerPillDetail.flowWithLifecycle(lifecycle).onEach { drawerPillDetail ->
             binding.tvPillDrawerDetailLastDoseContent.text = drawerPillDetail?.finalDoseDate
         }.launchIn(lifecycleScope)
     }

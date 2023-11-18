@@ -15,11 +15,10 @@ import javax.inject.Inject
 @HiltViewModel
 class PillDrawerDetailViewModel @Inject constructor(
     private val doseRepository: DoseRepository
-): ViewModel() {
+) : ViewModel() {
     private val _drawerPillDetail =
         MutableStateFlow<DrawerDetail?>(null)
     val drawerPillDetail get() = _drawerPillDetail.asStateFlow()
-
 
     fun fetchDrawerPillDetail(itemSeq: Int) {
         viewModelScope.launch {
