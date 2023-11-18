@@ -10,6 +10,7 @@ import com.cecd.exitmed.databinding.ActivityBookmarkListBinding
 import com.cecd.exitmed.domain.type.Pill
 import com.cecd.exitmed.presentation.common.PillListAdapter
 import com.cecd.exitmed.presentation.pillDetail.PillDetailActivity
+import com.cecd.exitmed.presentation.textSearch.SearchActivity
 import com.cecd.exitmed.util.UiState
 import com.cecd.exitmed.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,8 +53,10 @@ class MyPillListActivity :
         bookmarkedListAdapter.submitList(it.data)
     }
 
-    private fun moveToPillDetail() {
-        startActivity(Intent(this, PillDetailActivity::class.java))
+    private fun moveToPillDetail(itemSeq: Int) {
+        val intent = Intent(this, PillDetailActivity::class.java)
+        intent.putExtra(SearchActivity.ITEM_SEQ, itemSeq)
+        startActivity(intent)
     }
 
     // TODO 임의 로직, 삭제

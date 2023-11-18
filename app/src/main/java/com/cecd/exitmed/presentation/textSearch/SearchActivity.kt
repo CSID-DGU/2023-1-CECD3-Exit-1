@@ -10,6 +10,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySearchBinding
+import com.cecd.exitmed.domain.type.Pill
 import com.cecd.exitmed.presentation.common.PillListAdapter
 import com.cecd.exitmed.presentation.pillDetail.PillDetailActivity
 import com.cecd.exitmed.util.UiState
@@ -20,7 +21,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import com.cecd.exitmed.domain.type.Pill
 
 @AndroidEntryPoint
 class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_search) {
@@ -102,11 +102,17 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         }.attach()
     }
 
-    private fun moveToPillDetail() {
-        startActivity(Intent(this, PillDetailActivity::class.java))
+    private fun moveToPillDetail(itemSeq: Int) {
+        val intent = Intent(this, PillDetailActivity::class.java)
+        intent.putExtra(ITEM_SEQ, itemSeq)
+        startActivity(intent)
     }
 
     private fun bookmark(pillItemSeq: Int) {
         searchViewModel.bookmark(pillItemSeq)
+    }
+
+    companion object {
+        const val ITEM_SEQ = "itemSeq"
     }
 }
