@@ -73,5 +73,4 @@ object ServiceModule {
         retrofit: Retrofit
     ): MyService =
         retrofit.create(MyService::class.java)
-
 }

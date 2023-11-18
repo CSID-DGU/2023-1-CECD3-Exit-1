@@ -61,6 +61,5 @@ class MyPillListActivity :
 
     // TODO 임의 로직, 삭제
     private fun bookmark(itemSeq: Int) {
-
     }
 }
