@@ -1,12 +1,10 @@
 package com.example.exitmedserver.search.service;
 
 import com.example.exitmedserver.pill.entity.Pill;
+import com.example.exitmedserver.pill.entity.PillImage;
 import com.example.exitmedserver.pill.repository.PillImageRepository;
 import com.example.exitmedserver.pill.repository.PillRepository;
-import com.example.exitmedserver.search.dto.SearchAddFavoriteResponseDto;
-import com.example.exitmedserver.search.dto.SearchGetFavoriteResponseDto;
-import com.example.exitmedserver.search.dto.SearchGetSearchListResponseDto;
-import com.example.exitmedserver.search.dto.SearchTextResponseDto;
+import com.example.exitmedserver.search.dto.*;
 import com.example.exitmedserver.search.entity.FavoriteList;
 import com.example.exitmedserver.search.entity.SearchHistoryList;
 import com.example.exitmedserver.search.repository.FavoriteListRepository;
@@ -16,11 +14,25 @@ import com.example.exitmedserver.user.dto.SearchGetSearchListResponse;
 import com.example.exitmedserver.user.dto.SearchTextResponse;
 import com.example.exitmedserver.util.auth.JwtProvider;
 import com.example.exitmedserver.util.file.FileProvider;
+import com.google.api.client.util.Base64;
+import com.google.cloud.aiplatform.util.ValueConverter;
+import com.google.cloud.aiplatform.v1.EndpointName;
+import com.google.cloud.aiplatform.v1.PredictResponse;
+import com.google.cloud.aiplatform.v1.PredictionServiceClient;
+import com.google.cloud.aiplatform.v1.PredictionServiceSettings;
+import com.google.cloud.aiplatform.v1.schema.predict.instance.ImageClassificationPredictionInstance;
+import com.google.cloud.aiplatform.v1.schema.predict.params.ImageClassificationPredictionParams;
+import com.google.cloud.aiplatform.v1.schema.predict.prediction.ClassificationPredictionResult;
+import com.google.common.io.BaseEncoding;
+import com.google.protobuf.Value;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -164,5 +176,79 @@ public class SearchService {
     public byte[] getImage(String pillItemSequence) throws IOException {
         FileProvider fileProvider = new FileProvider();
         return Files.readAllBytes(new File(fileProvider.getServerDisplayPath() + "/" + pillItemSequence + ".jpg").toPath());
+    }
+
+    public SearchGetImageSearchResponseDto predictImageClassification(String project, MultipartFile fileName, String endpointId)
+            throws IOException {
+        PredictionServiceSettings settings =
+                PredictionServiceSettings.newBuilder()
+                        .setEndpoint("us-central1-aiplatform.googleapis.com:443")
+                        .build();
+
+        // Initialize client that will be used to send requests. This client only needs to be created
+        // once, and can be reused for multiple requests. After completing all of your requests, call
+        // the "close" method on the client to safely clean up any remaining background resources.
+        try (PredictionServiceClient predictionServiceClient =
+                     PredictionServiceClient.create(settings)) {
+            String location = "us-central1";
+            EndpointName endpointName = EndpointName.of(project, location, endpointId);
+
+            byte[] contents = java.util.Base64.getEncoder().encode(fileName.getBytes());
+
+            String content = new String(contents, StandardCharsets.UTF_8);
+
+            ImageClassificationPredictionInstance predictionInstance =
+                    ImageClassificationPredictionInstance.newBuilder().setContent(content).build();
+
+            List<Value> instances = new ArrayList<>();
+            instances.add(ValueConverter.toValue(predictionInstance));
+
+            ImageClassificationPredictionParams predictionParams =
+                    ImageClassificationPredictionParams.newBuilder()
+                            .setConfidenceThreshold((float) 0.01)
+                            .setMaxPredictions(5)
+                            .build();
+
+            PredictResponse predictResponse =
+                    predictionServiceClient.predict(
+                            endpointName, instances, ValueConverter.toValue(predictionParams));
+            System.out.println("Predict Image Classification Response");
+            System.out.format("\tDeployed Model Id: %s\n", predictResponse.getDeployedModelId());
+
+            SearchGetImageSearchResponseDto searchGetImageSearchResponseDto = new SearchGetImageSearchResponseDto();
+
+            System.out.println(predictResponse);
+
+            System.out.println("Predictions");
+            for (Value prediction : predictResponse.getPredictionsList()) {
+
+                ClassificationPredictionResult.Builder resultBuilder =
+                        ClassificationPredictionResult.newBuilder();
+                // Display names and confidences values correspond to
+                // IDs in the ID list.
+                ClassificationPredictionResult result =
+                        (ClassificationPredictionResult) ValueConverter.fromValue(resultBuilder, prediction);
+                int counter = 0;
+                for (Long id : result.getIdsList()) {
+                    Long itemSequence = Long.parseLong(result.getDisplayNames(counter));
+
+                    searchGetImageSearchResponseDto.setPillItemSequence(itemSequence);
+                    searchGetImageSearchResponseDto.setPillName(pillRepository.findPillByPillItemSequence(itemSequence).getPillName());
+
+                    PillImage pillImage = pillImageRepository.findByPillItemSequence(itemSequence);
+
+                    searchGetImageSearchResponseDto.setImageLink(pillImage.getImageLink());
+                    searchGetImageSearchResponseDto.setShape(pillImage.getShape());
+
+                    System.out.printf("Label ID: %d\n", id);
+                    System.out.printf("Label: %s\n", result.getDisplayNames(counter));
+                    System.out.println(Integer.parseInt(result.getDisplayNames(counter)));
+                    System.out.printf("Confidence: %.4f\n", result.getConfidences(counter));
+                    counter++;
+                }
+            }
+
+            return searchGetImageSearchResponseDto;
+        }
     }
 }
