@@ -23,18 +23,22 @@ public class Ingredient {
     @Column(columnDefinition = "unit_medicine")
     private String unitMedicine;
 
+    @Column(columnDefinition = "ingredient")
+    private String ingredient;
+
     @Column(columnDefinition = "dosage")
-    private float dosage;
+    private Float dosage;
 
     @Column(columnDefinition = "unit")
     private String unit;
 
     @Builder
-    public Ingredient(Integer id, Long pillItemSequence, String pillName, String unitMedicine, float dosage, String unit) {
+    public Ingredient(Integer id, Long pillItemSequence, String pillName, String unitMedicine, String ingredient, Float dosage, String unit) {
         this.id = id;
         this.pillItemSequence = pillItemSequence;
         this.pillName = pillName;
         this.unitMedicine = unitMedicine;
+        this.ingredient = ingredient;
         this.dosage = dosage;
         this.unit = unit;
     }

@@ -21,13 +21,13 @@ public class MaxIngredient {
     private String mainIngredient;
 
     @Column(columnDefinition = "max_dosage")
-    private float maxDosage;
+    private Float maxDosage;
 
     @Column(columnDefinition = "unit2")
     private String unit;
 
     @Builder
-    public MaxIngredient(Integer id, Long pillItemSequence, String mainIngredient, float maxDosage, String unit) {
+    public MaxIngredient(Integer id, Long pillItemSequence, String mainIngredient, Float maxDosage, String unit) {
         this.id = id;
         this.pillItemSequence = pillItemSequence;
         this.mainIngredient = mainIngredient;

@@ -1,14 +1,8 @@
 package com.example.exitmedserver.pill.service;
 
 import com.example.exitmedserver.pill.dto.*;
-import com.example.exitmedserver.pill.entity.Alarm;
-import com.example.exitmedserver.pill.entity.Drawer;
-import com.example.exitmedserver.pill.entity.Pill;
-import com.example.exitmedserver.pill.entity.PillImage;
-import com.example.exitmedserver.pill.repository.AlarmRepository;
-import com.example.exitmedserver.pill.repository.DrawerRepository;
-import com.example.exitmedserver.pill.repository.PillImageRepository;
-import com.example.exitmedserver.pill.repository.PillRepository;
+import com.example.exitmedserver.pill.entity.*;
+import com.example.exitmedserver.pill.repository.*;
 import com.example.exitmedserver.search.entity.FavoriteList;
 import com.example.exitmedserver.search.repository.FavoriteListRepository;
 import com.example.exitmedserver.user.entity.UserProfile;
@@ -36,6 +30,8 @@ public class PillService {
     private final PillImageRepository pillImageRepository;
     private final UserProfileRepository userProfileRepository;
     private final FavoriteListRepository favoriteListRepository;
+    private final IngredientRepository ingredientRepository;
+    private final MaxIngredientRepository maxIngredientRepository;
 
     public PillAddDrawerResponseDto addDrawer(String jwtToken, PillAddDrawerRequestDto pillAddDrawerRequestDto) {
         PillAddDrawerResponseDto pillAddDrawerResponseDto = new PillAddDrawerResponseDto();
@@ -82,6 +78,35 @@ public class PillService {
             }
         }
         return pillAddDrawerResponseDto;
+    }
+
+    public PillGetMaxAllowedResponse getMaxAllowed(String jwtToken, PillGetMaxAllowedRequestDto pillGetMaxAllowedRequestDto) {
+        PillGetMaxAllowedResponse pillGetMaxAllowedResponse = new PillGetMaxAllowedResponse();
+        List<PillGetMaxAllowedResponseDto> maxAllowedList = new ArrayList<>();
+
+        JwtProvider jwtProvider = new JwtProvider();
+        String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        List<Ingredient> searchedIngredients = ingredientRepository.findIngredientByPillItemSequence(pillGetMaxAllowedRequestDto.getPillItemSequence());
+        List<MaxIngredient> searchedMaxIngredient = maxIngredientRepository.findMaxIngredientByPillItemSequence(pillGetMaxAllowedRequestDto.getPillItemSequence());
+
+
+        for (Ingredient ingredient : searchedIngredients) {
+            String ingredientName = ingredient.getIngredient();
+            for (MaxIngredient maxIngredient : searchedMaxIngredient) {
+                String searchedMaxIngredientName = maxIngredient.getMainIngredient();
+                if (ingredientName.equals(searchedMaxIngredientName)) {
+                    PillGetMaxAllowedResponseDto pillGetMaxAllowedResponseDto = new PillGetMaxAllowedResponseDto();
+                    pillGetMaxAllowedResponseDto.setMainIngredient(ingredientName);
+                    pillGetMaxAllowedResponseDto.setMaxDosage(maxIngredient.getMaxDosage());
+                    pillGetMaxAllowedResponseDto.setUnit(maxIngredient.getUnit());
+                    maxAllowedList.add(pillGetMaxAllowedResponseDto);
+                }
+            }
+        }
+
+        pillGetMaxAllowedResponse.setData(maxAllowedList);
+        return pillGetMaxAllowedResponse;
     }
 
     public PillGetDrawerListResponse getDrawerList(String jwtToken) {
