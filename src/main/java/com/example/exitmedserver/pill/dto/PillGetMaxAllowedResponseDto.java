@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class PillGetMaxAllowedResponseDto {
     private String mainIngredient;
-    private float maxDosage;
+    private Float dosage;
+    private Float maxDosage;
     private String unit;
 }

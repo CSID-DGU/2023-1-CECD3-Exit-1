@@ -98,6 +98,7 @@ public class PillService {
                 if (ingredientName.equals(searchedMaxIngredientName)) {
                     PillGetMaxAllowedResponseDto pillGetMaxAllowedResponseDto = new PillGetMaxAllowedResponseDto();
                     pillGetMaxAllowedResponseDto.setMainIngredient(ingredientName);
+                    pillGetMaxAllowedResponseDto.setDosage(ingredient.getDosage());
                     pillGetMaxAllowedResponseDto.setMaxDosage(maxIngredient.getMaxDosage());
                     pillGetMaxAllowedResponseDto.setUnit(maxIngredient.getUnit());
                     maxAllowedList.add(pillGetMaxAllowedResponseDto);
