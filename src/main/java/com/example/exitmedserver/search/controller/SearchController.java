@@ -8,14 +8,11 @@ import com.example.exitmedserver.user.dto.SearchGetFavoriteResponse;
 import com.example.exitmedserver.user.dto.SearchGetSearchListResponse;
 import com.example.exitmedserver.user.dto.SearchTextResponse;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.util.Base64Util;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Base64;
 
 @RestController
 @RequiredArgsConstructor
