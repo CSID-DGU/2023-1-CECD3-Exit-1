@@ -2,6 +2,7 @@ package com.example.exitmedserver.search.controller;
 
 import com.example.exitmedserver.search.dto.SearchAddFavoriteRequestDto;
 import com.example.exitmedserver.search.dto.SearchAddFavoriteResponseDto;
+import com.example.exitmedserver.search.dto.SearchGetImageSearchResponseDto;
 import com.example.exitmedserver.search.service.SearchService;
 import com.example.exitmedserver.user.dto.SearchGetFavoriteResponse;
 import com.example.exitmedserver.user.dto.SearchGetSearchListResponse;
@@ -9,6 +10,7 @@ import com.example.exitmedserver.user.dto.SearchTextResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -25,6 +27,15 @@ public class SearchController {
     @PostMapping("/auth/search/favorite")
     public SearchAddFavoriteResponseDto addToFavorite(@RequestHeader("Authorization") String jwtToken, @RequestBody SearchAddFavoriteRequestDto searchAddFavoriteRequestDto) {
         return searchService.addToFavorite(jwtToken, searchAddFavoriteRequestDto.getPillItemSequence());
+    }
+
+    @PostMapping("/auth/search/image-search")
+    public SearchGetImageSearchResponseDto imageEncode(@RequestHeader("Authorization") String jwtToken, @RequestParam("image") MultipartFile image) throws IOException {
+        try {
+            return searchService.predictImageClassification("690976576624", image, "5170539191523606528");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/auth/search/favorite")
