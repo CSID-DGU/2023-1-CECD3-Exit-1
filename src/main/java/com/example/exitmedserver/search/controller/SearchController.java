@@ -34,14 +34,7 @@ public class SearchController {
 
     @PostMapping("/auth/search/image-search")
     public SearchGetImageSearchResponseDto imageEncode(@RequestHeader("Authorization") String jwtToken, @RequestParam("image") MultipartFile image) throws IOException {
-//        if (image.isEmpty()) {
-//            return "file is empty";
-//        }
-
         try {
-            byte[] imageBytes = image.getBytes();
-            String encodedImage2 = Base64.getEncoder().encodeToString(imageBytes);
-
             return searchService.predictImageClassification("690976576624", image, "5170539191523606528");
         } catch (IOException e) {
             throw new RuntimeException(e);
