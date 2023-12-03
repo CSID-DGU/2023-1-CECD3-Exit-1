@@ -11,25 +11,17 @@ import lombok.NoArgsConstructor;
 public class MaxIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "id")
-    private Integer id;
-
-    @Column(columnDefinition = "pill_item_sequence")
-    private Long pillItemSequence;
-
-    @Column(columnDefinition = "main_ingredient")
+    @Column(name = "main_ingredient")
     private String mainIngredient;
 
-    @Column(columnDefinition = "max_dosage")
+    @Column(name = "max_dosage")
     private Float maxDosage;
 
-    @Column(columnDefinition = "unit2")
+    @Column(name = "unit")
     private String unit;
 
     @Builder
-    public MaxIngredient(Integer id, Long pillItemSequence, String mainIngredient, Float maxDosage, String unit) {
-        this.id = id;
-        this.pillItemSequence = pillItemSequence;
+    public MaxIngredient(String mainIngredient, Float maxDosage, String unit) {
         this.mainIngredient = mainIngredient;
         this.maxDosage = maxDosage;
         this.unit = unit;

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-import java.sql.Time;
 
 @Entity
 @Getter
@@ -53,9 +52,16 @@ public class Drawer {
     @Column(name = "sunday", columnDefinition = "TINYINT")
     private boolean sunday;
 
+    @Column(name = "count_per_dosage")
+    private Integer countPerDosage;
+
+    @Column(name = "count_per_day")
+    private Integer countPerDay;
+
     @Builder
     public Drawer(Integer id, String userId, Long pillItemSequence, Date finalDate, String dosageCycle, String comment,
-                  boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, boolean sunday) {
+                  boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, boolean sunday,
+                  Integer countPerDosage, Integer countPerDay) {
         this.id = id;
         this.userId = userId;
         this.pillItemSequence = pillItemSequence;
@@ -69,5 +75,7 @@ public class Drawer {
         this.friday = friday;
         this.saturday = saturday;
         this.sunday = sunday;
+        this.countPerDosage = countPerDosage;
+        this.countPerDay = countPerDay;
     }
 }

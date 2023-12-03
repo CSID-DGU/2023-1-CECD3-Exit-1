@@ -11,25 +11,25 @@ import lombok.NoArgsConstructor;
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(columnDefinition = "pill_item_sequence")
+    @Column(name = "pill_item_sequence")
     private Long pillItemSequence;
 
-    @Column(columnDefinition = "pill_name")
+    @Column(name = "pill_name")
     private String pillName;
 
-    @Column(columnDefinition = "unit_medicine")
+    @Column(name = "unit_medicine")
     private String unitMedicine;
 
-    @Column(columnDefinition = "ingredient")
+    @Column(name = "ingredient")
     private String ingredient;
 
-    @Column(columnDefinition = "dosage")
+    @Column(name = "dosage")
     private Float dosage;
 
-    @Column(columnDefinition = "unit")
+    @Column(name = "unit")
     private String unit;
 
     @Builder
