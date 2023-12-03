@@ -15,6 +15,11 @@ public class PillController {
         return pillService.addDrawer(jwtToken, pillAddDrawerRequestDto);
     }
 
+    @GetMapping("/auth/pill/get-max-allowed/{pillItemSequence}")
+    public PillGetMaxAllowedResponse getMaxAllowed(@RequestHeader("Authorization") String jwtToken, @PathVariable Long pillItemSequence) {
+        return pillService.getMaxAllowed(jwtToken, pillItemSequence);
+    }
+
     @GetMapping("/auth/pill/drawer")
     public PillGetDrawerListResponse getDrawerList(@RequestHeader("Authorization") String jwtToken) {
         return pillService.getDrawerList(jwtToken);

@@ -1,14 +1,8 @@
 package com.example.exitmedserver.pill.service;
 
 import com.example.exitmedserver.pill.dto.*;
-import com.example.exitmedserver.pill.entity.Alarm;
-import com.example.exitmedserver.pill.entity.Drawer;
-import com.example.exitmedserver.pill.entity.Pill;
-import com.example.exitmedserver.pill.entity.PillImage;
-import com.example.exitmedserver.pill.repository.AlarmRepository;
-import com.example.exitmedserver.pill.repository.DrawerRepository;
-import com.example.exitmedserver.pill.repository.PillImageRepository;
-import com.example.exitmedserver.pill.repository.PillRepository;
+import com.example.exitmedserver.pill.entity.*;
+import com.example.exitmedserver.pill.repository.*;
 import com.example.exitmedserver.search.entity.FavoriteList;
 import com.example.exitmedserver.search.repository.FavoriteListRepository;
 import com.example.exitmedserver.user.entity.UserProfile;
@@ -25,7 +19,9 @@ import java.time.LocalTime;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +32,8 @@ public class PillService {
     private final PillImageRepository pillImageRepository;
     private final UserProfileRepository userProfileRepository;
     private final FavoriteListRepository favoriteListRepository;
+    private final IngredientRepository ingredientRepository;
+    private final MaxIngredientRepository maxIngredientRepository;
 
     public PillAddDrawerResponseDto addDrawer(String jwtToken, PillAddDrawerRequestDto pillAddDrawerRequestDto) {
         PillAddDrawerResponseDto pillAddDrawerResponseDto = new PillAddDrawerResponseDto();
@@ -82,6 +80,129 @@ public class PillService {
             }
         }
         return pillAddDrawerResponseDto;
+    }
+
+    public PillGetMaxAllowedResponse getMaxAllowed(String jwtToken, Long pillItemSequence) {
+        PillGetMaxAllowedResponse pillGetMaxAllowedResponse = new PillGetMaxAllowedResponse();
+        List<PillGetMaxAllowedResponseDto> maxAllowedList = new ArrayList<>();
+
+        JwtProvider jwtProvider = new JwtProvider();
+        String userId = jwtProvider.getUserIdFromToken(jwtToken.replace("Bearer ", ""));
+
+        // get all ingredient list of the pill that user want to add
+        // 추가하고 싶은 약의 모든 성분 불러오기
+        List<Ingredient> ingredientsToAdd = ingredientRepository.findIngredientByPillItemSequence(pillItemSequence);
+
+        // get all max ingredient of the pill that user want to add
+        // 추가하고 싶은 약의 모든 최대 허용량 불러오기
+        List<MaxIngredient> maxIngredientsToAdd = new ArrayList<>();
+        for (Ingredient ingredient : ingredientsToAdd) {
+            MaxIngredient maxIngredient = maxIngredientRepository.findMaxIngredientByMainIngredient(ingredient.getIngredient());
+            if (maxIngredient != null) {
+                maxIngredientsToAdd.add(maxIngredient);
+                PillGetMaxAllowedResponseDto pillGetMaxAllowedResponseDto = new PillGetMaxAllowedResponseDto();
+                pillGetMaxAllowedResponseDto.setMaxDosage(maxIngredient.getMaxDosage());
+                pillGetMaxAllowedResponseDto.setMainIngredient(maxIngredient.getMainIngredient());
+                pillGetMaxAllowedResponseDto.setUnit(maxIngredient.getUnit());
+                pillGetMaxAllowedResponseDto.setDosage(ingredient.getDosage());
+                maxAllowedList.add(pillGetMaxAllowedResponseDto);
+            }
+        }
+
+        //List<MaxIngredient> searchedMaxIngredient = maxIngredientRepository.findMaxIngredientByPillItemSequence(pillItemSequence);
+        List<IngredientDataHolder> ingredientDataHolderList = new ArrayList<>();
+
+        // get all item sequence list of user
+        // 유저의 약서랍에 들어있는 모든 약의 item sequence 불러오기
+        List<Drawer> userDrawer = drawerRepository.findDrawerByUserId(userId);
+        List<Long> itemSequenceList = new ArrayList<>();
+
+        for (MaxIngredient maxIngredient : maxIngredientsToAdd) {
+            String ingredientName = maxIngredient.getMainIngredient();
+            for (Drawer drawer : userDrawer) {
+                List<Ingredient> ingredientsInDrawer = ingredientRepository.findIngredientByPillItemSequence(drawer.getPillItemSequence());
+                for (Ingredient ingredient : ingredientsInDrawer) {
+                    if (ingredient.getIngredient().equals(ingredientName)) {
+                        IngredientDataHolder ingredientDataHolder = new IngredientDataHolder();
+                        ingredientDataHolder.setIngredientName(ingredientName);
+                        ingredientDataHolder.setDosage(ingredient.getDosage());
+                        ingredientDataHolder.setCntPerDay(drawer.getCountPerDay());
+                        ingredientDataHolder.setCntPerDosage(drawer.getCountPerDosage());
+                        ingredientDataHolder.setUnit(ingredient.getUnit());
+                        ingredientDataHolderList.add(ingredientDataHolder);
+                    }
+                }
+            }
+        }
+
+        // ingredientDataHolderList에는
+        // {성분명, 투여량, 단위, 몇알, 몇회} 리스트 형태로 저장되어있음
+        Map<String, Float> ingredientAndAccumulatedDosage = new HashMap<>();
+        for (IngredientDataHolder ingredientDataHolder : ingredientDataHolderList) {
+            String ingredientName = ingredientDataHolder.getIngredientName();
+            Float accumulatedDosage = ingredientDataHolder.getDosage() * ingredientDataHolder.getCntPerDosage() * ingredientDataHolder.getCntPerDay();
+            if (ingredientAndAccumulatedDosage.containsKey(ingredientName)) {
+                Float oldAccumulatedDosage = ingredientAndAccumulatedDosage.get(ingredientName);
+                ingredientAndAccumulatedDosage.replace(ingredientName, oldAccumulatedDosage + accumulatedDosage);
+            } else {
+                ingredientAndAccumulatedDosage.put(ingredientName, accumulatedDosage);
+            }
+        }
+
+        for (PillGetMaxAllowedResponseDto pillGetMaxAllowedResponseDto : maxAllowedList) {
+            for (String ingredient : ingredientAndAccumulatedDosage.keySet()) {
+                if (pillGetMaxAllowedResponseDto.getMainIngredient().equals(ingredient)) {
+                    pillGetMaxAllowedResponseDto.setAccumulatedDosage(ingredientAndAccumulatedDosage.get(ingredient));
+                }
+            }
+        }
+
+
+        // item sequence, 하루 복용 개수 map
+//        Map<Long, Integer> ingredientAndCount = new HashMap<>();
+//        int cntPerDosage = 0;
+//        int cntPerDay = 0;
+//        for (Drawer drawer : userDrawer) {
+//            List<Ingredient> ingredientsInDrawer = ingredientRepository.findIngredientByPillItemSequence(drawer.getPillItemSequence());
+//            for (Ingredient ingredient : ingredientsInDrawer) {
+//                for (MaxIngredient maxIngredient : maxIngredientsToAdd) {
+//                    if (ingredient.getIngredient().equals(maxIngredient.getMainIngredient())) {
+//                        cntPerDosage += drawer.getCountPerDosage();
+//                        cntPerDay  += drawer.getCountPerDay();
+//                        // item sequence, 하루 복용 개수 map
+//                        if (ingredientAndCount.containsKey(drawer.getPillItemSequence())) {
+//                            int newCnt = ingredientAndCount.get(drawer.getPillItemSequence()) + cntPerDay * cntPerDosage;
+//                            ingredientAndCount.replace(drawer.getPillItemSequence(), newCnt);
+//                        } else {
+//                            ingredientAndCount.put(drawer.getPillItemSequence(), cntPerDay * cntPerDosage);
+//                        }
+//                    }
+//                }
+//            }
+            //itemSequenceList.add(drawer.getPillItemSequence());
+        //}
+
+        // 추가하려는 약 성분 중에서 허용량 제한이 있는 성분과 약 서합에 들어있는 약들의 모든 성분 중에서 겹치는 성분 찾기
+//        for (Long sequence : itemSequenceList) {
+//            ingredientsToAdd.clear();
+//            ingredientsToAdd = ingredientRepository.findIngredientByPillItemSequence(sequence);
+//            for (Ingredient ingredient : ingredientsToAdd) {
+//                for (MaxIngredient maxIngredient : maxIngredientsToAdd) {
+//                    if (ingredient.getIngredient().equals(maxIngredient.getMainIngredient())) {
+//                    }
+//                }
+//            }
+//        }
+
+//        for (Ingredient ingredient : ingredientsToAdd) {
+//            String ingredientName = ingredient.getIngredient();
+//
+//            ingredientsToAdd.add(maxIngredientRepository.findMaxIngredientByMainIngredient(ingredientName));
+//
+//        }
+
+        pillGetMaxAllowedResponse.setData(maxAllowedList);
+        return pillGetMaxAllowedResponse;
     }
 
     public PillGetDrawerListResponse getDrawerList(String jwtToken) {
