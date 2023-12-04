@@ -63,6 +63,8 @@ public class PillService {
                         .friday(pillAddDrawerRequestDto.getDayForDrawer().isFriday())
                         .saturday(pillAddDrawerRequestDto.getDayForDrawer().isSaturday())
                         .sunday(pillAddDrawerRequestDto.getDayForDrawer().isSunday())
+                        .countPerDosage(pillAddDrawerRequestDto.getCountPerDosage())
+                        .countPerDay(pillAddDrawerRequestDto.getCountPerDay())
                         .build();
                 Alarm alarm = Alarm.builder()
                         .id(null)

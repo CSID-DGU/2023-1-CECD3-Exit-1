@@ -10,4 +10,6 @@ public class PillAddDrawerRequestDto {
     private String comment;
     private String takeTime;
     private DayForDrawer dayForDrawer;
+    private Integer countPerDosage;
+    private Integer countPerDay;
 }
