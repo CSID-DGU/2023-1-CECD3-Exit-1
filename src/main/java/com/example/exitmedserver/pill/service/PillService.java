@@ -48,7 +48,6 @@ public class PillService {
             SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
             try {
                 Date date = new Date(dateFormatter.parse(pillAddDrawerRequestDto.getFinalDate()).getTime());
-                Time takeTime = new Time(timeFormatter.parse(pillAddDrawerRequestDto.getTakeTime()).getTime());
                 Drawer drawer = Drawer.builder()
                         .id(null)
                         .userId(userId)
@@ -66,16 +65,21 @@ public class PillService {
                         .countPerDosage(pillAddDrawerRequestDto.getCountPerDosage())
                         .countPerDay(pillAddDrawerRequestDto.getCountPerDay())
                         .build();
-                Alarm alarm = Alarm.builder()
-                        .id(null)
-                        .pillItemSequence(pillAddDrawerRequestDto.getPillItemSequence())
-                        .userId(userId)
-                        .takeTime(takeTime)
-                        .isTurnedOn(true)
-                        .build();
 
+                List<String> takeTimeList = pillAddDrawerRequestDto.getTakeTime();
+                for (String takeTime : takeTimeList) {
+                    Time takeTimeToAdd = new Time(timeFormatter.parse(takeTime).getTime());
+                    Alarm alarm = Alarm.builder()
+                            .id(null)
+                            .pillItemSequence(pillAddDrawerRequestDto.getPillItemSequence())
+                            .userId(userId)
+                            .takeTime(takeTimeToAdd)
+                            .isTurnedOn(true)
+                            .build();
+                    alarmRepository.save(alarm);
+                }
                 drawerRepository.save(drawer);
-                alarmRepository.save(alarm);
+
                 pillAddDrawerResponseDto.setAdded(true);
             } catch (ParseException e) {
                 e.printStackTrace();
