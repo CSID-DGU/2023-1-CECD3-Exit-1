@@ -139,4 +139,10 @@
     <string name="init_dur_senior_caution_contents">노인 분들은 주의 해야 하는 의약품 입니다. 건강 보험 심사 평가원 홈페이지에 접속해 참고해 주세요.</string>
     <string name="pill_detail_caution">주의</string>
     <string name="pill_detail_caution_title">이 약의 주의사항은 무엇인가요?</string>
+
+    <!--  double dose  -->
+    <string name="pill_detail_no_drug_interaction">내가 복용 중인 약과 중복 투약이 아니예요 :)</string>
+    <string name="pill_detail_drug_interaction_content"><![CDATA[%s와(과) <font color="#FF2424">동일성분 중복</font>이에요. 복용에 주의해 주세요.]]></string>
+    <string name="pill_creation_dialog_description_basic">복용하고 있는 약을 관리하고\n복용 알림을 받을 수 있어요.</string>
+    <string name="pill_creation_dialog_description_duplicated">해당 약은 약서랍에 있는 약과\n동일 성분 중복이에요.\n복용에 주의해주세요.</string>
 </resources>

@@ -26,13 +26,18 @@ class PillDetailDrugInteractionFragment :
     private fun collectData() {
         pillDetailViewModel.duplicatedPills.flowWithLifecycle(lifecycle)
             .onEach { duplicatedPillList ->
-                val duplicatedPills = duplicatedPillList.joinToString(separator = ", ")
-                val content = getString(
-                    R.string.pill_detail_drug_interaction_content,
-                    Html.fromHtml(duplicatedPills, Html.FROM_HTML_MODE_LEGACY)
-                )
-                binding.tvPillDetailDrugInteractionContent.text =
-                    Html.fromHtml(content, Html.FROM_HTML_MODE_LEGACY)
+                if (duplicatedPillList.size > 0) {
+                    val duplicatedPills = duplicatedPillList.joinToString(separator = ", ")
+                    val content = getString(
+                        R.string.pill_detail_drug_interaction_content,
+                        Html.fromHtml(duplicatedPills, Html.FROM_HTML_MODE_LEGACY)
+                    )
+                    binding.tvPillDetailDrugInteractionContent.text =
+                        Html.fromHtml(content, Html.FROM_HTML_MODE_LEGACY)
+                } else {
+                    binding.tvPillDetailDrugInteractionContent.text =
+                        getString(R.string.pill_detail_no_drug_interaction)
+                }
             }.launchIn(lifecycleScope)
     }
 }
