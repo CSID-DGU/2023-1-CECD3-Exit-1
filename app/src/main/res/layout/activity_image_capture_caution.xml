@@ -30,16 +30,39 @@
             layout="@layout/view_toolbar"
             app:title="@{@string/image_search_title}" />
 
-        <ImageView
-            android:id="@+id/iv_caution"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_caution"
+            android:padding="10dp"
             android:layout_width="0dp"
             android:layout_height="240dp"
             android:layout_marginTop="44dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
+            android:background="@color/lightgray_warm"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <ImageView
+                android:id="@+id/iv_caution_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_image_capture_caution2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_caution_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_caution_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="148dp"
+                android:src="@drawable/img_image_caputre_caution"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_caution_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -48,7 +71,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_image_capture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_caution">
+            app:layout_constraintTop_toBottomOf="@id/layout_caution">
 
             <ImageView
                 android:id="@+id/iv_light_reflection"
@@ -86,7 +109,7 @@
                 android:textAppearance="@style/TextAppearance.BodyM1"
                 app:layout_constraintStart_toStartOf="@+id/iv_identification_pharse"
                 app:layout_constraintTop_toBottomOf="@+id/iv_light_reflection"
-                tools:text="알약의 앞면을\n해주세요" />
+                tools:text="알약의 앞면을\n촬영 해주세요" />
 
             <ImageView
                 android:id="@+id/iv_image_center"
