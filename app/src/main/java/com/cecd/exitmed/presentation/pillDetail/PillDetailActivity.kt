@@ -57,7 +57,11 @@ class PillDetailActivity :
             }
         }
         binding.layoutPillDrawer.setOnClickListener {
-            moveToAddPillDrawer()
+            PillCreationDialog().apply {
+                arguments = Bundle().apply {
+                    putInt(DUPLICATED_PILL_SIZE, pillDetailViewModel.duplicatedPills.value.size)
+                }
+            }.show(supportFragmentManager, "pillCreationDialog")
         }
         binding.ivBack.setOnClickListener {
             finish()
@@ -132,5 +136,6 @@ class PillDetailActivity :
 
     companion object {
         const val ITEM_SEQ = "itemSeq"
+        const val DUPLICATED_PILL_SIZE = "duplicatedPillSize"
     }
 }

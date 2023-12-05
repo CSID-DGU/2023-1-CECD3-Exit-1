@@ -14,5 +14,6 @@ data class ResponsePillDetail(
     val pillName: String,
     val pregnant: Boolean,
     val storage: String,
-    val warning: String
+    val warning: String,
+    val duplicatedPills: List<String>
 )
