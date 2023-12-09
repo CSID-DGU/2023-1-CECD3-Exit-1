@@ -48,7 +48,6 @@ public class PillService {
             SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
             try {
                 Date date = new Date(dateFormatter.parse(pillAddDrawerRequestDto.getFinalDate()).getTime());
-                Time takeTime = new Time(timeFormatter.parse(pillAddDrawerRequestDto.getTakeTime()).getTime());
                 Drawer drawer = Drawer.builder()
                         .id(null)
                         .userId(userId)
@@ -63,17 +62,24 @@ public class PillService {
                         .friday(pillAddDrawerRequestDto.getDayForDrawer().isFriday())
                         .saturday(pillAddDrawerRequestDto.getDayForDrawer().isSaturday())
                         .sunday(pillAddDrawerRequestDto.getDayForDrawer().isSunday())
-                        .build();
-                Alarm alarm = Alarm.builder()
-                        .id(null)
-                        .pillItemSequence(pillAddDrawerRequestDto.getPillItemSequence())
-                        .userId(userId)
-                        .takeTime(takeTime)
-                        .isTurnedOn(true)
+                        .countPerDosage(pillAddDrawerRequestDto.getCountPerDosage())
+                        .countPerDay(pillAddDrawerRequestDto.getCountPerDay())
                         .build();
 
+                List<String> takeTimeList = pillAddDrawerRequestDto.getTakeTime();
+                for (String takeTime : takeTimeList) {
+                    Time takeTimeToAdd = new Time(timeFormatter.parse(takeTime).getTime());
+                    Alarm alarm = Alarm.builder()
+                            .id(null)
+                            .pillItemSequence(pillAddDrawerRequestDto.getPillItemSequence())
+                            .userId(userId)
+                            .takeTime(takeTimeToAdd)
+                            .isTurnedOn(true)
+                            .build();
+                    alarmRepository.save(alarm);
+                }
                 drawerRepository.save(drawer);
-                alarmRepository.save(alarm);
+
                 pillAddDrawerResponseDto.setAdded(true);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -179,7 +185,7 @@ public class PillService {
 //                    }
 //                }
 //            }
-            //itemSequenceList.add(drawer.getPillItemSequence());
+        //itemSequenceList.add(drawer.getPillItemSequence());
         //}
 
         // 추가하려는 약 성분 중에서 허용량 제한이 있는 성분과 약 서합에 들어있는 약들의 모든 성분 중에서 겹치는 성분 찾기
