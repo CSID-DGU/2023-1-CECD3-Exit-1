@@ -185,7 +185,7 @@ public class PillService {
 //                    }
 //                }
 //            }
-            //itemSequenceList.add(drawer.getPillItemSequence());
+        //itemSequenceList.add(drawer.getPillItemSequence());
         //}
 
         // 추가하려는 약 성분 중에서 허용량 제한이 있는 성분과 약 서합에 들어있는 약들의 모든 성분 중에서 겹치는 성분 찾기
