@@ -2,7 +2,7 @@ package com.example.exitmedserver.search.controller;
 
 import com.example.exitmedserver.search.dto.SearchAddFavoriteRequestDto;
 import com.example.exitmedserver.search.dto.SearchAddFavoriteResponseDto;
-import com.example.exitmedserver.search.dto.SearchGetImageSearchResponseDto;
+import com.example.exitmedserver.search.dto.SearchGetImageSearchResponse;
 import com.example.exitmedserver.search.service.SearchService;
 import com.example.exitmedserver.user.dto.SearchGetFavoriteResponse;
 import com.example.exitmedserver.user.dto.SearchGetSearchListResponse;
@@ -30,7 +30,7 @@ public class SearchController {
     }
 
     @PostMapping("/auth/search/image-search")
-    public SearchGetImageSearchResponseDto imageEncode(@RequestHeader("Authorization") String jwtToken, @RequestParam("image") MultipartFile image) throws IOException {
+    public SearchGetImageSearchResponse imageEncode(@RequestHeader("Authorization") String jwtToken, @RequestParam("image") MultipartFile image) throws IOException {
         try {
             return searchService.predictImageClassification("690976576624", image, "5170539191523606528");
         } catch (IOException e) {
