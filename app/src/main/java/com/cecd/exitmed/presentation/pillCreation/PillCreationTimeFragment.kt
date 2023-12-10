@@ -58,12 +58,7 @@ class PillCreationTimeFragment :
     private fun showTimePickerDialog(position: Int) {
         val cal = Calendar.getInstance()
         val timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-            val time =
-                if (minute == 0) {
-                    String.format("%d:00", hourOfDay)
-                } else {
-                    String.format("%d:%d", hourOfDay, minute)
-                }
+            val time = String.format("%02d:%02d", hourOfDay, minute)
             pillCreationTimeAdapter.setItem(time, position)
         }
         TimePickerDialog(
