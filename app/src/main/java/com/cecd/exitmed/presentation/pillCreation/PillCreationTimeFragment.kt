@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.FragmentPillCreationTimeBinding
 import com.cecd.exitmed.util.binding.BindingFragment
@@ -42,16 +43,28 @@ class PillCreationTimeFragment :
     }
 
     private fun collectData() {
-        viewModel.pagePosition.flowWithLifecycle(lifecycle).onEach {
-            if (it == 3)
+        // TODO adapter 내 item 변화 관찰
+        pillCreationTimeAdapter.registerAdapterDataObserver(object : AdapterDataObserver() {
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+                super.onItemRangeChanged(positionStart, itemCount)
                 viewModel.setPillTimeList(pillCreationTimeAdapter.timeList)
+            }
+        })
+        viewModel.pillTimeList.flowWithLifecycle(lifecycle).onEach { pillTimeList ->
+            binding.tvPillCreationTime.text = String.format("섭취횟수 %d회", pillTimeList.size)
         }.launchIn(lifecycleScope)
     }
 
     private fun showTimePickerDialog(position: Int) {
         val cal = Calendar.getInstance()
         val timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-            pillCreationTimeAdapter.setItem(set12HourClock(hourOfDay, minute), position)
+            val time =
+                if (minute == 0) {
+                    String.format("%d:00", hourOfDay)
+                } else {
+                    String.format("%d:%d", hourOfDay, minute)
+                }
+            pillCreationTimeAdapter.setItem(time, position)
         }
         TimePickerDialog(
             requireActivity(),

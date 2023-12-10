@@ -19,7 +19,7 @@ class PillCreationViewModel @Inject constructor(
 ) : ViewModel() {
     private val _pagePosition = MutableStateFlow(0)
     val pagePosition get() = _pagePosition.asStateFlow()
-    private val _lastDoseDate = MutableStateFlow<String>("")
+    private val _lastDoseDate = MutableStateFlow("")
     val lastDoseDate get() = _lastDoseDate.asStateFlow()
     private val _pillPeriodType = MutableStateFlow<PillPeriodType?>(null)
     val pillPeriodType get() = _pillPeriodType.asStateFlow()
@@ -34,7 +34,7 @@ class PillCreationViewModel @Inject constructor(
             DayType.SUNDAY to false
         )
     )
-    private val _pillTimeList = MutableStateFlow<MutableList<String?>?>(null)
+    private val _pillTimeList = MutableStateFlow<MutableList<String>>(mutableListOf())
     val pillTimeList get() = _pillTimeList.asStateFlow()
     var pillMemo = MutableStateFlow("")
     private val _isAdded = MutableStateFlow(false)
@@ -48,7 +48,7 @@ class PillCreationViewModel @Inject constructor(
                     finalDate = _lastDoseDate.value,
                     dosageCycle = _pillPeriodType.value?.name ?: "",
                     comment = pillMemo.value,
-                    takeTime = "16:00",
+                    takeTime = pillTimeList.value.toMutableList(),
                     dayForDrawer = RequestPillCreation.DayForDrawer(
                         monday = pillDayType.value.get(DayType.MONDAY) == true,
                         tuesday = pillDayType.value.get(DayType.TUESDAY) == true,
@@ -84,7 +84,7 @@ class PillCreationViewModel @Inject constructor(
         }
     }
 
-    fun setPillTimeList(pillTimeList: MutableList<String?>) {
+    fun setPillTimeList(pillTimeList: MutableList<String>) {
         _pillTimeList.value = pillTimeList
     }
 

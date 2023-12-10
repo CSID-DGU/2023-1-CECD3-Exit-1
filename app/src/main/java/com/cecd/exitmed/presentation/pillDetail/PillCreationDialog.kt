@@ -11,10 +11,12 @@ import com.cecd.exitmed.util.binding.BindingDialogFragment
 class PillCreationDialog :
     BindingDialogFragment<FragmentCreatePillDrawerDialogBinding>(R.layout.fragment_create_pill_drawer_dialog) {
     private var duplicatedPillSize: Int? = null
+    private var itemSeq: Int? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         duplicatedPillSize = arguments?.getInt(DUPLICATED_PILL_SIZE)
+        itemSeq = arguments?.getInt(ITEM_SEQ)
         initLayout()
         addListeners()
     }
@@ -40,10 +42,12 @@ class PillCreationDialog :
 
     private fun moveToAddPillDrawer() {
         val intent = Intent(requireContext(), PillCreationActivity::class.java)
+        intent.putExtra(ITEM_SEQ, itemSeq)
         startActivity(intent)
     }
 
     companion object {
         const val DUPLICATED_PILL_SIZE = "duplicatedPillSize"
+        const val ITEM_SEQ = "itemSeq"
     }
 }

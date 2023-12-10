@@ -53,6 +53,19 @@
             app:layout_constraintTop_toTopOf="@id/iv_pill_creation_time_remove"
             app:tint="@color/orange_700" />
 
+        <TextView
+            android:id="@+id/tv_pill_creation_duplicated_caution"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing24"
+            android:layout_marginTop="16dp"
+            android:text="약서랍에 동일 성분 중복인 의약품이 존재해요.\n에트라빌25밀리그램정을(를) 2정 이상 섭취하게 되면 아미트리프틸린염산염의 1일 최대 주성분 허용량을 초과하니 신중히 복용해주세요."
+            android:textAppearance="@style/TextAppearance.CaptionM1"
+            android:textColor="@color/error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pill_creation_time" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pill_creation_time_list"
             android:layout_width="0dp"
@@ -63,7 +76,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_pill_creation_time_add"
+            app:layout_constraintTop_toBottomOf="@id/tv_pill_creation_duplicated_caution"
             tools:listitem="@layout/item_pill_creation_time" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
