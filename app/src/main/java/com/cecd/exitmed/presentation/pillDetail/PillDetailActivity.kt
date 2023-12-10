@@ -32,13 +32,14 @@ class PillDetailActivity :
     }
 
     private fun initLayout() {
-        val fragmentList = ArrayList<Fragment>()
-        fragmentList.add(PillDetailMedicationFragment())
-        fragmentList.add(PillDetailComponentsContentFragment())
-        fragmentList.add(PillDetailUsageFragment())
-        fragmentList.add(PillDetailCautionFragment())
-        fragmentList.add(PillDetailDURFragment())
-        fragmentList.add(PillDetailDrugInteractionFragment())
+        val fragmentList = ArrayList<Fragment>().apply {
+            add(PillDetailMedicationFragment())
+            add(PillDetailComponentsContentFragment())
+            add(PillDetailUsageFragment())
+            add(PillDetailCautionFragment())
+            add(PillDetailDURFragment())
+            add(PillDetailDrugInteractionFragment())
+        }
 
         val adapter = PillDetailPagerAdapter(fragmentList, this)
         binding.vpPillDetail.adapter = adapter
