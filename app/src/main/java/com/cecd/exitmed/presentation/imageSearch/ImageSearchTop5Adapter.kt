@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ItemSearchTop5Binding
 import com.cecd.exitmed.domain.type.ImageSearchInfo
 import com.cecd.exitmed.util.ItemDiffCallback
@@ -24,8 +25,16 @@ class ImageSearchTop5Adapter :
         ) {
             with(binding) {
                 this.ivTopAccuracyImage.setImage(imagePillInfo.imageLink)
-                this.tvTopAccuracyPillName.text = imagePillInfo.pillName
-                this.tvTopAccuracyPillShpae.text = imagePillInfo.shape
+                binding.tvTopAccuracyPillName.text =
+                    binding.root.context.getString(
+                        R.string.image_search_pill_name,
+                        imagePillInfo.pillName
+                    )
+                binding.tvTopAccuracyPillShpae.text =
+                    binding.root.context.getString(
+                        R.string.image_search_pill_shape,
+                        imagePillInfo.shape
+                    )
             }
             binding.executePendingBindings()
         }
@@ -41,4 +50,3 @@ class ImageSearchTop5Adapter :
         holder.onBind(getItem(position))
     }
 }
-

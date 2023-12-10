@@ -26,8 +26,8 @@ class ImageSearchResultTop1Fragment :
     private fun initLayout() {
         with(viewModel.imageSearchInfoLists.value[0]) {
             binding.ivTopAccuracyImage.setImage(this.imageLink)
-            binding.tvTopAccuracyPillName.text = this.pillName
-            binding.tvTopAccuracyPillShpae.text = this.shape
+            binding.tvTopAccuracyPillName.text = getString(R.string.image_search_pill_name, this.pillName)
+            binding.tvTopAccuracyPillShpae.text = getString(R.string.image_search_pill_shape, this.shape)
         }
     }
 
