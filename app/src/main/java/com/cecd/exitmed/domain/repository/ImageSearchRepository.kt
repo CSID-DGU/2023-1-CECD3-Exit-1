@@ -1,8 +1,8 @@
 package com.cecd.exitmed.domain.repository
 
-import com.cecd.exitmed.data.model.response.ResponseImageSearch
+import com.cecd.exitmed.domain.type.ImageSearchInfo
 import okhttp3.MultipartBody
 
 interface ImageSearchRepository {
-    suspend fun searchImagePill(image: MultipartBody.Part): Result<ResponseImageSearch>
+    suspend fun searchImagePill(image: MultipartBody.Part): Result<List<ImageSearchInfo>>
 }
