@@ -13,7 +13,7 @@ class PillDrawerDetailDoseTimeAdapter :
         private val binding: ItemPillDrawerDetailDoseTimeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(doseTime: String) {
-            binding.tvDoseTtmeTitle.text = String.format("%d번째 알람",  adapterPosition + 1)
+            binding.tvDoseTtmeTitle.text = String.format("%d번째 알람", adapterPosition + 1)
             binding.tvDoseTime.text = doseTime
             binding.executePendingBindings()
         }
