@@ -101,6 +101,7 @@ public class SearchService {
                 if (pill.isPresent()) {
                     SearchGetFavoriteResponseDto searchGetFavoriteResponseDto = new SearchGetFavoriteResponseDto();
                     searchGetFavoriteResponseDto.setPillName(pill.get().getPillName());
+                    searchGetFavoriteResponseDto.setPillItemSequence(pill.get().getPillItemSequence());
                     favoriteList.add(searchGetFavoriteResponseDto);
                     i++;
                 }
