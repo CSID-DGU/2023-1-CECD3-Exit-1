@@ -10,47 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/view_toolbar"
-            app:title="@{@string/image_search_title}" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_image_search_pill"
-            android:layout_width="300dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/btn_image_search"
-            app:layout_constraintDimensionRatio="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:strokeColor="@color/gray_200"
-            app:strokeWidth="1dp" />
-
-        <ImageView
-            android:id="@+id/iv_add_a_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_a_photo"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_image_search_pill"
-            app:layout_constraintEnd_toEndOf="@+id/iv_image_search_pill"
-            app:layout_constraintStart_toStartOf="@+id/iv_image_search_pill"
-            app:layout_constraintTop_toTopOf="@+id/iv_image_search_pill"
-            app:tint="@color/gray_200" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_image_search"
-            style="@style/Widget.FullButton.Basic"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/container_image_search_result"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing24"
-            android:layout_marginBottom="@dimen/spacing24"
-            android:paddingVertical="12dp"
-            android:text="@string/image_search_button_title"
-            android:textAppearance="@style/TextAppearance.BodyM1"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
