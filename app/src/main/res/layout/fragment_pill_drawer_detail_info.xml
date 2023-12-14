@@ -26,20 +26,20 @@
             android:id="@+id/tv_pill_drawer_detail_info_period_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/spacing24"
-            android:text="월요일, 화요일, 수요일, 목요일, 금요일, 토요일 2회씩"
             android:textAppearance="@style/TextAppearance.BodyM1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_pill_drawer_detail_info_period_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_pill_drawer_detail_info_period_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_pill_drawer_detail_info_period_title"
+            tools:text="월요일, 화요일, 수요일, 목요일, 금요일, 토요일 2회씩" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pill_drawer_detail_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing24"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/shape_radius_12_border_black"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,13 +60,14 @@
             app:layout_constraintTop_toBottomOf="@id/rv_pill_drawer_detail_time" />
 
         <TextView
+            android:id="@+id/tv_pill_drawer_detail_last_dose_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing24"
-            android:text="2023년 8월 19일"
             android:textAppearance="@style/TextAppearance.BodyM1"
             app:layout_constraintBottom_toBottomOf="@id/tv_pill_drawer_detail_last_dose_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_pill_drawer_detail_last_dose_title" />
+            app:layout_constraintTop_toTopOf="@id/tv_pill_drawer_detail_last_dose_title"
+            tools:text="2023년 8월 19일" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
