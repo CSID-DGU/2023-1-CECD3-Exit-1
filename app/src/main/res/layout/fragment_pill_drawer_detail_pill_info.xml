@@ -1,49 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_pill_drawer_detail_pill_info_usage_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing24"
-            android:text="@string/pill_drawer_detail_pill_info_usage"
-            android:textAppearance="@style/TextAppearance.BodyB1"
-            android:textColor="@color/orange_500"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_pill_drawer_detail_pill_info_cautions"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing24"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/shape_radius_12_border_black"
-            android:padding="20dp"
-            android:text="1일 30-75㎎(6~15알)을 2-3회 분할 경구투여하고 필요시 1일 150㎎(30알)까지 점차적으로 증량할 수 있어요. 드물게 1일 300㎎(60알)까지 증량할 수 있어요."
-            android:textAppearance="@style/TextAppearance.BodyM1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_pill_drawer_detail_pill_info_usage_title" />
+            <TextView
+                android:id="@+id/tv_pill_drawer_detail_pill_info_usage_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing24"
+                android:text="@string/pill_drawer_detail_pill_info_usage"
+                android:textAppearance="@style/TextAppearance.BodyB1"
+                android:textColor="@color/orange_500"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing24"
-            android:layout_marginTop="@dimen/spacing24"
-            android:text="@string/pill_drawer_detail_pill_info_caution_title"
-            android:textAppearance="@style/TextAppearance.BodyB1"
-            android:textColor="@color/orange_500"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_pill_drawer_detail_pill_info_cautions" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_pill_drawer_detail_pill_info_cautions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing24"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_radius_12_border_black"
+                android:padding="20dp"
+                android:textAppearance="@style/TextAppearance.BodyM1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_pill_drawer_detail_pill_info_usage_title"
+                tools:text="1일 30-75㎎(6~15알)을 2-3회 분할 경구투여하고 필요시 1일 150㎎(30알)까지 점차적으로 증량할 수 있어요. 드물게 1일 300㎎(60알)까지 증량할 수 있어요." />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

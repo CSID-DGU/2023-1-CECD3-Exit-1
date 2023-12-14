@@ -9,7 +9,7 @@ class PillCreationTimeAdapter(
     private val showTimePickerDialog: (Int) -> Unit
 ) :
     RecyclerView.Adapter<PillCreationTimeAdapter.TimeViewHolder>() {
-    var timeList = mutableListOf<String?>(null)
+    var timeList = mutableListOf<String>()
 
     class TimeViewHolder(
         private val binding: ItemPillCreationTimeBinding
@@ -37,13 +37,13 @@ class PillCreationTimeAdapter(
         holder.onBind(timeList[position], showTimePickerDialog)
     }
 
-    fun addItem() {
-        timeList.add(null)
-        notifyDataSetChanged()
+    fun addItem(position: Int) {
+        timeList.add("")
+        notifyItemInserted(position)
     }
 
     fun removeItem(position: Int) {
-        if (position > 0) {
+        if (position >= 0) {
             timeList.removeAt(position)
             notifyItemRemoved(position)
         }

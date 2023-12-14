@@ -26,4 +26,9 @@ interface DoseService {
     suspend fun onOffDoseAlarm(
         @Path("item_sequence") itemSequence: Int,
     ): ResponseOnOffDoseAlarm
+
+    @GET("auth/pill/drawer/{item_sequence}")
+    suspend fun fetchDrawerPillDetail(
+        @Path("item_sequence") itemSequence: Int,
+    ): ResponseDrawerDetail
 }

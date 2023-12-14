@@ -9,7 +9,7 @@ data class RequestPillCreation(
     val dosageCycle: String,
     val finalDate: String,
     val pillItemSequence: Int,
-    val takeTime: String
+    val takeTime: List<String>
 ) {
     @Serializable
     data class DayForDrawer(

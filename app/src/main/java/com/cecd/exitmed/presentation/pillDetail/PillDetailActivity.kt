@@ -1,6 +1,5 @@
 package com.cecd.exitmed.presentation.pillDetail
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -8,7 +7,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityPillDetailBinding
-import com.cecd.exitmed.presentation.pillCreation.PillCreationActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.binding.setImage
 import com.cecd.exitmed.util.extension.showToast
@@ -22,8 +20,7 @@ class PillDetailActivity :
     BindingActivity<ActivityPillDetailBinding>(R.layout.activity_pill_detail) {
     private val pillDetailViewModel: PillDetailViewModel by viewModels()
     private val pillDURViewModel: PillDetailDURViewModel by viewModels()
-    var itemSeq: Int = 0
-
+    var itemSeq: Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initLayout()
@@ -32,13 +29,14 @@ class PillDetailActivity :
     }
 
     private fun initLayout() {
-        val fragmentList = ArrayList<Fragment>()
-        fragmentList.add(PillDetailMedicationFragment())
-        fragmentList.add(PillDetailComponentsContentFragment())
-        fragmentList.add(PillDetailUsageFragment())
-        fragmentList.add(PillDetailCautionFragment())
-        fragmentList.add(PillDetailDURFragment())
-        fragmentList.add(PillDetailDrugInteractionFragment())
+        val fragmentList = ArrayList<Fragment>().apply {
+            add(PillDetailMedicationFragment())
+            add(PillDetailComponentsContentFragment())
+            add(PillDetailUsageFragment())
+            add(PillDetailCautionFragment())
+            add(PillDetailDURFragment())
+            add(PillDetailDrugInteractionFragment())
+        }
 
         val adapter = PillDetailPagerAdapter(fragmentList, this)
         binding.vpPillDetail.adapter = adapter
@@ -57,7 +55,12 @@ class PillDetailActivity :
             }
         }
         binding.layoutPillDrawer.setOnClickListener {
-            moveToAddPillDrawer()
+            PillCreationDialog().apply {
+                arguments = Bundle().apply {
+                    putInt(DUPLICATED_PILL_SIZE, pillDetailViewModel.duplicatedPills.value.size)
+                    putInt(ITEM_SEQ, itemSeq)
+                }
+            }.show(supportFragmentManager, "pillCreationDialog")
         }
         binding.ivBack.setOnClickListener {
             finish()
@@ -124,13 +127,8 @@ class PillDetailActivity :
         showToast(getString(R.string.pill_detail_bookmark_toast))
     }
 
-    private fun moveToAddPillDrawer() {
-        val intent = Intent(this, PillCreationActivity::class.java)
-        intent.putExtra(ITEM_SEQ, itemSeq)
-        startActivity(intent)
-    }
-
     companion object {
         const val ITEM_SEQ = "itemSeq"
+        const val DUPLICATED_PILL_SIZE = "duplicatedPillSize"
     }
 }

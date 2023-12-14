@@ -11,7 +11,7 @@ data class ResponseRecentSearchTerm(
         val searchText: String
     )
 
-    fun toStringList() = data.map { searchText ->
+    fun toRecentSearchTermString() = data.map { searchText ->
         searchText.searchText
     }
 }

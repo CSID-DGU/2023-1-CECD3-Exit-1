@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -55,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineHeight="24dp"
-                        android:text="에나폰정10밀리그램(아미트리프틸린염산염)_(10mg/1정) 와(과) 동일성분 중복이에요."
+                        tools:text="@string/pill_detail_drug_interaction_content"
                         android:textAppearance="@style/TextAppearance.BodyM3"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_pill_detail_drug_interaction_question_title" />

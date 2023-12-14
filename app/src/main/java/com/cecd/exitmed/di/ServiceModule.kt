@@ -4,6 +4,8 @@ import com.cecd.exitmed.data.service.AuthService
 import com.cecd.exitmed.data.service.BookmarkService
 import com.cecd.exitmed.data.service.DURService
 import com.cecd.exitmed.data.service.DoseService
+import com.cecd.exitmed.data.service.MyService
+import com.cecd.exitmed.data.service.ImageSearchService
 import com.cecd.exitmed.data.service.PillDetailService
 import com.cecd.exitmed.data.service.TextSearchService
 import com.cecd.exitmed.data.type.BaseUrlType
@@ -59,9 +61,25 @@ object ServiceModule {
 
     @Singleton
     @Provides
-    fun provideMyService(
+    fun provideDoseService(
         @NetworkModule.Retrofit2(BaseUrlType.EXIT)
         retrofit: Retrofit
     ): DoseService =
         retrofit.create(DoseService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideMyService(
+        @NetworkModule.Retrofit2(BaseUrlType.EXIT)
+        retrofit: Retrofit
+    ): MyService =
+        retrofit.create(MyService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideImageSearchService(
+        @NetworkModule.Retrofit2(BaseUrlType.EXIT)
+        retrofit: Retrofit
+    ): ImageSearchService =
+        retrofit.create(ImageSearchService::class.java)
 }

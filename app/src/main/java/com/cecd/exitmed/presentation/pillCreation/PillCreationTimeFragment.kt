@@ -3,21 +3,16 @@ package com.cecd.exitmed.presentation.pillCreation
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.FragmentPillCreationTimeBinding
 import com.cecd.exitmed.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import java.util.Calendar
 
 @AndroidEntryPoint
 class PillCreationTimeFragment :
     BindingFragment<FragmentPillCreationTimeBinding>(R.layout.fragment_pill_creation_time) {
-    private val viewModel: PillCreationViewModel by activityViewModels()
     private lateinit var pillCreationTimeAdapter: PillCreationTimeAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,13 +23,14 @@ class PillCreationTimeFragment :
     }
 
     private fun initLayout() {
+        binding.tvPillCreationTime.text = getString(R.string.Pill_creation_count, 0)
         pillCreationTimeAdapter = PillCreationTimeAdapter(::showTimePickerDialog)
         binding.rvPillCreationTimeList.adapter = pillCreationTimeAdapter
     }
 
     private fun addListeners() {
         binding.ivPillCreationTimeAdd.setOnClickListener {
-            pillCreationTimeAdapter.addItem()
+            pillCreationTimeAdapter.addItem(pillCreationTimeAdapter.itemCount)
         }
         binding.ivPillCreationTimeRemove.setOnClickListener {
             pillCreationTimeAdapter.removeItem(pillCreationTimeAdapter.itemCount - 1)
@@ -42,16 +38,29 @@ class PillCreationTimeFragment :
     }
 
     private fun collectData() {
-        viewModel.pagePosition.flowWithLifecycle(lifecycle).onEach {
-            if (it == 3)
-                viewModel.setPillTimeList(pillCreationTimeAdapter.timeList)
-        }.launchIn(lifecycleScope)
+        pillCreationTimeAdapter.registerAdapterDataObserver(object : AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+                updateCount()
+            }
+
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                super.onItemRangeRemoved(positionStart, itemCount)
+                updateCount()
+            }
+        })
+    }
+
+    private fun updateCount() {
+        binding.tvPillCreationTime.text =
+            String.format("섭취횟수 %d회", pillCreationTimeAdapter.itemCount)
     }
 
     private fun showTimePickerDialog(position: Int) {
         val cal = Calendar.getInstance()
         val timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-            pillCreationTimeAdapter.setItem(set12HourClock(hourOfDay, minute), position)
+            val time = String.format("%02d:%02d", hourOfDay, minute)
+            pillCreationTimeAdapter.setItem(time, position)
         }
         TimePickerDialog(
             requireActivity(),
@@ -60,15 +69,5 @@ class PillCreationTimeFragment :
             cal.get(Calendar.MINUTE),
             false
         ).show()
-    }
-
-    // TODO 로직 다시 보기
-    private fun set12HourClock(hourOfDay: Int, minute: Int): String {
-        return if (hourOfDay < 12)
-            "오전 $hourOfDay:$minute"
-        else if (hourOfDay == 12)
-            "오후 $hourOfDay:$minute"
-        else
-            "오후 ${hourOfDay - 12}:$minute"
     }
 }
