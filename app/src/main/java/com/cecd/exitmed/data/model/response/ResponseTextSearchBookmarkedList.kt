@@ -8,10 +8,7 @@ data class ResponseTextSearchBookmarkedList(
 ) {
     @Serializable
     data class Data(
-        val pillName: String
+        val pillName: String,
+        val pillItemSequence: Int
     )
-
-    fun toBookmarkedString() = data.map { bookmark ->
-        bookmark.pillName
-    }
 }

@@ -180,8 +180,8 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="@dimen/spacing24"
                 android:layout_marginTop="20dp"
-                app:tabContentStart="10dp"
                 app:tabBackground="@drawable/selector_pill_detail_tab"
+                app:tabContentStart="10dp"
                 app:tabGravity="fill"
                 app:tabIndicator="@null"
                 app:tabIndicatorHeight="0dp"
@@ -198,6 +198,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="36dp"
             android:overScrollMode="never"
+            android:paddingBottom="30dp"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:layout_constrainedHeight="true" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,7 +2,9 @@ package com.cecd.exitmed.presentation.textSearch
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +20,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class SearchHistoryFragment :
     BindingFragment<FragmentSearchHistoryBinding>(R.layout.fragment_search_history) {
-    private val searchViewModel: SearchViewModel by viewModels()
+    private val searchViewModel: SearchViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,12 +41,12 @@ class SearchHistoryFragment :
     }
 
     private fun setRecentSearchTermAdapter(it: UiState.Success<List<String>>) {
-        val historyAdapter = SearchHistoryAdapter(::moveToPillDetail)
+        val historyAdapter = SearchHistoryAdapter(::putRecentSearchTermToSearchBar)
         binding.rvSearchHistory.adapter = historyAdapter
         historyAdapter.setHistoryList(it.data.toMutableList())
     }
 
-    private fun moveToPillDetail() {
-        startActivity(Intent(requireActivity(), PillDetailActivity::class.java))
+    private fun putRecentSearchTermToSearchBar(searchTerm: String) {
+        searchViewModel.setRecentSearchTerm(searchTerm)
     }
 }

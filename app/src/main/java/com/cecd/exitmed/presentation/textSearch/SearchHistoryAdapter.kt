@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cecd.exitmed.databinding.ItemSearchHistoryBinding
 
 class SearchHistoryAdapter(
-    private val moveToPillDetail: () -> Unit
+    val putRecentSearchTermToSearchBar: (String) -> Unit
 ) : RecyclerView.Adapter<SearchHistoryAdapter.HistoryViewHolder>() {
     private var historyList: MutableList<String> = mutableListOf()
 
@@ -15,11 +15,11 @@ class SearchHistoryAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             pillName: String,
-            moveToPillDetail: () -> Unit
+            putRecentSearchTermToSearchBar: (String) -> Unit
         ) {
             binding.pillName = pillName
             binding.tvSearchTitle.setOnClickListener {
-                moveToPillDetail()
+                putRecentSearchTermToSearchBar(pillName)
             }
             binding.executePendingBindings()
         }
@@ -34,7 +34,7 @@ class SearchHistoryAdapter(
     override fun getItemCount(): Int = historyList.size
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        holder.onBind(historyList[position], moveToPillDetail)
+        holder.onBind(historyList[position], putRecentSearchTermToSearchBar)
     }
 
     fun setHistoryList(historyList: MutableList<String>) {

@@ -20,8 +20,7 @@ class PillDetailActivity :
     BindingActivity<ActivityPillDetailBinding>(R.layout.activity_pill_detail) {
     private val pillDetailViewModel: PillDetailViewModel by viewModels()
     private val pillDURViewModel: PillDetailDURViewModel by viewModels()
-    var itemSeq: Int = 0
-
+    var itemSeq: Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initLayout()

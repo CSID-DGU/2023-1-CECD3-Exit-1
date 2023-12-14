@@ -2,10 +2,12 @@ package com.cecd.exitmed.presentation.textSearch
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
@@ -72,6 +74,10 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
                 else -> {}
             }
+        }.launchIn(lifecycleScope)
+        searchViewModel.searchTerm.flowWithLifecycle(lifecycle).onEach { searchTerm ->
+            Log.d("aaa", searchTerm)
+            binding.etSearchBox.setText(searchTerm)
         }.launchIn(lifecycleScope)
     }
 

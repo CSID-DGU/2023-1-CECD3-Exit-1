@@ -1,8 +1,10 @@
 package com.cecd.exitmed.presentation.textSearch
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cecd.exitmed.data.model.request.RequestBookmark
+import com.cecd.exitmed.data.model.response.ResponseTextSearchBookmarkedList
 import com.cecd.exitmed.domain.repository.BookmarkRepository
 import com.cecd.exitmed.domain.repository.TextSearchRepository
 import com.cecd.exitmed.domain.type.Pill
@@ -27,8 +29,10 @@ class SearchViewModel @Inject constructor(
     private var _recentSearchTermsState = MutableStateFlow<UiState<List<String>>>(UiState.Loading)
     val recentSearchTermsState get() = _recentSearchTermsState.asStateFlow()
     private var _searchBookmarkedListState =
-        MutableStateFlow<UiState<List<String>>>(UiState.Loading)
+        MutableStateFlow<UiState<List<ResponseTextSearchBookmarkedList.Data>>>(UiState.Loading)
     val searchBookmarkedListState get() = _searchBookmarkedListState.asStateFlow()
+    private var _searchTerm = MutableStateFlow<String>("")
+    val searchTerm get() = _searchTerm.asStateFlow()
 
     init {
         fetchRecentSearchTerms()
@@ -83,5 +87,9 @@ class SearchViewModel @Inject constructor(
                     Timber.e(throwable.message)
                 }
         }
+    }
+
+    fun setRecentSearchTerm(searchTerm: String) {
+        _searchTerm.value = searchTerm
     }
 }
