@@ -257,13 +257,19 @@ public class PillService {
 
         Drawer searchedDrawer = drawerRepository.findDrawerByUserIdAndPillItemSequence(userId, pillItemSequence);
         if (searchedDrawer != null) {
-            Alarm searchedAlarm = alarmRepository.findAlarmByUserIdAndPillItemSequence(userId, pillItemSequence);
+            //Alarm searchedAlarm = alarmRepository.findAlarmByUserIdAndPillItemSequence(userId, pillItemSequence);
+            List<Alarm> searchedAlarmList = alarmRepository.findAlarmListByUserIdAndPillItemSequence(userId, pillItemSequence);
             Pill searchedPill = pillRepository.findPillByPillItemSequence(pillItemSequence);
             PillImage searchedPillImage = pillImageRepository.findByPillItemSequence(pillItemSequence);
             pillGetPillInDrawerResponseDto.setPillName(searchedPill.getPillName());
             pillGetPillInDrawerResponseDto.setImageLink(searchedPillImage.getImageLink());
             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-            pillGetPillInDrawerResponseDto.setAlarm(timeFormatter.format(searchedAlarm.getTakeTime()));
+            List<String> alarmList = new ArrayList<>();
+            for (Alarm alarm : searchedAlarmList) {
+                alarmList.add(timeFormatter.format(alarm.getTakeTime()));
+            }
+            //pillGetPillInDrawerResponseDto.setAlarm(timeFormatter.format(searchedAlarm.getTakeTime()));
+            pillGetPillInDrawerResponseDto.setAlarm(alarmList);
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
             pillGetPillInDrawerResponseDto.setFinalDate(dateFormatter.format(searchedDrawer.getFinalDate()));
             pillGetPillInDrawerResponseDto.setDosage(searchedPill.getDosage());
