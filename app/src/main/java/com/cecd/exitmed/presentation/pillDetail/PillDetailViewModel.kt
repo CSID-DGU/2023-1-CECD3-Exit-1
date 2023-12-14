@@ -35,6 +35,8 @@ class PillDetailViewModel @Inject constructor(
     val pillDosageMethod get() = _pillDosageMethod.asStateFlow()
     private val _pillCaution = MutableStateFlow("")
     val pillCaution get() = _pillCaution.asStateFlow()
+    private val _duplicatedPills = MutableStateFlow<List<String>>(listOf())
+    val duplicatedPills get() = _duplicatedPills.asStateFlow()
 
     fun fetchPillDetail(itemSeq: Int) {
         viewModelScope.launch {
@@ -49,6 +51,7 @@ class PillDetailViewModel @Inject constructor(
                     _pillIngredient.value = pillDetail.ingredient
                     _pillDosageMethod.value = pillDetail.dosage
                     _pillCaution.value = pillDetail.warning
+                    _duplicatedPills.value = pillDetail.duplicatedPills
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
