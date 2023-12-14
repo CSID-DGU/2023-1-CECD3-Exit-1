@@ -1,6 +1,5 @@
 package com.cecd.exitmed.presentation.textSearch
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cecd.exitmed.data.model.request.RequestBookmark
