@@ -73,7 +73,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
                 else -> {}
             }
         }.launchIn(lifecycleScope)
-        searchViewModel.searchTerm.flowWithLifecycle(lifecycle).onEach { searchTerm ->
+        searchViewModel.searchRecentTerm.flowWithLifecycle(lifecycle).onEach { searchTerm ->
             binding.etSearchBox.setText(searchTerm)
             searchViewModel.textPillSearch()
         }.launchIn(lifecycleScope)

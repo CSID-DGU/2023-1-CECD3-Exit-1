@@ -11,6 +11,7 @@ import com.cecd.exitmed.util.ItemDiffCallback
 import com.cecd.exitmed.util.binding.setImage
 
 class PillDrawerListAdapter(
+    private val onOffDoseAlarm: (Int) -> Unit,
     private val moveToPillDrawerDetail: (Int) -> Unit,
 ) : ListAdapter<PillDrawerData, PillDrawerListAdapter.PillDrawerListViewHolder>(
     ItemDiffCallback<PillDrawerData>(
@@ -25,6 +26,7 @@ class PillDrawerListAdapter(
         fun onBind(
             pill: PillDrawerData,
             moveToPillDrawerDetail: (Int) -> Unit,
+            onOffDoseAlarm: (Int) -> Unit
         ) {
             binding.ivPill.setImage(pill.imageLink)
             binding.tvPillName.text = pill.pillName
@@ -39,8 +41,11 @@ class PillDrawerListAdapter(
                 }
             }
             binding.ivPillDrawerAlarm.setImageResource(isAlarmTurnedImageRes)
-            binding.root.setOnClickListener {
+            binding.layoutPillDrawerItem.setOnClickListener {
                 moveToPillDrawerDetail(pill.pillItemSequence)
+            }
+            binding.ivPillDrawerAlarm.setOnClickListener {
+                onOffDoseAlarm(pill.pillItemSequence)
             }
             binding.executePendingBindings()
         }
@@ -53,6 +58,6 @@ class PillDrawerListAdapter(
     }
 
     override fun onBindViewHolder(holder: PillDrawerListViewHolder, position: Int) {
-        holder.onBind(getItem(position), moveToPillDrawerDetail)
+        holder.onBind(getItem(position), moveToPillDrawerDetail, onOffDoseAlarm)
     }
 }

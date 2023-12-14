@@ -3,6 +3,7 @@ package com.cecd.exitmed.data.service
 import com.cecd.exitmed.data.model.request.RequestPillCreation
 import com.cecd.exitmed.data.model.response.ResponseDoseTimeTable
 import com.cecd.exitmed.data.model.response.ResponseDrawerDetail
+import com.cecd.exitmed.data.model.response.ResponseOnOffDoseAlarm
 import com.cecd.exitmed.data.model.response.ResponsePillCreation
 import com.cecd.exitmed.data.model.response.ResponsePillDrawerList
 import retrofit2.http.Body
@@ -21,6 +22,11 @@ interface DoseService {
     suspend fun addToPillDrawer(
         @Body requestPillCreation: RequestPillCreation
     ): ResponsePillCreation
+
+    @GET("auth/pill/toggle-alarm/{item_sequence}")
+    suspend fun onOffDoseAlarm(
+        @Path("item_sequence") itemSequence: Int,
+    ): ResponseOnOffDoseAlarm
 
     @GET("auth/pill/drawer/{item_sequence}")
     suspend fun fetchDrawerPillDetail(
