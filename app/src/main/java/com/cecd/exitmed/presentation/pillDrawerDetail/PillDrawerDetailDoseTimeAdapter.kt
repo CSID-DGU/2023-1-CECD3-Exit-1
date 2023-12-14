@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cecd.exitmed.databinding.ItemPillDrawerDetailDoseTimeBinding
-import com.cecd.exitmed.domain.type.DoseTime
 
 class PillDrawerDetailDoseTimeAdapter :
     RecyclerView.Adapter<PillDrawerDetailDoseTimeAdapter.DoseTimeViewHolder>() {
-    private var doseTimeList = emptyList<DoseTime>()
+    private var doseTimeList = emptyList<String>()
 
     class DoseTimeViewHolder(
         private val binding: ItemPillDrawerDetailDoseTimeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(doseTime: DoseTime) {
-            binding.doseTime = doseTime
+        fun onBind(doseTime: String) {
+            binding.tvDoseTtmeTitle.text = String.format("%d번째 알람",  adapterPosition + 1)
+            binding.tvDoseTime.text = doseTime
             binding.executePendingBindings()
         }
     }
@@ -34,7 +34,7 @@ class PillDrawerDetailDoseTimeAdapter :
         holder.onBind(doseTimeList[position])
     }
 
-    fun setDoseTimeList(doseTimeList: List<DoseTime>) {
+    fun setDoseTimeList(doseTimeList: List<String>) {
         this.doseTimeList = doseTimeList
         notifyDataSetChanged()
     }

@@ -3,7 +3,6 @@ package com.cecd.exitmed.presentation.pillDrawerDetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cecd.exitmed.domain.repository.DoseRepository
-import com.cecd.exitmed.domain.type.DoseTime
 import com.cecd.exitmed.domain.type.DrawerDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,15 +30,4 @@ class PillDrawerDetailViewModel @Inject constructor(
                 }
         }
     }
-
-    val doseTimeMockList = listOf(
-        DoseTime(
-            1,
-            "오전 10:00"
-        ),
-        DoseTime(
-            2,
-            "오후 6:00"
-        )
-    )
 }

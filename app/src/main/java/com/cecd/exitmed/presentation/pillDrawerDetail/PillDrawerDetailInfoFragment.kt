@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.onEach
 class PillDrawerDetailInfoFragment :
     BindingFragment<FragmentPillDrawerDetailInfoBinding>(R.layout.fragment_pill_drawer_detail_info) {
     private val viewModel: PillDrawerDetailViewModel by activityViewModels()
+    lateinit var adapter: PillDrawerDetailDoseTimeAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -24,14 +25,16 @@ class PillDrawerDetailInfoFragment :
     }
 
     private fun initLayout() {
-        val adapter = PillDrawerDetailDoseTimeAdapter()
+        adapter = PillDrawerDetailDoseTimeAdapter()
         binding.rvPillDrawerDetailTime.adapter = adapter
-        adapter.setDoseTimeList(viewModel.doseTimeMockList)
     }
 
     private fun collectData() {
         viewModel.drawerPillDetail.flowWithLifecycle(lifecycle).onEach { drawerPillDetail ->
             binding.tvPillDrawerDetailLastDoseContent.text = drawerPillDetail?.finalDoseDate
+            if (drawerPillDetail != null) {
+                adapter.setDoseTimeList(drawerPillDetail.doseTime)
+            }
         }.launchIn(lifecycleScope)
     }
 }

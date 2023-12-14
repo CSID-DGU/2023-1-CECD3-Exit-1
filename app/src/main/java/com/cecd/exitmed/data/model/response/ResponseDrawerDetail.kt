@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponseDrawerDetail(
-    val alarm: String,
+    val alarm: List<String>,
     val comment: String,
     val dosage: String,
     val finalDate: String,
