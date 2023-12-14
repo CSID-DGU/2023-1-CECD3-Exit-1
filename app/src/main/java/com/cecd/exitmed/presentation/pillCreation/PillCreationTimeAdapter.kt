@@ -37,13 +37,13 @@ class PillCreationTimeAdapter(
         holder.onBind(timeList[position], showTimePickerDialog)
     }
 
-    fun addItem() {
+    fun addItem(position: Int) {
         timeList.add("")
-        notifyDataSetChanged()
+        notifyItemInserted(position)
     }
 
     fun removeItem(position: Int) {
-        if (position > 0) {
+        if (position >= 0) {
             timeList.removeAt(position)
             notifyItemRemoved(position)
         }

@@ -76,7 +76,7 @@
     <string name="pill_creation">약서랍 생성</string>
     <string name="pill_creation_step">STEP %d/4</string>
     <string name="pill_creation_date_format">%d-%d-%d</string>
-    <string name="Pill_creation_count">섭취횟수 %d화</string>
+    <string name="Pill_creation_count">섭취횟수 %d회</string>
     <string name="pill_creation_everyday">매일</string>
     <string name="pill_creation_fixed_day">정해진 요일마다</string>
     <string name="pill_creation_monday">월요일</string>

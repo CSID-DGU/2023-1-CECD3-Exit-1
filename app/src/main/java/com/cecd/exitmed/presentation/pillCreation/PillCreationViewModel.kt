@@ -84,10 +84,6 @@ class PillCreationViewModel @Inject constructor(
         }
     }
 
-    fun setPillTimeList(pillTimeList: MutableList<String>) {
-        _pillTimeList.value = pillTimeList
-    }
-
     fun setPagePosition(position: Int) {
         _pagePosition.value = position
     }

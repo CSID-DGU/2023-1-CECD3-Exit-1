@@ -27,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:padding="5dp"
             android:src="@drawable/ic_remove_circle"
             app:layout_constraintStart_toStartOf="@id/tv_pill_creation_time_title"
             app:layout_constraintTop_toBottomOf="@id/tv_pill_creation_time_title"
@@ -36,7 +37,6 @@
             android:id="@+id/tv_pill_creation_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:textAppearance="@style/TextAppearance.BodyM1"
             app:layout_constraintBottom_toBottomOf="@id/iv_pill_creation_time_remove"
             app:layout_constraintStart_toEndOf="@id/iv_pill_creation_time_remove"
@@ -44,10 +44,10 @@
             tools:text="생성횟수 3회" />
 
         <ImageView
+            android:padding="5dp"
             android:id="@+id/iv_pill_creation_time_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:src="@drawable/ic_add_circle"
             app:layout_constraintStart_toEndOf="@id/tv_pill_creation_time"
             app:layout_constraintTop_toTopOf="@id/iv_pill_creation_time_remove"
