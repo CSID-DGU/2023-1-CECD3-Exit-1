@@ -76,7 +76,6 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
             }
         }.launchIn(lifecycleScope)
         searchViewModel.searchTerm.flowWithLifecycle(lifecycle).onEach { searchTerm ->
-            Log.d("aaa", searchTerm)
             binding.etSearchBox.setText(searchTerm)
         }.launchIn(lifecycleScope)
     }
