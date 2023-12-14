@@ -1,12 +1,15 @@
 package com.cecd.exitmed.presentation.pillDetail
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityPillDetailBinding
+import com.cecd.exitmed.presentation.home.HomeActivity
+import com.cecd.exitmed.presentation.pillCreation.PillCreationActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.binding.setImage
 import com.cecd.exitmed.util.extension.showToast
@@ -30,13 +33,14 @@ class PillDetailActivity :
     }
 
     private fun initLayout() {
-        val fragmentList = ArrayList<Fragment>()
-        fragmentList.add(PillDetailMedicationFragment())
-        fragmentList.add(PillDetailComponentsContentFragment())
-        fragmentList.add(PillDetailUsageFragment())
-        fragmentList.add(PillDetailCautionFragment())
-        fragmentList.add(PillDetailDURFragment())
-        fragmentList.add(PillDetailDrugInteractionFragment())
+        val fragmentList = ArrayList<Fragment>().apply {
+            add(PillDetailMedicationFragment())
+            add(PillDetailComponentsContentFragment())
+            add(PillDetailUsageFragment())
+            add(PillDetailCautionFragment())
+            add(PillDetailDURFragment())
+            add(PillDetailDrugInteractionFragment())
+        }
 
         val adapter = PillDetailPagerAdapter(fragmentList, this)
         binding.vpPillDetail.adapter = adapter
