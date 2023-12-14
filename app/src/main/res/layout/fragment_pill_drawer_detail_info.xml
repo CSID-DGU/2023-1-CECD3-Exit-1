@@ -26,7 +26,7 @@
             android:id="@+id/tv_pill_drawer_detail_info_period_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/spacing24"
             android:textAppearance="@style/TextAppearance.BodyM1"
             app:layout_constraintEnd_toEndOf="parent"

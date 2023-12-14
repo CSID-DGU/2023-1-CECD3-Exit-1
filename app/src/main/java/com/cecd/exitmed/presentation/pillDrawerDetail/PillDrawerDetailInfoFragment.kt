@@ -31,6 +31,7 @@ class PillDrawerDetailInfoFragment :
 
     private fun collectData() {
         viewModel.drawerPillDetail.flowWithLifecycle(lifecycle).onEach { drawerPillDetail ->
+            binding.tvPillDrawerDetailInfoPeriodContent.text = drawerPillDetail?.dosageCycle
             binding.tvPillDrawerDetailLastDoseContent.text = drawerPillDetail?.finalDoseDate
             if (drawerPillDetail != null) {
                 adapter.setDoseTimeList(drawerPillDetail.doseTime)

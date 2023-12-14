@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 data class ResponseDrawerDetail(
     val alarm: List<String>,
     val comment: String,
+    val dosageCycle: String,
     val dosage: String,
     val finalDate: String,
     val imageLink: String,
@@ -20,6 +21,7 @@ fun ResponseDrawerDetail.toDrawerDetail(): DrawerDetail {
         this.dosage,
         this.finalDate,
         this.imageLink,
-        this.pillName
+        this.pillName,
+        this.dosageCycle
     )
 }

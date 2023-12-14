@@ -6,5 +6,6 @@ data class DrawerDetail(
     val dosage: String,
     val finalDoseDate: String,
     val imageLink: String,
-    val pillName: String
+    val pillName: String,
+    val dosageCycle: String
 )
