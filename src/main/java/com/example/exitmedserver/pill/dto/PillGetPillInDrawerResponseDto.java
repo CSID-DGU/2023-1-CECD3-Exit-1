@@ -10,6 +10,7 @@ public class PillGetPillInDrawerResponseDto {
     private String imageLink;
     private List<String> alarm;
     private String finalDate;
+    private String dosageCycle;
     private String dosage;
     private String comment;
 }

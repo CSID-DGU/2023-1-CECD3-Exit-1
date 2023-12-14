@@ -272,6 +272,34 @@ public class PillService {
             pillGetPillInDrawerResponseDto.setAlarm(alarmList);
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
             pillGetPillInDrawerResponseDto.setFinalDate(dateFormatter.format(searchedDrawer.getFinalDate()));
+            if (searchedDrawer.getDosageCycle().equals("EVERY_DAY")) {
+                pillGetPillInDrawerResponseDto.setDosageCycle("매일");
+            } else {
+                String dosageCycle = "";
+                if (searchedDrawer.isMonday()) {
+                    dosageCycle += "월요일,";
+                }
+                if (searchedDrawer.isTuesday()) {
+                    dosageCycle += "화요일,";
+                }
+                if (searchedDrawer.isWednesday()) {
+                    dosageCycle += "수요일,";
+                }
+                if (searchedDrawer.isThursday()) {
+                    dosageCycle += "목요일,";
+                }
+                if (searchedDrawer.isFriday()) {
+                    dosageCycle += "금요일,";
+                }
+                if (searchedDrawer.isSaturday()) {
+                    dosageCycle += "토요일,";
+                }
+                if (searchedDrawer.isSunday()) {
+                    dosageCycle += "일요일,";
+                }
+                dosageCycle = dosageCycle.substring(0, dosageCycle.length() - 1);
+                pillGetPillInDrawerResponseDto.setDosageCycle(dosageCycle);
+            }
             pillGetPillInDrawerResponseDto.setDosage(searchedPill.getDosage());
             pillGetPillInDrawerResponseDto.setComment(searchedDrawer.getComment());
         }
