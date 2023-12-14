@@ -10,7 +10,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivitySearchBinding
-import com.cecd.exitmed.domain.type.SearchPill
+import com.cecd.exitmed.domain.type.Pill
 import com.cecd.exitmed.presentation.common.PillListAdapter
 import com.cecd.exitmed.presentation.pillDetail.PillDetailActivity
 import com.cecd.exitmed.util.UiState
@@ -73,6 +73,10 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
                 else -> {}
             }
         }.launchIn(lifecycleScope)
+        searchViewModel.searchTerm.flowWithLifecycle(lifecycle).onEach { searchTerm ->
+            binding.etSearchBox.setText(searchTerm)
+            searchViewModel.textPillSearch()
+        }.launchIn(lifecycleScope)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -80,8 +84,8 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         return super.dispatchTouchEvent(ev)
     }
 
-    private fun setTextPillSearchAdapter(searchList: List<SearchPill>) {
-        val searchListAdapter = PillListAdapter(::moveToPillDetail)
+    private fun setTextPillSearchAdapter(searchList: List<Pill>) {
+        val searchListAdapter = PillListAdapter(::moveToPillDetail, ::bookmark)
         binding.rvSearchList.adapter = searchListAdapter
         searchListAdapter.submitList(searchList)
     }
@@ -106,6 +110,10 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         val intent = Intent(this, PillDetailActivity::class.java)
         intent.putExtra(ITEM_SEQ, itemSeq)
         startActivity(intent)
+    }
+
+    private fun bookmark(pillItemSeq: Int) {
+        searchViewModel.bookmark(pillItemSeq)
     }
 
     companion object {

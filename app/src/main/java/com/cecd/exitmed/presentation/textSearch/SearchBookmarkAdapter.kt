@@ -3,23 +3,24 @@ package com.cecd.exitmed.presentation.textSearch
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.cecd.exitmed.data.model.response.ResponseTextSearchBookmarkedList
 import com.cecd.exitmed.databinding.ItemSearchBookmarkBinding
 
 class SearchBookmarkAdapter(
-    private val moveToPillDetail: () -> Unit
+    private val moveToPillDetail: (Int) -> Unit
 ) : RecyclerView.Adapter<SearchBookmarkAdapter.BookmarkViewHolder>() {
-    private var bookmarkList: MutableList<String> = mutableListOf()
+    private var bookmarkList: MutableList<ResponseTextSearchBookmarkedList.Data> = mutableListOf()
 
     class BookmarkViewHolder(
         private val binding: ItemSearchBookmarkBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            pillName: String,
-            moveToPillDetail: () -> Unit
+            pillInfo: ResponseTextSearchBookmarkedList.Data,
+            moveToPillDetail: (Int) -> Unit
         ) {
-            binding.pillName = pillName
-            binding.tvSearchTitle.setOnClickListener {
-                moveToPillDetail()
+            binding.pillName = pillInfo.pillName
+            binding.root.setOnClickListener {
+                moveToPillDetail(pillInfo.pillItemSequence)
             }
             binding.executePendingBindings()
         }
@@ -37,7 +38,7 @@ class SearchBookmarkAdapter(
         holder.onBind(bookmarkList[position], moveToPillDetail)
     }
 
-    fun setBookmarkList(bookmarkList: MutableList<String>) {
+    fun setBookmarkList(bookmarkList: MutableList<ResponseTextSearchBookmarkedList.Data>) {
         this.bookmarkList = bookmarkList.toMutableList()
         notifyDataSetChanged()
     }

@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cecd.exitmed.databinding.ItemPillBinding
-import com.cecd.exitmed.domain.type.SearchPill
+import com.cecd.exitmed.domain.type.Pill
 import com.cecd.exitmed.util.ItemDiffCallback
 
 class PillListAdapter(
-    private val moveToPillDetail: (Int) -> Unit
-) : ListAdapter<SearchPill, PillListAdapter.SearchResultViewHolder>(
-    ItemDiffCallback<SearchPill>(
+    private val moveToPillDetail: (Int) -> Unit,
+    private val bookmark: (Int) -> Unit
+) : ListAdapter<Pill, PillListAdapter.SearchResultViewHolder>(
+    ItemDiffCallback<Pill>(
         onItemTheSame = { old, new -> old.pillItemSequence == new.pillItemSequence },
         onContentsTheSame = { old, new -> old == new }
     )
@@ -21,11 +22,13 @@ class PillListAdapter(
         private val binding: ItemPillBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            pill: SearchPill,
-            moveToPillDetail: (Int) -> Unit
+            pill: Pill,
+            moveToPillDetail: (Int) -> Unit,
+            bookmark: (Int) -> Unit
         ) {
             binding.searchPill = pill
             binding.root.setOnClickListener {
+                bookmark(pill.pillItemSequence)
                 moveToPillDetail(pill.pillItemSequence)
             }
             binding.executePendingBindings()
@@ -39,6 +42,6 @@ class PillListAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
-        holder.onBind(getItem(position), moveToPillDetail)
+        holder.onBind(getItem(position), moveToPillDetail, bookmark)
     }
 }
