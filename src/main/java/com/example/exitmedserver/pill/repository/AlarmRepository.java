@@ -11,4 +11,5 @@ public interface AlarmRepository extends JpaRepository<Alarm, Integer> {
     List<Alarm> findAlarmByUserId(String userId);
     List<Alarm> findAlarmByUserIdAndIsTurnedOnOrderByTakeTimeAsc(String userId, boolean isTurnedOn);
     Alarm findAlarmByUserIdAndPillItemSequence(String userId, Long pillItemSequence);
+    List<Alarm> findAlarmListByUserIdAndPillItemSequence(String userId, Long pillItemSequence);
 }

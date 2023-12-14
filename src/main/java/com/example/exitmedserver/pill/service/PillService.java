@@ -232,8 +232,16 @@ public class PillService {
                 pillGetDrawerListResponseDto.setPillName(searchedPill.getPillName());
                 pillGetDrawerListResponseDto.setClassification(searchedPill.getClassification());
                 pillGetDrawerListResponseDto.setImageLink(searchedPillImage.getImageLink());
-                pillGetDrawerListResponseDto.setAlarmTurnedOn(alarmList.get(i).isTurnedOn());
 
+                boolean isTurnedOn = false;
+                List<Alarm> searchedAlarms = alarmRepository.findAlarmListByUserIdAndPillItemSequence(userId, searchedDrawer.getPillItemSequence());
+                for (Alarm alarm : searchedAlarms) {
+                    if (alarm.isTurnedOn()) {
+                        isTurnedOn = true;
+                        break;
+                    }
+                }
+                pillGetDrawerListResponseDto.setAlarmTurnedOn(isTurnedOn);
                 drawerList.add(pillGetDrawerListResponseDto);
             }
             pillGetDrawerListResponse.setData(drawerList);
