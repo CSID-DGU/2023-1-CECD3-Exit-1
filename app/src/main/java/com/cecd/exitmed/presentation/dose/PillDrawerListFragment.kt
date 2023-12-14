@@ -53,11 +53,17 @@ class PillDrawerListFragment :
         pillDrawerAdapter.submitList(it.data)
     }
 
-    private fun moveToPillDrawerDetail() {
-        startActivity(Intent(requireActivity(), PillDrawerDetailActivity::class.java))
+    private fun moveToPillDrawerDetail(itemSeq: Int) {
+        val intent = Intent(requireActivity(), PillDrawerDetailActivity::class.java)
+        intent.putExtra(ITEM_SEQ, itemSeq)
+        startActivity(intent)
     }
 
     private fun moveToTextSearch() {
         startActivity(Intent(requireActivity(), SearchActivity::class.java))
+    }
+
+    companion object {
+        const val ITEM_SEQ = "itemSeq"
     }
 }
