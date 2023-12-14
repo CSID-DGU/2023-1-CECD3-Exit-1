@@ -1,15 +1,12 @@
 package com.cecd.exitmed.presentation.pillDetail
 
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.cecd.exitmed.R
 import com.cecd.exitmed.databinding.ActivityPillDetailBinding
-import com.cecd.exitmed.presentation.home.HomeActivity
-import com.cecd.exitmed.presentation.pillCreation.PillCreationActivity
 import com.cecd.exitmed.util.binding.BindingActivity
 import com.cecd.exitmed.util.binding.setImage
 import com.cecd.exitmed.util.extension.showToast
