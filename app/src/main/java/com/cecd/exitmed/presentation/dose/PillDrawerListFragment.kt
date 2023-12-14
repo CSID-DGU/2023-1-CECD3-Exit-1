@@ -53,7 +53,7 @@ class PillDrawerListFragment :
     }
 
     private fun setMyPillDrawerListAdapter(it: UiState.Success<List<PillDrawerData>>) {
-        val pillDrawerAdapter = PillDrawerListAdapter(::moveToPillDrawerDetail, ::onOffDoseAlarm)
+        val pillDrawerAdapter = PillDrawerListAdapter(::onOffDoseAlarm, ::moveToPillDrawerDetail)
         binding.rvPillDrawer.adapter = pillDrawerAdapter
         pillDrawerAdapter.submitList(it.data)
     }
@@ -62,8 +62,6 @@ class PillDrawerListFragment :
         viewModel.onOffDoseAlarm(itemSeq)
     }
 
-    private fun moveToPillDrawerDetail() {
-        startActivity(Intent(requireActivity(), PillDrawerDetailActivity::class.java))
     private fun moveToPillDrawerDetail(itemSeq: Int) {
         val intent = Intent(requireActivity(), PillDrawerDetailActivity::class.java)
         intent.putExtra(ITEM_SEQ, itemSeq)

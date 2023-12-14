@@ -2,6 +2,7 @@ package com.cecd.exitmed.data.service
 
 import com.cecd.exitmed.data.model.request.RequestPillCreation
 import com.cecd.exitmed.data.model.response.ResponseDoseTimeTable
+import com.cecd.exitmed.data.model.response.ResponseDrawerDetail
 import com.cecd.exitmed.data.model.response.ResponseOnOffDoseAlarm
 import com.cecd.exitmed.data.model.response.ResponsePillCreation
 import com.cecd.exitmed.data.model.response.ResponsePillDrawerList

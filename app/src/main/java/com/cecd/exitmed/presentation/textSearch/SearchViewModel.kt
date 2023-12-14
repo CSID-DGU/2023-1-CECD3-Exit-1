@@ -30,8 +30,8 @@ class SearchViewModel @Inject constructor(
     private var _searchBookmarkedListState =
         MutableStateFlow<UiState<List<ResponseTextSearchBookmarkedList.Data>>>(UiState.Loading)
     val searchBookmarkedListState get() = _searchBookmarkedListState.asStateFlow()
-    private var _searchTerm = MutableStateFlow<String>("")
-    val searchTerm get() = _searchTerm.asStateFlow()
+    private var _searchRecentTerm = MutableStateFlow("")
+    val searchRecentTerm get() = this._searchRecentTerm.asStateFlow()
 
     init {
         fetchRecentSearchTerms()
@@ -89,6 +89,6 @@ class SearchViewModel @Inject constructor(
     }
 
     fun setRecentSearchTerm(searchTerm: String) {
-        _searchTerm.value = searchTerm
+        _searchRecentTerm.value = searchTerm
     }
 }
